@@ -17,7 +17,7 @@ namespace BrowseLib
             name = n;
             columns = new List<Column>();
          }
-
+        //Add a column to the table
         public void addColumn(Column c) {
             columns.Add(c);
         }
