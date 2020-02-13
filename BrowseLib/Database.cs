@@ -24,5 +24,10 @@ namespace BrowseLib
         {
             tables.Remove(table);
         }
+
+        public void updateName(string name)
+        {
+            this.name = name;
+        }
     }
 }
