@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BrowseLib
 {
-    class Column
+    public class Column
     {
     }
 }

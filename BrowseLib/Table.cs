@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BrowseLib
 {
-    class Table
+    public class Table
     {
         private string name;
 

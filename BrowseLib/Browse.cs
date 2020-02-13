@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BrowseLib
 {
-    class Browse
+   public class Browse
     {
         List<Database> databases;
 
