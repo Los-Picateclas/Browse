@@ -12,6 +12,7 @@ namespace UnitTests
     [TestClass]
     public class TableTest
     {
+        [TestMethod]
         public void Test() {
 
             Table table = new Table("Tabla1");
