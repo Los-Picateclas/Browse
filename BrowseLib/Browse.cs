@@ -9,7 +9,7 @@ namespace BrowseLib
 {
    public class Browse
     {
-        List<Database> databases;
+        public List<Database> databases;
 
         public Browse()
         {
@@ -28,6 +28,11 @@ namespace BrowseLib
         public void deleteDatabase(Database database)
         {
             databases.Remove(database);
+        }
+
+        public Database getDatabase(int num)
+        {
+            return databases.ElementAt(num);
         }
     }
 }
