@@ -14,7 +14,7 @@ namespace UnitTests
     {
         [TestMethod]
         public void Test() {
-
+           
             Table table = new Table("Tabla1");
             Table t = table;
             Column c1 = new Column("name", "TEXT");
@@ -25,11 +25,11 @@ namespace UnitTests
             table.addColumn(c3);
             table.dropColumn(c2);
             Assert.AreEqual(table, t);
-
-
+            c2 = table.selectColumn(c1);
+            Assert.AreEqual(c1,c2);
         }
        
 
 
     }
-}
+}                                               

@@ -26,6 +26,11 @@ namespace BrowseLib
         {
             columns.Remove(c);
         }
+        public Column selectColumn(Column c) {
+            
+
+            return c;
+        }
 
 
 
