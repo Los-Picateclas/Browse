@@ -54,7 +54,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BrowseTest.cs" />
     <Compile Include="TableTest.cs" />
-    <Compile Include="UnitTest2.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
