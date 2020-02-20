@@ -18,6 +18,7 @@ namespace BrowseLib
             if (type == "TEXT")
             {
                 List<string> columns = new List<string>();
+               
             }
             if (type == "INT")
             {
@@ -29,6 +30,24 @@ namespace BrowseLib
             }
         }
 
+        public void insertTEXTtoTable(string text) {
+
+            columns.Add(text);
+        
+        }
+
+        public void insertINTtoTable(int number)
+        {
+
+            columns.Add(number);
+
+        }
+        public void insertDOUBLEtoTable(double number)
+        {
+
+            columns.Add(number);
+
+        }
     }
 }
 
