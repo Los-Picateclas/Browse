@@ -9,20 +9,27 @@ namespace UnitTests
     [TestClass]
     public class DatabaseTest
     {
-        private readonly string testname;
-        [TestMethod]
-        public void Database()
-            {
-           
-                Table table = new Table("test-table");
-                Database db = new Database("test-db");
-                Database db2 = new Database("test-db");
-                db.addTable(table);
-                db.dropTable(table);
-                db.updateName(testname);
+        private string testname;
+        Table table = new Table("test-table");
+        Database db = new Database("test-db");
+        Database db2 = new Database("test-db");
 
+       [TestMethod]
+        public void addTable()
+        {
+            //db.addTable(table);
+        }
+            
+        public void dropTable()
+        {
+            //db.dropTable(table);
+        }
 
-            }
-        
+        public void updateName()
+        {
+            //db.updateName(testname);
+        }
     }
+        
 }
+
