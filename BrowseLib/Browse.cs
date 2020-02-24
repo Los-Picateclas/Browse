@@ -16,9 +16,19 @@ namespace BrowseLib
             databases = new List<Database>();
         }
 
-        public void loadDatabases()
+        public void loadDatabases(string path)
         {
-                       
+            DirectoryInfo di = new DirectoryInfo(path);
+            DirectoryInfo[] directories = di.GetDirectories();
+            foreach (DirectoryInfo fi in directories)
+            {
+                databases.Add(new Database(fi.Name));
+            }
+        }
+
+        public void saveDatabases(string path)
+        {
+            
         }
 
         public void addDatabase(Database database) {
