@@ -8,8 +8,8 @@ namespace BrowseLib
 {
     public class Database
     {
-         private string name;
-         private List<Table> tables;
+        public string name;
+        public List<Table> tables;
 
         public Database(string name) {
             this.name = name;
@@ -28,6 +28,11 @@ namespace BrowseLib
         public void updateName(string name)
         {
             this.name = name;
+        }
+
+        public Table getTable(int position)
+        {
+            return tables.ElementAt(position);
         }
     }
 }

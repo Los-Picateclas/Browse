@@ -9,25 +9,33 @@ namespace UnitTests
     [TestClass]
     public class DatabaseTest
     {
-        private string testname;
-        Table table = new Table("test-table");
-        Database db = new Database("test-db");
-        Database db2 = new Database("test-db");
+        public static Table table = new Table("test-table");
+        public static Database db1 = new Database("test-db");
+        public static Database db2 = new Database("test-db");
 
-       [TestMethod]
+        [TestMethod]
         public void addTable()
         {
-            //db.addTable(table);
+            db1.addTable(table);
+            db2.addTable(table);
+            Assert.AreEqual(db1.getTable(0), db2.getTable(0));
+
+
         }
-            
+        [TestMethod]
         public void dropTable()
         {
-            //db.dropTable(table);
+            db1.tables.Clear();
+            db1.addTable(table);
+            db1.dropTable(table);
+            Assert.IsTrue(db1.tables.Count == 0);
+           
+            
         }
-
+        [TestMethod]
         public void updateName()
         {
-            //db.updateName(testname);
+            db1.updateName(db1.name);   
         }
     }
         
