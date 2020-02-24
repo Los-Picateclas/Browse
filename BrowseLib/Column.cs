@@ -4,50 +4,62 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace BrowseLib
 {
     public class Column
     {
         public string name;
         public string type;
-        public List<Object> columns;
+        public static List<string> column;
         public Column(string name, string type)
         {
             this.name = name;
             this.type = type;
-            if (type == "TEXT")
-            {
-                List<string> columns = new List<string>();
-               
-            }
-            if (type == "INT")
-            {
-                List<int> columns = new List<int>();
-            }
-            if (type == "DOUBLE")
-            {
-                List<double> columns = new List<double>();
-            }
+            column = new List<string>();
         }
 
-        public void insertTEXTtoTable(string text) {
-
-            columns.Add(text);
-        
-        }
-
-        public void insertINTtoTable(int number)
+        public void insert(string text)
         {
 
-            columns.Add(number);
+            column.Add(text);
 
         }
-        public void insertDOUBLEtoTable(double number)
+
+        public int getIntFromColumn(int position)
         {
 
-            columns.Add(number);
+
+            string t = column[position];
+
+
+            int m = Int32.Parse(t);
+            return m;
+
 
         }
+        public double getDoubleFromColumn(int position)
+        {
+
+
+            string t = column[position];
+
+
+            double m = double.Parse(t);
+            return m;
+
+
+        }
+
+
+        public string getTextFromColumn(int position)
+        {
+
+            return column[position];
+
+        }
+
+
     }
 }
 
