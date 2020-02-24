@@ -10,15 +10,17 @@ namespace UnitTests
         [TestMethod]
         public void TestMethod1()
         {
-            Column columna1 = new Column("prueba1", "TEXT");
-            columna1.insertTEXTtoTable("Olaa K asEE");
-            Column columna2 = new Column("prueba2", "TEXT");
-            columna2.insertTEXTtoTable("Olaa K asEE");
-            Assert.Equals(columna1, columna2);
+            Column column1 = new Column("prueba1", "INT");
+            column1.insert("22");
+            column1.getIntFromColumn(0);
 
-            Column columna3 = new Column("prueba3", "INT");
-            columna3.insertINTtoTable(20022020);
-            Assert.Equals(columna3, columna2);
+            Column column2 = new Column("prueba2", "DOUBLE");
+            column2.insert("24,02");
+            column2.getDoubleFromColumn(0);
+
+            Column column3 = new Column("prueba3", "TEXT");
+            column3.insert("Ola k ase");
+            column3.getTextFromColumn(0);
 
         }
     }
