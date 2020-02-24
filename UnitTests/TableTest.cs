@@ -27,6 +27,7 @@ namespace UnitTests
             Assert.AreEqual(table, t);
             c2 = table.selectColumn(c1);
             Assert.AreEqual(c1,c2);
+            table.save(table);
         }
        
 
