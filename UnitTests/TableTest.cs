@@ -32,9 +32,11 @@ namespace UnitTests
             Table table = new Table("MiTabla");
             Column name = new Column("name", "TEXT");
             name.insert("Borja");
+            name.insert("Unai");
             table.addColumn(name);
             Column age = new Column("age", "INT");
             age.insert("21");
+            age.insert("22");
             table.addColumn(age);
             table.save(table);
 

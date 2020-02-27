@@ -40,6 +40,10 @@ namespace BrowseLib
 
             return c;
         }
+        public int columnSize() {
+            return columns.Count();
+
+        }
         public Column selectColumn(int i)
         {
             Column c = columns[i];
@@ -81,7 +85,20 @@ namespace BrowseLib
 
 
                     }
-                  
+                    sw.WriteLine("");
+                    for (int i=0; i<t.selectColumn(0).getColumnSize();i++) {
+                        sw.WriteLine("");
+                        for (int y = 0;y<t.columnSize() ;y++) {
+                            
+                            sw.Write(t.selectColumn(y).getTextFromColumn(i));
+
+                            //if (i + 1 != t.getColumnNumber()) { sw.Write(", "); }
+
+
+
+                        }
+                    
+                    }
 
                         
                     }
