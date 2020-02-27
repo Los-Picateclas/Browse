@@ -81,20 +81,15 @@ namespace BrowseLib
 
 
                     }
-                    int columnNumber = t.getColumnNumber();
-                    for (int i =0;i<columnNumber;i++) {
-                        int y = 0;
-                        Column temp = t.selectColumn(i);
-                        while (y < temp.getColumnSize()) {
+                  
+
                         
-                        
-                        }
                     }
 
 
 
 
-                }
+                
                 MessageBox.Show("Archivo creado!!");
             }
             catch (Exception ex)
