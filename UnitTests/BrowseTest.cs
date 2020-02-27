@@ -45,5 +45,14 @@ namespace UnitTests
             Assert.IsTrue(browse1.databases.Count == 0);
         }
 
+        [TestMethod]
+        public void loadDatabase()
+        {
+            browse1.databases.Clear();
+            Assert.IsTrue(browse1.databases.Count == 0);
+            browse1.loadDatabases(@"C:\Users\docencia\Desktop\Databases");
+            Assert.IsTrue(browse1.databases.Count >= 0);
+        }
+
     }
 }
