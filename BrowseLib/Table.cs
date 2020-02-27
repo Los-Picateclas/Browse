@@ -64,15 +64,36 @@ namespace BrowseLib
             {
                 using (StreamWriter sw = new StreamWriter(ruta))
                 {
-                   
+                    for (int i = 0; i < t.getColumnNumber(); i++)
+                    {
 
+                        sw.Write(t.selectColumn(i).type );
+
+                        if (i+1!=t.getColumnNumber()) { sw.Write(", "); }
+
+                    }
+                    sw.WriteLine("");
                     for (int i=0; i<t.getColumnNumber(); i++) {
-                        sw.WriteLine(t.selectColumn(i).name);
+                        sw.Write(t.selectColumn(i).name );
 
+                        if (i + 1 != t.getColumnNumber()) { sw.Write(", "); }
 
 
 
                     }
+                    int columnNumber = t.getColumnNumber();
+                    for (int i =0;i<columnNumber;i++) {
+                        int y = 0;
+                        Column temp = t.selectColumn(i);
+                        while (y < temp.getColumnSize()) {
+                        
+                        
+                        }
+                    }
+
+
+
+
                 }
                 MessageBox.Show("Archivo creado!!");
             }
@@ -82,6 +103,24 @@ namespace BrowseLib
             }
         }
 
-     
+        public void addRow() { 
+        
+        
+        
+        
+
+        
+        }
+      /**  public void loadDatabases(string path)
+        {
+            DirectoryInfo di = new DirectoryInfo(path);
+            DirectoryInfo[] directories = di.GetDirectories();
+            foreach (DirectoryInfo fi in directories)
+            {
+                databases.Add(new Database(fi.Name));
+            }
+        }**/
+
+
     }
 }

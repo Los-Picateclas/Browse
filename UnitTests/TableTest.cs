@@ -14,8 +14,8 @@ namespace UnitTests
     {
         [TestMethod]
         public void Test() {
-           
-            Table table = new Table("Tabla1");
+
+            /**Table table = new Table("Tabla1");
             Table t = table;
             Column c1 = new Column("name", "TEXT");
             Column c2 = new Column("age", "INT");
@@ -27,7 +27,18 @@ namespace UnitTests
             Assert.AreEqual(table, t);
             c2 = table.selectColumn(c1);
             Assert.AreEqual(c1,c2);
+            table.save(table);**/
+
+            Table table = new Table("MiTabla");
+            Column name = new Column("name", "TEXT");
+            name.insert("Borja");
+            table.addColumn(name);
+            Column age = new Column("age", "INT");
+            age.insert("21");
+            table.addColumn(age);
             table.save(table);
+
+
         }
        
 
