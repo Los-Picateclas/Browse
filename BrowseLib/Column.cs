@@ -58,6 +58,13 @@ namespace BrowseLib
             return column[position];
 
         }
+        public int getColumnSize()
+        {
+
+            return column.Count;
+
+        }
+
 
 
     }

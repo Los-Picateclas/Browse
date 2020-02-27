@@ -22,6 +22,9 @@ namespace UnitTests
             column3.insert("Ola k ase");
             column3.getTextFromColumn(0);
 
+            column3.insert("a tomar por cleta");
+            column3.getTextFromColumn(1);
+
         }
     }
 }
