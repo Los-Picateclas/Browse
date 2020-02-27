@@ -8,15 +8,20 @@ namespace BrowseLib
 {
     public class Database
     {
-        public string name;
         public List<Table> tables;
+        public Database db = new Database("databaseName", "username", "password");
+        public string databaseName;
 
-        public Database(string name) {
-            this.name = name;
+        public Database(string databaseName, string username, string password)
+        {
             tables = new List<Table>();
-         }
+            db = new Database(databaseName, username, password);
+        }
 
-        public void addTable(Table table) {
+
+
+        public void addTable(Table table)
+        {
             tables.Add(table);
         }
 
@@ -25,9 +30,9 @@ namespace BrowseLib
             tables.Remove(table);
         }
 
-        public void updateName(string name)
+        public void updateName(string databaseName)
         {
-            this.name = name;
+            this.databaseName = databaseName;
         }
 
         public Table getTable(int position)

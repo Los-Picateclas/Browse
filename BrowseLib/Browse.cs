@@ -22,7 +22,7 @@ namespace BrowseLib
             DirectoryInfo[] directories = di.GetDirectories();
             foreach (DirectoryInfo fi in directories)
             {
-                databases.Add(new Database(fi.Name));
+                databases.Add(new Database(fi.Name, "username", "password"));
             }
         }
 

@@ -10,7 +10,7 @@ namespace UnitTests
     {
         static Browse browse1 = new Browse();
         static Browse browse2 = new Browse();
-        static Database db = new Database("db");
+        static Database db = new Database("databaseName", "username", "password");
 
         [TestMethod]
         // Check the constructor in Browse create a new Browse object
