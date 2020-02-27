@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using BrowseLib;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -10,7 +11,9 @@ namespace UnitTests
     {
         static Browse browse1 = new Browse();
         static Browse browse2 = new Browse();
-        static Database db = new Database("db");
+        Database testDb1 = new Database("db1", "username1", "password1");
+        Database testDb2 = new Database("db2", "username2", "password2");
+        string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "Databases");
 
         [TestMethod]
         // Check the constructor in Browse create a new Browse object
@@ -21,37 +24,74 @@ namespace UnitTests
             Assert.AreEqual(b1, b1);
             Assert.AreNotEqual(b1, b2);
         }
-        
+
         [TestMethod]
         // Check addDatabase(Database database) method in Browse add the given database from the list
         public void addDatabase()
         {
             browse1.databases.Clear();
             browse2.databases.Clear();
-            browse1.addDatabase(db);
-            Assert.AreEqual(db, browse1.databases.First());
-            browse2.addDatabase(db);
+            browse1.addDatabase(testDb1);
+            Assert.AreEqual(testDb1, browse1.databases.First());
+            browse2.addDatabase(testDb1);
             Assert.AreEqual(browse1.databases.First(), browse2.databases.First());
         }
-        
+
         [TestMethod]
-        // Check deleteDatabase(Database database) method in Browse delete the given database from the list
+        // Check deleteDatabase(Database database) method delete the given database from the list
         public void deleteDatabase()
         {
             browse1.databases.Clear();
-            browse1.addDatabase(db);
+            browse1.addDatabase(testDb1);
             Assert.IsFalse(browse1.databases.Count == 0);
-            browse1.deleteDatabase(db);
+            browse1.deleteDatabase(testDb1);
             Assert.IsTrue(browse1.databases.Count == 0);
         }
 
+        // Check that the method loadDatabases(string path) loads the files
         [TestMethod]
         public void loadDatabase()
         {
             browse1.databases.Clear();
-            Assert.IsTrue(browse1.databases.Count == 0);
-            browse1.loadDatabases(@"C:\Users\docencia\Desktop\Databases");
-            Assert.IsTrue(browse1.databases.Count >= 0);
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+            if (Directory.Exists(Path.Combine(path, "testDb1")))
+            {
+                Directory.Delete(Path.Combine(path, "testDb1"));
+            }
+            if (Directory.Exists(Path.Combine(path, "testDb2")))
+            {
+                Directory.Delete(Path.Combine(path, "testDb2"));
+            }
+            browse1.addDatabase(testDb1);
+            browse1.addDatabase(testDb2);
+            browse1.saveDatabases(path);
+            browse1.loadDatabases(path);
+            Assert.IsTrue(browse1.databases.Count > 0);
+        }
+
+        // Check that the method saveDatabases(string path) saves the files
+        [TestMethod]
+        public void saveDatabase()
+        {
+            browse1.databases.Clear();
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+            if (Directory.Exists(Path.Combine(path, "testDb1")))
+            {
+                Directory.Delete(Path.Combine(path, "testDb1"));
+            }
+            if (Directory.Exists(Path.Combine(path, "testDb2")))
+            {
+                Directory.Delete(Path.Combine(path, "testDb2"));
+            }
+            browse1.addDatabase(testDb1);
+            browse1.saveDatabases(path);
+            Assert.IsTrue(Directory.Exists(path));
         }
 
     }
