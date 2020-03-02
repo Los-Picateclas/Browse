@@ -9,13 +9,17 @@ namespace BrowseLib
     public class Database
     {
         public List<Table> tables;
-        public Database db = new Database("databaseName", "username", "password");
+        public Database db;
         public string databaseName;
+        public string username;
+        public string password;
 
-        public Database(string databaseName, string username, string password)
+        public Database(string dN, string uN, string pW)
         {
             tables = new List<Table>();
-            db = new Database(databaseName, username, password);
+            this.databaseName = dN;
+            this.username = uN;
+            this.password = pW;
         }
 
 
