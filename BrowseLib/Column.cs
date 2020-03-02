@@ -11,7 +11,7 @@ namespace BrowseLib
     {
         public string name;
         public string type;
-        public static List<string> column;
+        public  List<string> column;
         public Column(string name, string type)
         {
             this.name = name;

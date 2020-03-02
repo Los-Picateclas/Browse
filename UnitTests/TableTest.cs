@@ -3,6 +3,7 @@ using System.Text;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using BrowseLib;
+using System.Windows;
 
 namespace UnitTests
 {
@@ -39,8 +40,11 @@ namespace UnitTests
             age.insert("22");
             table.addColumn(age);
             table.save(table);
-
-
+            MessageBox.Show(name.getTextFromColumn(0));
+            MessageBox.Show(name.getTextFromColumn(1));
+            MessageBox.Show(age.getTextFromColumn(0));
+            MessageBox.Show(age.getTextFromColumn(1));
+            
         }
        
 
