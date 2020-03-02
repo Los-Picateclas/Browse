@@ -25,6 +25,8 @@ namespace UnitTests
             column3.insert("a tomar por cleta");
             column3.getTextFromColumn(1);
 
+            Console.WriteLine(column3.getColumnSize());
+
         }
     }
 }
