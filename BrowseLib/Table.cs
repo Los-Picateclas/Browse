@@ -114,8 +114,66 @@ namespace BrowseLib
                 MessageBox.Show(ex.Message);
             }
         }
+        public void save(Table t, Database db)
+        {
 
-        
+            //This will create a .txt in the desktop
+            //string ruta = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop),t.getName()+".txt");
+            string ruta = "C:\\Users\\docencia\\Documents\\Browse\\"+ db.databaseName +"\\"+ t.getName() + ".txt";
+            try
+            {
+                using (StreamWriter sw = new StreamWriter(ruta))
+                {
+                    for (int i = 0; i < t.getColumnNumber(); i++)
+                    {
+
+                        sw.Write(t.selectColumn(i).type);
+
+                        if (i + 1 != t.getColumnNumber()) { sw.Write(", "); }
+
+                    }
+                    sw.WriteLine("");
+                    for (int i = 0; i < t.getColumnNumber(); i++)
+                    {
+                        sw.Write(t.selectColumn(i).name);
+
+                        if (i + 1 != t.getColumnNumber()) { sw.Write(", "); }
+
+
+
+                    }
+                    sw.WriteLine("");
+                    for (int i = 0; i < t.selectColumn(0).getColumnSize(); i++)
+                    {
+                        sw.WriteLine("");
+                        for (int y = 0; y < t.columnSize(); y++)
+                        {
+
+                            sw.Write(t.selectColumn(y).getTextFromColumn(i) + ", ");
+
+
+
+
+
+                        }
+
+                    }
+
+
+                }
+
+
+
+
+
+                MessageBox.Show("Archivo creado!!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
         /**  public void loadDatabases(string path)
           {
               DirectoryInfo di = new DirectoryInfo(path);
@@ -129,3 +187,4 @@ namespace BrowseLib
 
     }
 }
+
