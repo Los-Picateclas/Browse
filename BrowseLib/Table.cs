@@ -59,11 +59,10 @@ namespace BrowseLib
 
         public void save(Table t)
         {
-            int numero = 10;
-
+            
             //This will create a .txt in the desktop
-            string ruta = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop),
-                                      t.getName()+".txt");
+            //string ruta = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop),t.getName()+".txt");
+            string ruta = "C:\\Users\\docencia\\Documents\\Browse\\" + t.getName() +".txt";
             try
             {
                 using (StreamWriter sw = new StreamWriter(ruta))
@@ -90,9 +89,9 @@ namespace BrowseLib
                         sw.WriteLine("");
                         for (int y = 0;y<t.columnSize() ;y++) {
                             
-                            sw.Write(t.selectColumn(y).getTextFromColumn(i));
+                            sw.Write(t.selectColumn(y).getTextFromColumn(i) + ", ");
 
-                            //if (i + 1 != t.getColumnNumber()) { sw.Write(", "); }
+                            
 
 
 
@@ -115,23 +114,16 @@ namespace BrowseLib
             }
         }
 
-        public void addRow() { 
         
-        
-        
-        
-
-        
-        }
-      /**  public void loadDatabases(string path)
-        {
-            DirectoryInfo di = new DirectoryInfo(path);
-            DirectoryInfo[] directories = di.GetDirectories();
-            foreach (DirectoryInfo fi in directories)
-            {
-                databases.Add(new Database(fi.Name));
-            }
-        }**/
+        /**  public void loadDatabases(string path)
+          {
+              DirectoryInfo di = new DirectoryInfo(path);
+              DirectoryInfo[] directories = di.GetDirectories();
+              foreach (DirectoryInfo fi in directories)
+              {
+                  databases.Add(new Database(fi.Name));
+              }
+          }**/
 
 
     }
