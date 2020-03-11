@@ -13,7 +13,7 @@ namespace UnitTests
         static Browse browse2 = new Browse();
         Database testDb1 = new Database("db1", "username1", "password1");
         Database testDb2 = new Database("db2", "username2", "password2");
-        string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "Databases");
+        string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Browse");
 
         [TestMethod]
         // Check the constructor in Browse create a new Browse object
@@ -48,49 +48,11 @@ namespace UnitTests
             Assert.IsTrue(browse1.databases.Count == 0);
         }
 
-        // Check that the method loadDatabases(string path) loads the files
-        [TestMethod]
-        public void loadDatabase()
-        {
-            browse1.databases.Clear();
-            if (!Directory.Exists(path))
-            {
-                Directory.CreateDirectory(path);
-            }
-            if (Directory.Exists(Path.Combine(path, "testDb1")))
-            {
-                Directory.Delete(Path.Combine(path, "testDb1"));
-            }
-            if (Directory.Exists(Path.Combine(path, "testDb2")))
-            {
-                Directory.Delete(Path.Combine(path, "testDb2"));
-            }
-            browse1.addDatabase(testDb1);
-            browse1.addDatabase(testDb2);
-            browse1.saveDatabases(path);
-            browse1.loadDatabases(path);
-            Assert.IsTrue(browse1.databases.Count > 0);
-        }
-
         // Check that the method saveDatabases(string path) saves the files
         [TestMethod]
-        public void saveDatabase()
+        public void saveBrowse()
         {
-            browse1.databases.Clear();
-            if (!Directory.Exists(path))
-            {
-                Directory.CreateDirectory(path);
-            }
-            if (Directory.Exists(Path.Combine(path, "testDb1")))
-            {
-                Directory.Delete(Path.Combine(path, "testDb1"));
-            }
-            if (Directory.Exists(Path.Combine(path, "testDb2")))
-            {
-                Directory.Delete(Path.Combine(path, "testDb2"));
-            }
-            browse1.addDatabase(testDb1);
-            browse1.saveDatabases(path);
+            browse1.saveBrowse();
             Assert.IsTrue(Directory.Exists(path));
         }
 
