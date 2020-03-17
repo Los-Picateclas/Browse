@@ -24,15 +24,14 @@ namespace BrowseLib
             this.password = pW;
         }
         //It saves each table from the list
-        public void saveAllTables(Database d) {
+        public void saveAllTables(Database d)
+        {
             for (int i = 0; i < tables.Count; i++)
             {
                 tables.ElementAt(i).save(tables.ElementAt(i),d );
-
-
-                 }
-
             }
+
+        }
 
         public void addTable(Table table)
         {
@@ -80,6 +79,20 @@ namespace BrowseLib
                 {
                     Directory.CreateDirectory(Path.Combine(path, tb.getName()));
                 }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+        }
+
+        public void saveDatabase()
+        {
+            try
+            {
+                //aquí se crea en documentos tiene que crearse en la carpeta browse de pascu y no se como acceder al directorio 
+
+                Directory.CreateDirectory(Path.Combine(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Database")));
             }
             catch (Exception e)
             {

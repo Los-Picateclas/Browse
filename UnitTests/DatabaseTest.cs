@@ -73,6 +73,13 @@ namespace UnitTests
             db1.saveTables(path);
             Assert.IsTrue(Directory.Exists(path));
         }
+
+        [TestMethod]
+        public void saveDatabase()
+        {
+            db1.saveDatabase();
+            Assert.IsTrue(Directory.Exists(path));
+        }
     }
         
 }
