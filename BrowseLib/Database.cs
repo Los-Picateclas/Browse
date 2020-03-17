@@ -34,9 +34,6 @@ namespace BrowseLib
 
             }
 
-
-      
-
         public void addTable(Table table)
         {
             tables.Add(table);
