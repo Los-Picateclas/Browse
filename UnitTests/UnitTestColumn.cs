@@ -7,6 +7,7 @@ namespace UnitTests
     [TestClass]
     public class UnitTestColumn
     {
+        /*
         [TestMethod]
         public void TestMethod1()
         {
@@ -28,5 +29,6 @@ namespace UnitTests
             Console.WriteLine(column3.getColumnSize());
 
         }
+        */
     }
 }

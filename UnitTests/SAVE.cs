@@ -9,6 +9,7 @@ namespace UnitTests
     [TestClass]
     public class SAVE
     {
+        /*
         [TestMethod]
         public void TestMethod1()
         {
@@ -21,16 +22,7 @@ namespace UnitTests
             db1.addTable(t);
            db1.saveAllTables(db1);
 
-
-
-
-
-
-
-
-
-
-
+    */
         }
     }
 }

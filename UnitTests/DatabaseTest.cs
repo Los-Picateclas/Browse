@@ -10,6 +10,7 @@ namespace UnitTests
     [TestClass]
     public class DatabaseTest
     {
+        /*
         public static Table table = new Table("test-table");
         public static Database db1 = new Database("test-db1", "username1", "password1");
         public static Database db2 = new Database("test-db2", "username2", "password2");
@@ -80,6 +81,7 @@ namespace UnitTests
             db1.saveDatabase();
             Assert.IsTrue(Directory.Exists(path));
         }
+        */
     }
         
 }
