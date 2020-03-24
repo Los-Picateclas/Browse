@@ -21,8 +21,8 @@ namespace UnitTests
            
             db1.addTable(t);
            db1.saveAllTables(db1);
+        }
 
     */
-        }
     }
 }
