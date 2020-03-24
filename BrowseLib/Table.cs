@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -37,110 +36,43 @@ namespace BrowseLib
         }
         public Column selectColumn(Column c)
         {
-
-
             return c;
         }
-        public int columnSize() {
+        public int columnSize()
+        {
             return columns.Count();
 
         }
         public Column selectColumn(int i)
         {
             Column c = columns[i];
-
             return c;
         }
 
-        public int getColumnNumber() {
+        public int getColumnNumber()
+        {
             return columns.Count();
         }
 
-        
-
         public void save(Table t)
         {
-            
             //This will create a .txt in the desktop
             //string ruta = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop),t.getName()+".txt");
-            string ruta = "C:\\Users\\docencia\\Documents\\Browse\\" + t.getName() +".txt";
+            string ruta = "C:\\Users\\docencia\\Documents\\Browse\\" + t.getName() + ".txt";
             try
             {
                 using (StreamWriter sw = new StreamWriter(ruta))
                 {
                     for (int i = 0; i < t.getColumnNumber(); i++)
                     {
-
-                        sw.Write(t.selectColumn(i).type );
-
-                        if (i+1!=t.getColumnNumber()) { sw.Write(", "); }
-
-                    }
-                    sw.WriteLine("");
-                    for (int i=0; i<t.getColumnNumber(); i++) {
-                        sw.Write(t.selectColumn(i).name );
-
-                        if (i + 1 != t.getColumnNumber()) { sw.Write(", "); }
-
-
-
-                    }
-                    sw.WriteLine("");
-                    for (int i=0; i<t.selectColumn(0).getColumnSize();i++) {
-                        sw.WriteLine("");
-                        for (int y = 0;y<t.columnSize() ;y++) {
-                            
-                            sw.Write(t.selectColumn(y).getTextFromColumn(i) + ", ");
-
-                            
-
-
-
-                        }
-                    
-                    }
-
-                        
-                    }
-
-
-
-
-                
-                MessageBox.Show("Archivo creado!!");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-        public void save(Table t, Database db)
-        {
-
-            //This will create a .txt in the desktop
-            //string ruta = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop),t.getName()+".txt");
-            string ruta = "C:\\Users\\docencia\\Documents\\Browse\\"+ db.databaseName +"\\"+ t.getName() + ".txt";
-            try
-            {
-                using (StreamWriter sw = new StreamWriter(ruta))
-                {
-                    for (int i = 0; i < t.getColumnNumber(); i++)
-                    {
-
                         sw.Write(t.selectColumn(i).type);
-
                         if (i + 1 != t.getColumnNumber()) { sw.Write(", "); }
-
                     }
                     sw.WriteLine("");
                     for (int i = 0; i < t.getColumnNumber(); i++)
                     {
                         sw.Write(t.selectColumn(i).name);
-
                         if (i + 1 != t.getColumnNumber()) { sw.Write(", "); }
-
-
-
                     }
                     sw.WriteLine("");
                     for (int i = 0; i < t.selectColumn(0).getColumnSize(); i++)
@@ -148,29 +80,53 @@ namespace BrowseLib
                         sw.WriteLine("");
                         for (int y = 0; y < t.columnSize(); y++)
                         {
-
                             sw.Write(t.selectColumn(y).getTextFromColumn(i) + ", ");
-
-
-
-
-
                         }
-
                     }
-
-
                 }
-
-
-
-
-
-                MessageBox.Show("Archivo creado!!");
+                //MessageBox.Show("Archivo creado!!");
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                //MessageBox.Show(ex.Message);
+            }
+        }
+        public void save(Table t, Database db)
+        {
+
+            //This will create a .txt in the desktop
+            //string ruta = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop),t.getName()+".txt");
+            string ruta = "C:\\Users\\docencia\\Documents\\Browse\\" + db.databaseName + "\\" + t.getName() + ".txt";
+            try
+            {
+                using (StreamWriter sw = new StreamWriter(ruta))
+                {
+                    for (int i = 0; i < t.getColumnNumber(); i++)
+                    {
+                        sw.Write(t.selectColumn(i).type);
+                        if (i + 1 != t.getColumnNumber()) { sw.Write(", "); }
+                    }
+                    sw.WriteLine("");
+                    for (int i = 0; i < t.getColumnNumber(); i++)
+                    {
+                        sw.Write(t.selectColumn(i).name);
+                        if (i + 1 != t.getColumnNumber()) { sw.Write(", "); }
+                    }
+                    sw.WriteLine("");
+                    for (int i = 0; i < t.selectColumn(0).getColumnSize(); i++)
+                    {
+                        sw.WriteLine("");
+                        for (int y = 0; y < t.columnSize(); y++)
+                        {
+                            sw.Write(t.selectColumn(y).getTextFromColumn(i) + ", ");
+                        }
+                    }
+                }
+                //MessageBox.Show("Archivo creado!!");
+            }
+            catch (Exception ex)
+            {
+                //MessageBox.Show(ex.Message);
             }
         }
 
