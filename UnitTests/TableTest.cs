@@ -7,9 +7,6 @@ using System.Windows;
 
 namespace UnitTests
 {
-    /// <summary>
-    /// Summary description for UnitTest2
-    /// </summary>
     [TestClass]
     public class TableTest
     {
@@ -30,7 +27,6 @@ namespace UnitTests
             Assert.AreEqual(c1,c2);
             table.save(table);**/
 
-            /*
             Table table = new Table("MiTabla");
             Column name = new Column("name", "TEXT");
             name.insert("Borja");
@@ -45,10 +41,6 @@ namespace UnitTests
             MessageBox.Show(name.getTextFromColumn(1));
             MessageBox.Show(age.getTextFromColumn(0));
             MessageBox.Show(age.getTextFromColumn(1));
-            */
         }
-       
-
-
     }
 }                                               
