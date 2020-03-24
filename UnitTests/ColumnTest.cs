@@ -5,9 +5,8 @@ using BrowseLib;
 namespace UnitTests
 {
     [TestClass]
-    public class UnitTestColumn
+    public class ColumnTest
     {
-        /*
         [TestMethod]
         public void TestMethod1()
         {
@@ -29,6 +28,5 @@ namespace UnitTests
             Console.WriteLine(column3.getColumnSize());
 
         }
-        */
     }
 }
