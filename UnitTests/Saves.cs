@@ -7,20 +7,19 @@ using BrowseLib;
 namespace UnitTests
 {
     [TestClass]
-    public class SAVE
+    public class Saves
     {
         
         [TestMethod]
-        public void TestMethod1()
+        public void TestMethod()
         {
-            Database db1 = new Database("db1", "b", "123");
-            Table t = new Table("t1");
+            Database db1 = new Database("db1", "user1", "password1");
+            Table t1 = new Table("t1");
             Column c1 = new Column("c1", "String");
             c1.insert("olaKase");
-            t.addColumn(c1);
-           
-            db1.addTable(t);
-           db1.saveAllTables(db1);
+            t1.addColumn(c1);
+            db1.addTable(t1);
+            db1.saveAllTables(db1);
         }
     }
 }
