@@ -36,15 +36,25 @@ namespace BrowseLib
             return databases.ElementAt(pos);
         }
 
-        // Save the directories of each database in the list databases
+        // Save the Browse directory
         public void saveBrowse()
         {
             try
             {
-                Directory.CreateDirectory(Path.Combine(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Browse")));
+                Directory.CreateDirectory("../data/Browse");
             }
             catch (Exception e)
             {
+                throw e;
+            }
+        }
+
+        // Save the directories for each database in the list databases
+        public void saveDatabases()
+        {
+            foreach (Database db in databases)
+            {
+                db.saveDatabase();
             }
         }
     }

@@ -66,7 +66,7 @@ namespace BrowseLib
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message);
+               throw e;
             }
 
         }
@@ -82,7 +82,7 @@ namespace BrowseLib
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message);
+                throw e;
             }
         }
 
@@ -90,13 +90,11 @@ namespace BrowseLib
         {
             try
             {
-                //aquí se crea en documentos tiene que crearse en la carpeta browse de pascu y no se como acceder al directorio 
-
-                Directory.CreateDirectory(Path.Combine(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Database")));
+                Directory.CreateDirectory("../data/Browse/" + databaseName);
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message);
+                throw e;
             }
         }
     }

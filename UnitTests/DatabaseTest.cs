@@ -80,7 +80,7 @@ namespace UnitTests
         public void saveDatabase()
         {
             db1.saveDatabase();
-            Assert.IsTrue(Directory.Exists(path));
+            Assert.IsTrue(Directory.Exists("../data/Browse/test-db1"));
         }
     }
         

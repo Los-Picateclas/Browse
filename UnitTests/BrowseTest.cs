@@ -48,13 +48,12 @@ namespace UnitTests
             Assert.IsTrue(browse1.databases.Count == 0);
         }
 
-        // Check that the method saveDatabases(string path) saves the files
+        // Check that the method saveBrowse() saves the file Browse
         [TestMethod]
         public void saveBrowse()
         {
             browse1.saveBrowse();
-            Assert.IsTrue(Directory.Exists(path));
+            Assert.IsTrue(Directory.Exists("../data/Browse"));
         }
-
     }
 }
