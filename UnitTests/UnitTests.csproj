@@ -60,6 +60,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="AddColumnTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BrowseLib\BrowseLib.csproj">
