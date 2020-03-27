@@ -23,7 +23,7 @@ namespace BrowseLib
             this.username = uN;
             this.password = pW;
         }
-        //It saves each table from the list
+
         public void saveAllTables(Database d)
         {
             for (int i = 0; i < tables.Count; i++)

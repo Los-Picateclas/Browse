@@ -40,7 +40,7 @@ namespace UnitTests
             db1.updateName(db1.databaseName);   
         }
 
-        /*
+        
         [TestMethod]
         public void loadTables()
         {
@@ -57,7 +57,7 @@ namespace UnitTests
             db1.loadTables(path);
             Assert.IsTrue(db1.tables.Count > 0);
         }
-        */
+        
 
         [TestMethod]
         public void saveTables()
