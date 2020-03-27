@@ -26,7 +26,6 @@ namespace UnitTests
             c2 = table.selectColumn(c1);
             Assert.AreEqual(c1,c2);
             table.save(table);**/
-
             Table table = new Table("MiTabla");
             Column name = new Column("name", "TEXT");
             name.insert("Borja");
