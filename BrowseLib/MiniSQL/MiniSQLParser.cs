@@ -30,8 +30,12 @@ namespace BrowseLib.MiniSQL
             return null;
         }
 
+        // This method is not finished
         static List<string> CommaSeparatedNames(string text)
         {
+            List<string> names = new List<string>();
+            return names;
         }
+        
     }
 }
