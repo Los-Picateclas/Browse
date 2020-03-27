@@ -54,6 +54,7 @@ namespace UnitTests
                 Directory.Delete(Path.Combine(path, "Tables"));
             }
 
+            db1.addTable(table);
             db1.loadTables(path);
             Assert.IsTrue(db1.tables.Count > 0);
         }
