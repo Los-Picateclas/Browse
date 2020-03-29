@@ -60,10 +60,12 @@ namespace BrowseLib
             //string ruta = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop),t.getName()+".txt");
             //This one actually works but it is an absolute route 
             //string ruta = "C:\\Users\\docencia\\Documents\\Browse\\" + t.getName() + ".txt";
-            string ruta = "../data/Browse" + t.getName() + ".txt";
-= "C:\\Users\\docencia\\Documents\\Browse\\" + t.getName() + ".txt";
-            string ruta = "../data/Browse" + t.getName() + ".txt";
- (int i = 0; i < t.getColumnNumber(); i++)
+            string ruta = "..\\data\\Browse\\" + t.getName() + ".txt";
+            try
+            {
+                using (StreamWriter sw = new StreamWriter(ruta))
+                {
+                    for (int i = 0; i < t.getColumnNumber(); i++)
                     {
                         sw.Write(t.selectColumn(i).type);
                         if (i + 1 != t.getColumnNumber()) { sw.Write(", "); }
