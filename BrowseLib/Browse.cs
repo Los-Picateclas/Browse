@@ -30,6 +30,12 @@ namespace BrowseLib
             databases.Remove(database);
         }
 
+        // Remove all the databases of the list databases
+        public void deleteAllDatabases()
+        {
+            databases.Clear();
+        }
+
         // Return the database in the given position
         public Database getDatabase(int pos)
         {
@@ -55,6 +61,18 @@ namespace BrowseLib
             foreach (Database db in databases)
             {
                 db.saveDatabase();
+            }
+        }
+
+        // Load the databases into the list from the directories
+        public void loadDatabases()
+        {
+            DirectoryInfo dirInfo = new DirectoryInfo("../data/Browse");
+            DirectoryInfo[] directoryNames = dirInfo.GetDirectories();
+
+            foreach (DirectoryInfo di in directoryNames)
+            {
+                addDatabase(new Database(di.Name, "", ""));
             }
         }
     }
