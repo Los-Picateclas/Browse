@@ -10,36 +10,36 @@ namespace BrowseLib
 {
     public class Browse
     {
-        public List<Database> databases;
+        public List<Database> Databases;
 
         // Constructor
         public Browse()
         {
-            databases = new List<Database>();
+            Databases = new List<Database>();
         }
 
         // Add a database to the list databases
         public void addDatabase(Database database)
         {
-            databases.Add(database);
+            Databases.Add(database);
         }
 
         // Remove a database from the list databases
         public void deleteDatabase(Database database)
         {
-            databases.Remove(database);
+            Databases.Remove(database);
         }
 
         // Remove all the databases of the list databases
         public void deleteAllDatabases()
         {
-            databases.Clear();
+            Databases.Clear();
         }
 
         // Return the database in the given position
         public Database getDatabase(int pos)
         {
-            return databases.ElementAt(pos);
+            return Databases.ElementAt(pos);
         }
 
         // Save the Browse directory
@@ -58,7 +58,7 @@ namespace BrowseLib
         // Save the directories for each database in the list databases
         public void saveDatabases()
         {
-            foreach (Database db in databases)
+            foreach (Database db in Databases)
             {
                 db.saveDatabase();
             }
