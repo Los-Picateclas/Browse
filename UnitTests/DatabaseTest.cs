@@ -108,8 +108,6 @@ namespace UnitTests
             String select = dbWork.Select("Person", selectColumns);
             Assert.IsTrue(select == "{'Name''Age'} => {Ander,Borja}{20,21}");
         }
-    }
-}
-        
+    }    
 }
 
