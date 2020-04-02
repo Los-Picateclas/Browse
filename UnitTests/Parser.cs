@@ -17,5 +17,7 @@ namespace UnitTests
             Assert.IsTrue(selectQuery.Columns.Contains("Height"));
             Assert.AreEqual("People", selectQuery.Table);
         }
+
+        
     }
 }

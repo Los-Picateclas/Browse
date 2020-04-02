@@ -30,7 +30,7 @@ namespace BrowseLib
         {
             for (int i = 0; i < tables.Count; i++)
             {
-                tables.ElementAt(i).save(tables.ElementAt(i),d );
+                tables.ElementAt(i).save(tables.ElementAt(i), d);
             }
 
         }
@@ -55,7 +55,7 @@ namespace BrowseLib
             return tables.ElementAt(position);
         }
 
-        public void loadTables (string path)
+        public void loadTables(string path)
         {
             try
             {
@@ -68,7 +68,7 @@ namespace BrowseLib
             }
             catch (Exception e)
             {
-               throw e;
+                throw e;
             }
 
         }
@@ -76,9 +76,9 @@ namespace BrowseLib
 
             MiniSQLQuery miniSQLQuery = MiniSQLParser.Parse(query);
 
-            if (miniSQLQuery == null) 
-            { 
-            return "Error";
+            if (miniSQLQuery == null)
+            {
+                return "Error";
             }
 
             return miniSQLQuery.Execute(this);
@@ -124,7 +124,36 @@ namespace BrowseLib
             }
         }
 
-        public string Select(string table, List<string> columns)
+
+
+        public string insert(string tab, List<String> Col){
+
+            foreach (Table tb in tables){
+                if (tab.Equals(tb.getName())){
+                    int i = 0;
+                    List<Column> columnsFromTb = tb.getColumns();
+                    foreach (Column c in columnsFromTb) {
+                        c.insert(Col[i]);
+                        i++;
+
+
+
+                    }
+
+
+            }
+        }
+
+            return "";
+        }
+
+
+
+
+
+
+
+    public string Select(string table, List<string> columns)
         {
             string select = "";
             List<int> numCl = new List<int>();

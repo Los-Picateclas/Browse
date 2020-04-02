@@ -28,6 +28,16 @@ namespace BrowseLib
         {
             return name;
         }
+        public List<string> getColumnNames() {
+            List<string> aux = null;
+            foreach (Column c in  columns) {
+                string n = c.name;
+                aux.Add(n);
+
+
+            }
+            return aux;
+        }
         public List<Column> getColumns() {
             return columns;
         }
