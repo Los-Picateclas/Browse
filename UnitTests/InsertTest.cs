@@ -18,7 +18,7 @@ namespace UnitTests
         {
 
 
-
+            Database db = new Database("pruebaInsert","usuario", "123");
             Table table = new Table("MiTabla");
             Column name = new Column("name", "TEXT");
             name.insert("Borja");
@@ -26,7 +26,9 @@ namespace UnitTests
             table.addColumn(name);
             string query = "INSERT INTO MiTabla VALUES Ander";
             MiniSQLParse mini = new MiniSQLParse(query);
-
+            table.addColumn(name);
+            db.addTable(table);
+            db.saveDataBase();
         }
 
 

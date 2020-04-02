@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace BrowseLib.MiniSQL
 {
@@ -24,7 +25,7 @@ namespace BrowseLib.MiniSQL
             Table t = database.getTable(name);
             foreach (Column c in t.getColumns()) {
                 c.insert(Columns[i]);
-
+                MessageBox.Show("escrito");
 
             }
             

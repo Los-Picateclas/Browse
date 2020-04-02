@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Windows;
 
 namespace BrowseLib
 {
@@ -23,7 +23,7 @@ namespace BrowseLib
         {
 
             column.Add(text);
-
+            MessageBox.Show("añadido");
         }
 
         public int getIntFromColumn(int position)
