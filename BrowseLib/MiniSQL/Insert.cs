@@ -6,30 +6,23 @@ using System.Threading.Tasks;
 
 namespace BrowseLib.MiniSQL
 {
-    class Insert : MiniSQLQuery
+    class insert : MiniSQLQuery
     {
         public string Table = null;
         public List<string> Columns = null;
-
-        public Insert(string table, List<string> columns)
+        
+        public insert(string table, List<string> columns)
         {
             Table = table;
             Columns = columns;
+            
         }
         
         public string Execute(Database database)
         {
-            int i = 0;
-            string name = Table;
-            Table t = database.getTable(name);
-            foreach (Column c in t.getColumns()) {
-
-                c.insert(Columns[i]);
-                i++;
-
-            }
+           
             
-            return "";// database.Insert(Table, Columns);
+            return  database.insert(Table, Columns);
         }
     }
 }
