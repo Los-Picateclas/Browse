@@ -123,16 +123,5 @@ namespace BrowseLib
             //Do whatever you have to do
             return null;
         }
-
-        public string ExecuteMiniSQLQuery(string query)
-        {
-            //Parse the query
-            MiniSQLQuery miniSQLQuery = MiniSQLParser.Parse(query);
-
-            if (miniSQLQuery == null)
-                return "Error";
-
-            return miniSQLQuery.Execute(this);
-        }
     }
 }
