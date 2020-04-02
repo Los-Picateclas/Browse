@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using BrowseLib.MiniSQL;
 
 namespace BrowseLib
 {
@@ -68,6 +69,19 @@ namespace BrowseLib
             {
                throw e;
             }
+
+        }
+        public string ExecuteMiniSQLQuery(string query) {
+
+            MiniSQLQuery miniSQLQuery = MiniSQLParser.Parse(query);
+
+            if (miniSQLQuery == null)
+                return "Error";
+
+
+
+
+            return miniSQLQuery.Execute(this);
 
         }
 
