@@ -18,6 +18,5 @@ namespace UnitTests
             Assert.AreEqual("People", selectQuery.Table);
         }
 
-        
     }
 }
