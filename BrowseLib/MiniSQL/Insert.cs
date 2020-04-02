@@ -16,9 +16,18 @@ namespace BrowseLib.MiniSQL
             Table = table;
             Columns = columns;
         }
-
+        
         public string Execute(Database database)
         {
+            int i = 0;
+            string name = Table;
+            Table t = database.getTable(name);
+            foreach (Column c in t.getColumns()) {
+                c.insert(Columns[i]);
+
+
+            }
+            
             return "";// database.Insert(Table, Columns);
         }
     }

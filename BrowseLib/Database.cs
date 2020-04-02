@@ -76,14 +76,27 @@ namespace BrowseLib
 
             MiniSQLQuery miniSQLQuery = MiniSQLParser.Parse(query);
 
-            if (miniSQLQuery == null)
-                return "Error";
+            if (miniSQLQuery == null) { 
+            return "Error"; }
+            
 
 
 
 
             return miniSQLQuery.Execute(this);
 
+        }
+        public Table getTable(string tab) {
+            Table aux = null;
+            foreach (Table t in tables) {
+                if (t.getName().Equals(tab)) {
+
+                    aux = t;
+                }
+
+
+            }
+            return aux;
         }
 
         public void saveTables(string path)
@@ -113,15 +126,6 @@ namespace BrowseLib
             }
         }
 
-        public string Select(string table, List<string> columns)
-        {
-            //Do whatever you have to do
-            return null;
-        }
-        public string Insert(string table, List<string> columns, List<string> values)
-        {
-            //Do whatever you have to do
-            return null;
-        }
+        
     }
 }

@@ -29,6 +29,9 @@ namespace BrowseLib
         {
             return name;
         }
+        public List<Column> getColumns() {
+            return columns;
+        }
 
         public void dropColumn(Column c)
         {

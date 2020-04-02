@@ -64,6 +64,7 @@
     <None Include="CrearTablaTest.cs" />
     <None Include="DropColumnTest.cs" />
     <None Include="saveTableTest.cs" />
+    <None Include="InsertTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BrowseLib\BrowseLib.csproj">
