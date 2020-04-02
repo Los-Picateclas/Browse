@@ -103,7 +103,7 @@ namespace BrowseLib
             {
                 foreach (Table tb in tables)
                 {
-                    Directory.CreateDirectory(Path.Combine(path, tb.getName()));
+                    Directory.CreateDirectory("../data/Browse/" + tables);
                 }
             }
             catch (Exception e)
