@@ -1,4 +1,5 @@
 ﻿using System;
+using BrowseLib.MiniSQL;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace UnitTests
@@ -6,7 +7,6 @@ namespace UnitTests
     [TestClass]
     public class Parser
     {
-        /*
         [TestMethod]
         public void Select()
         {
@@ -15,8 +15,7 @@ namespace UnitTests
             Assert.IsTrue(selectQuery.Columns.Contains("Name"));
             Assert.IsTrue(selectQuery.Columns.Contains("Age"));
             Assert.IsTrue(selectQuery.Columns.Contains("Height"));
-            Assert.Equals("People", selectQuery.Table);
+            Assert.AreEqual("People", selectQuery.Table);
         }
-        */
     }
 }

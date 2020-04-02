@@ -36,7 +36,7 @@ namespace BrowseLib.MiniSQL
         static List<string> CommaSeparatedNames(string text)
         {
             List<string> names = new List<string>();
-            string[] namesSeparated = text.Split(' ');
+            string[] namesSeparated = text.Split(',');
             foreach(string name in namesSeparated)
             {
                 names.Add(name.Trim());

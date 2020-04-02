@@ -76,12 +76,10 @@ namespace BrowseLib
 
             MiniSQLQuery miniSQLQuery = MiniSQLParser.Parse(query);
 
-            if (miniSQLQuery == null) { 
-            return "Error"; }
-            
-
-
-
+            if (miniSQLQuery == null) 
+            { 
+            return "Error";
+            }
 
             return miniSQLQuery.Execute(this);
 
@@ -126,6 +124,59 @@ namespace BrowseLib
             }
         }
 
-        
+        public string Select(string table, List<string> columns)
+        {
+            string select = "";
+            List<int> numCl = new List<int>();
+
+            foreach (Table tb in tables)
+            {
+                if (table == tb.getName())
+                {
+                    select = "{";
+                    foreach (string column in columns)
+                    {
+                        foreach (Column cl in tb.columns)
+                        {
+                            if (column == cl.name)
+                            {
+                                if (numCl.Count()==0)
+                                {
+                                    numCl.Add(tb.columns.IndexOf(cl));
+                                    select += "'" + column + "'";
+                                }
+                                else
+                                {
+                                    numCl.Add(tb.columns.IndexOf(cl));
+                                    select += ",'" + column + "'";
+                                }
+                                
+                            }
+                        }
+                    }
+                    select += "} => ";
+                    
+                    int columnLength = tb.columnSize()-1;
+                    for (int j = 0; j < columnLength; j++)
+                    {
+                        select += "{";
+                        foreach (int i in numCl)
+                        {
+                            if (i == 0)
+                            {
+                                select += tb.selectColumn(i).column[j];
+                            }
+                            else
+                            {
+                                select += "," + tb.selectColumn(i).column[j];
+                            }
+                        }
+                        select += "}";
+                    }
+                }
+            }
+
+            return select;
+        }
     }
 }

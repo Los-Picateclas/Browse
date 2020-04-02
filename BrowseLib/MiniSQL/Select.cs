@@ -17,7 +17,7 @@ namespace BrowseLib.MiniSQL
         public string Execute(Database database)
         {
             
-            return "";// database.Select(Table, Columns);
+            return database.Select(Table, Columns);
         }
     }
 }
