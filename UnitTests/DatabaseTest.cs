@@ -132,6 +132,29 @@ namespace UnitTests
             string result = dbWork.ExecuteMiniSQLQuery("SELECT Name, Age FROM Person;");
             Assert.AreEqual("{'Name','Age'} => {Ander,20}{Borja,21}", result);
         }
+        [TestMethod]
+        public void ParseAndInsert()
+        {
+            Column clName = new Column("Name", "TEXT");
+            Column clSurname = new Column("Surname", "TEXT");
+            Column clAge = new Column("Age", "INT");
+            clName.insert("Ander");
+            clName.insert("Borja");
+            clSurname.insert("Pascual");
+            clSurname.insert("Rey");
+            clAge.insert("20");
+            clAge.insert("21");
+            Table tbPerson = new Table("Person");
+            tbPerson.addColumn(clName);
+            tbPerson.addColumn(clSurname);
+            tbPerson.addColumn(clAge);
+            Database dbWork = new Database("Work", "username", "password");
+            dbWork.addTable(tbPerson);
+
+            string todo = dbWork.ExecuteMiniSQLQuery("INSERT INTO Person VALUES Unai, Foncea, 22");
+           
+            
+        }
     }    
 }
 
