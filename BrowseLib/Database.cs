@@ -76,12 +76,10 @@ namespace BrowseLib
 
             MiniSQLQuery miniSQLQuery = MiniSQLParser.Parse(query);
 
-            if (miniSQLQuery == null) { 
-            return "Error"; }
-            
-
-
-
+            if (miniSQLQuery == null) 
+            { 
+            return "Error";
+            }
 
             return miniSQLQuery.Execute(this);
 
@@ -142,19 +140,29 @@ namespace BrowseLib
                         {
                             if (column == cl.name)
                             {
-                                numCl.Add(tb.columns.IndexOf(cl));
-                                select += "'" + column + "'";
+                                if (numCl.Count()==0)
+                                {
+                                    numCl.Add(tb.columns.IndexOf(cl));
+                                    select += "'" + column + "'";
+                                }
+                                else
+                                {
+                                    numCl.Add(tb.columns.IndexOf(cl));
+                                    select += ",'" + column + "'";
+                                }
+                                
                             }
                         }
                     }
                     select += "} => ";
-                    foreach (int i in numCl)
+                    
+                    int columnLength = tb.columnSize()-1;
+                    for (int j = 0; j < columnLength; j++)
                     {
                         select += "{";
-                        int columnLength = tb.selectColumn(i).getColumnSize();
-                        for (int j = 0; j < columnLength; j++)
+                        foreach (int i in numCl)
                         {
-                            if (j == 0)
+                            if (i == 0)
                             {
                                 select += tb.selectColumn(i).column[j];
                             }
