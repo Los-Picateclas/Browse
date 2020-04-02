@@ -12,8 +12,7 @@ namespace BrowseLib
     public class Table
     {
         private string name;
-
-        private List<Column> columns;
+        public List<Column> columns;
 
         public Table(string n)
         {

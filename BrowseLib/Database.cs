@@ -126,6 +126,49 @@ namespace BrowseLib
             }
         }
 
-        
+        public string Select(string table, List<string> columns)
+        {
+            string select = "";
+            List<int> numCl = new List<int>();
+
+            foreach (Table tb in tables)
+            {
+                if (table == tb.getName())
+                {
+                    select = "{";
+                    foreach (string column in columns)
+                    {
+                        foreach (Column cl in tb.columns)
+                        {
+                            if (column == cl.name)
+                            {
+                                numCl.Add(tb.columns.IndexOf(cl));
+                                select += "'" + column + "'";
+                            }
+                        }
+                    }
+                    select += "} => ";
+                    foreach (int i in numCl)
+                    {
+                        select += "{";
+                        int columnLength = tb.selectColumn(i).getColumnSize();
+                        for (int j = 0; j < columnLength; j++)
+                        {
+                            if (j == 0)
+                            {
+                                select += tb.selectColumn(i).column[j];
+                            }
+                            else
+                            {
+                                select += "," + tb.selectColumn(i).column[j];
+                            }
+                        }
+                        select += "}";
+                    }
+                }
+            }
+
+            return select;
+        }
     }
 }

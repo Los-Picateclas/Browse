@@ -83,7 +83,33 @@ namespace UnitTests
             db1.saveDatabase();
             Assert.IsTrue(Directory.Exists("../data/Browse/test-db1"));
         }
+
+        [TestMethod]
+        public void select()
+        {
+            Column clName = new Column("Name", "TEXT");
+            Column clSurname = new Column("Surname", "TEXT");
+            Column clAge = new Column("Age", "INT");
+            clName.insert("Ander");
+            clName.insert("Borja");
+            clSurname.insert("Pascual");
+            clSurname.insert("Rey");
+            clAge.insert("20");
+            clAge.insert("21");
+            Table tbPerson = new Table("Person");
+            tbPerson.addColumn(clName);
+            tbPerson.addColumn(clSurname);
+            tbPerson.addColumn(clAge);
+            Database dbWork = new Database("Work", "username", "password");
+            dbWork.addTable(tbPerson);
+            List<string> selectColumns = new List<string>();
+            selectColumns.Add("Name");
+            selectColumns.Add("Age");
+            String select = dbWork.Select("Person", selectColumns);
+            Assert.IsTrue(select == "{'Name''Age'} => {Ander,Borja}{20,21}");
+        }
     }
+}
         
 }
 
