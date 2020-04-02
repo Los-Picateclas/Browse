@@ -23,8 +23,9 @@ namespace BrowseLib.MiniSQL
             string name = Table;
             Table t = database.getTable(name);
             foreach (Column c in t.getColumns()) {
-                c.insert(Columns[i]);
 
+                c.insert(Columns[i]);
+                i++;
 
             }
             
