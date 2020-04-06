@@ -127,24 +127,32 @@ namespace BrowseLib
 
 
         public string insert(string tab, List<String> Col){
-
+            string resultado = "";
+            string datos = "";
             foreach (Table tb in tables){
-                if (tab.Equals(tb.getName())){
+                if (tab.Equals(tb.getName())) {
                     int i = 0;
                     List<Column> columnsFromTb = tb.getColumns();
+                    resultado += "{";
                     foreach (Column c in columnsFromTb) {
                         c.insert(Col[i]);
+                        if (i == 0)
+                        {
+                            resultado += "'" + c.name + "'";
+                            datos += Col[i];
+                        }
+                        else
+                        {
+                            resultado += ",'" + c.name + "'";
+                            datos += "," + Col[i];
+                        }
                         i++;
-
-
-
                     }
-
-
+                    resultado += "}";
+                }
             }
-        }
-
-            return "";
+            resultado += " => {" + datos + "}";
+            return resultado;
         }
 
 
