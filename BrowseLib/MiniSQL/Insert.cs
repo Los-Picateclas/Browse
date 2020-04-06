@@ -6,22 +6,19 @@ using System.Threading.Tasks;
 
 namespace BrowseLib.MiniSQL
 {
-    class insert : MiniSQLQuery
+    public class Insert : MiniSQLQuery
     {
         public string Table = null;
         public List<string> Columns = null;
         
-        public insert(string table, List<string> columns)
+        public Insert(string table, List<string> columns)
         {
             Table = table;
             Columns = columns;
-            
         }
         
         public string Execute(Database database)
-        {
-           
-            
+        { 
             return  database.insert(Table, Columns);
         }
     }

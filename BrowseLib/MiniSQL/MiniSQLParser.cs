@@ -28,7 +28,7 @@ namespace BrowseLib.MiniSQL
                 string table = match.Groups[1].Value;
  
                 List<string> columnNames = CommaSeparatedNames(match.Groups[2].Value);
-                return new insert(table, columnNames);
+                return new Insert(table, columnNames);
             }
             return null;
         }

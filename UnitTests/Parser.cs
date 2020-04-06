@@ -18,5 +18,15 @@ namespace UnitTests
             Assert.AreEqual("People", selectQuery.Table);
         }
 
+        [TestMethod]
+        public void Insert()
+        {
+            MiniSQLQuery query = MiniSQLParser.Parse("INSERT INTO Person VALUES (Unai, Foncea, 22);");
+            Insert insertQuery = query as Insert;
+            Assert.IsTrue(insertQuery.Columns.Contains("Unai"));
+            Assert.IsTrue(insertQuery.Columns.Contains("Foncea"));
+            Assert.IsTrue(insertQuery.Columns.Contains("22"));
+            Assert.AreEqual("Person", insertQuery.Table);
+        }
     }
 }

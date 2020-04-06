@@ -151,9 +151,8 @@ namespace UnitTests
             Database dbWork = new Database("Work", "username", "password");
             dbWork.addTable(tbPerson);
 
-            string todo = dbWork.ExecuteMiniSQLQuery("INSERT INTO Person VALUES Unai, Foncea, 22");
-           
-            
+            string result = dbWork.ExecuteMiniSQLQuery("INSERT INTO Person VALUES (Unai, Foncea, 22);");
+            Assert.AreEqual("{'Name','Surname','Age'} => {Unai,Foncea,22}", result);
         }
     }    
 }
