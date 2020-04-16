@@ -61,7 +61,6 @@
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="AddColumnTest.cs" />
-    <None Include="CreateTableTest.cs" />
     <None Include="DropColumnTest.cs" />
     <None Include="saveTableTest.cs" />
     <None Include="InsertTest.cs" />
