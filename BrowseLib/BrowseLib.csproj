@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="Browse.cs" />
     <Compile Include="Database.cs" />
+    <Compile Include="MiniSQL\Delete.cs" />
     <Compile Include="MiniSQL\CreateTable.cs" />
     <Compile Include="MiniSQL\Insert.cs" />
     <Compile Include="MiniSQL\MiniSQLQuery.cs" />

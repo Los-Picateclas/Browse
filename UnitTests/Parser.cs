@@ -30,6 +30,15 @@ namespace UnitTests
         }
 
         [TestMethod]
+        public void Delete()
+        {
+            MiniSQLQuery query = MiniSQLParser.Parse("DELETE FROM Person WHERE Age=20;");
+            Delete deleteQuery = query as Delete;
+            Assert.AreEqual("Age=20", deleteQuery.Condition);
+            Assert.AreEqual("Person", deleteQuery.Table);
+        }
+
+        [TestMethod]
         public void DropTable()
         {
             MiniSQLQuery query = MiniSQLParser.Parse("DROP TABLE PERSONA;");

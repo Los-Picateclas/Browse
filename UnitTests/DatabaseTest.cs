@@ -154,6 +154,57 @@ namespace UnitTests
             string result = dbWork.ExecuteMiniSQLQuery("INSERT INTO Person VALUES (Unai, Foncea, 22);");
             Assert.AreEqual("{'Name','Surname','Age'} => {Unai,Foncea,22}", result);
         }
+
+        [TestMethod]
+        public void delete()
+        {
+            Column clName = new Column("Name", "TEXT");
+            Column clSurname = new Column("Surname", "TEXT");
+            Column clAge = new Column("Age", "INT");
+            clName.insert("Ander");
+            clName.insert("Borja");
+            clName.insert("Unai");
+            clSurname.insert("Pascual");
+            clSurname.insert("Rey");
+            clSurname.insert("Foncea");
+            clAge.insert("20");
+            clAge.insert("21");
+            clAge.insert("22");
+            Table tbPerson = new Table("Person");
+            tbPerson.addColumn(clName);
+            tbPerson.addColumn(clSurname);
+            tbPerson.addColumn(clAge);
+            Database dbWork = new Database("Work", "username", "password");
+            dbWork.addTable(tbPerson);
+
+            String delete = dbWork.delete("Person", "Age>20");
+            Assert.AreEqual("{'Age'} => {Borja,Rey,21}{Unai,Foncea,22}", delete);
+            String delete2 = dbWork.delete("Person", "Name=Ander");
+            Assert.AreEqual("{'Name'} => {Ander,Pascual,20}", delete2);
+        }
+
+        [TestMethod]
+        public void ParseAndDelete()
+        {
+            Column clName = new Column("Name", "TEXT");
+            Column clSurname = new Column("Surname", "TEXT");
+            Column clAge = new Column("Age", "INT");
+            clName.insert("Ander");
+            clName.insert("Borja");
+            clSurname.insert("Pascual");
+            clSurname.insert("Rey");
+            clAge.insert("20");
+            clAge.insert("21");
+            Table tbPerson = new Table("Person");
+            tbPerson.addColumn(clName);
+            tbPerson.addColumn(clSurname);
+            tbPerson.addColumn(clAge);
+            Database dbWork = new Database("Work", "username", "password");
+            dbWork.addTable(tbPerson);
+
+            string result = dbWork.ExecuteMiniSQLQuery("DELETE FROM Person WHERE Age>20;");
+            Assert.AreEqual("{'Age'} => {Borja,Rey,21}", result);
+        }
     }    
 }
 

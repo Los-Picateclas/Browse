@@ -229,5 +229,88 @@ namespace BrowseLib
 
             return select;
         }
+
+        // Delete the tuples from the given table that satisfy the condition (only accept a condition of type) 
+        public string delete(string table, string condition)
+        {
+            char[] delimiterChars = { '<', '=', '>' };
+            string[] words = condition.Split(delimiterChars);
+
+            string column = words[0];
+            string postCon = words[1];
+            int postNum;
+            bool esNumero = int.TryParse(postCon, out postNum);
+            char symbol;
+
+            if (condition.Contains('<'))
+            {
+                symbol = '<';
+            }
+            else if (condition.Contains('='))
+            {
+                symbol = '=';
+            }
+            else
+            {
+                symbol = '>';
+            }
+
+            string result = "{'" + column + "'} => ";
+            foreach (Table tb in tables)
+            {
+                if (table.Equals(tb.getName()))
+                {
+                    foreach (Column c in tb.columns)
+                    {
+                        if (column.Equals(c.name))
+                        {
+                            for (int i = 0; i < c.getColumnSize(); i++)
+                            {
+                                switch (symbol)
+                                {
+                                    case '<':
+                                        {
+                                            if (esNumero && Int32.Parse(c.column[i]) < postNum)
+                                            {
+                                                result += tb.selectTuple(i);
+                                                tb.deleteTuple(i);
+                                                i = i - 1;
+                                            }
+                                        }
+                                        break;
+                                    case '=':
+                                        {
+                                            if (esNumero && Int32.Parse(c.column[i]) == postNum)
+                                            {
+                                                result += tb.selectTuple(i);
+                                                tb.deleteTuple(i);
+                                                i = i - 1;
+                                            }
+                                            else if (!esNumero && c.column[i] == postCon)
+                                            {
+                                                result += tb.selectTuple(i);
+                                                tb.deleteTuple(i);
+                                                i = i - 1;
+                                            }
+                                        }
+                                        break;
+                                    case '>':
+                                        {
+                                            if (esNumero && Int32.Parse(c.column[i]) > postNum)
+                                            {
+                                                result += tb.selectTuple(i);
+                                                tb.deleteTuple(i);
+                                                i = i - 1;
+                                            }
+                                        }
+                                        break;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            return result;
+        }
     }
 }

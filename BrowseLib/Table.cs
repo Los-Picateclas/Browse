@@ -154,7 +154,24 @@ namespace BrowseLib
               }
           }**/
 
+        public string selectTuple(int pos)
+        {
+            string result = "{";
+            foreach (Column c in columns)
+            {
+                result += c.column[pos] + ",";                
+            }
+            result = result.TrimEnd(',') + "}";
+            return result;
+        }
 
+        public void deleteTuple(int pos)
+        {
+            foreach (Column c in columns)
+            {
+                c.column.RemoveAt(pos);
+            }
+        }
     }
 }
 
