@@ -30,6 +30,17 @@ namespace UnitTests
         }
 
         [TestMethod]
+        public void DropTable()
+        {
+            MiniSQLQuery query = MiniSQLParser.Parse("DROP TABLE PERSONA;");
+            DropTable dropQuery = query as DropTable;
+            Assert.IsTrue(insertQuery.Columns.Contains("Unai"));
+            Assert.IsTrue(insertQuery.Columns.Contains("Foncea"));
+            Assert.IsTrue(insertQuery.Columns.Contains("22"));
+            Assert.AreEqual("Person", insertQuery.Table);
+        }
+
+        [TestMethod]
         public void CreateTable()
         {
             MiniSQLQuery query = MiniSQLParser.Parse("CREATE TABLE table1 (age INT);");

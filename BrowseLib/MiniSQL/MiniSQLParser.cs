@@ -13,6 +13,7 @@ namespace BrowseLib.MiniSQL
         {
             const string selectPattern = "SELECT ([\\w,\\s]+) FROM (\\w+)\\s*;";
             const string insertPattern = "INSERT INTO (\\w+) VALUES \\(([\\w,\\s]+)\\)\\s?;";
+            const string dropPattern = "DROP TALBE (\\w+);";
             //Select
             Match match = Regex.Match(miniSQLQuery, selectPattern);
             if (match.Success)
@@ -29,6 +30,15 @@ namespace BrowseLib.MiniSQL
  
                 List<string> columnNames = CommaSeparatedNames(match.Groups[2].Value);
                 return new Insert(table, columnNames);
+            }
+            //drop
+            match = Regex.Match(miniSQLQuery, dropPattern);
+            if (match.Success)
+            {
+                string table = match.Groups[1].Value;
+
+                
+                return new DropTable(table);
             }
             return null;
         }

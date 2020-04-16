@@ -72,6 +72,20 @@ namespace BrowseLib
             }
 
         }
+
+
+
+        public string drop(string table) {
+
+            string route = "../data/Browse/" + databaseName + "/" + table;
+            File.Delete(route);
+            return table+" deleted";
+
+        }
+
+
+
+
         public string ExecuteMiniSQLQuery(string query) {
 
             MiniSQLQuery miniSQLQuery = MiniSQLParser.Parse(query);
