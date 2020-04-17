@@ -41,8 +41,9 @@ namespace UnitTests
         [TestMethod]
         public void DropTable()
         {
-            MiniSQLQuery query = MiniSQLParser.Parse("DROP TABLE PERSONA;");
+            MiniSQLQuery query = MiniSQLParser.Parse("DROP TABLE Person;");
             DropTable dropQuery = query as DropTable;
+            Assert.AreEqual("Person", dropQuery.table);
             
         }
 
