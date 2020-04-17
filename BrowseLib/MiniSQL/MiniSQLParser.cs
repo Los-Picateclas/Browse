@@ -14,7 +14,7 @@ namespace BrowseLib.MiniSQL
             const string selectPattern = "SELECT ([\\w,\\s]+) FROM (\\w+)\\s*;";
             const string insertPattern = "INSERT INTO (\\w+) VALUES \\(([\\w,\\s]+)\\)\\s?;";
             const string deletePattern = "DELETE FROM (\\w+) WHERE (\\w+\\s?[=<>]\\s?\\d+);";
-            const string dropPattern = "DROP TALBE (\\w+);";
+            const string dropPattern = "DROP TABLE (\\w+);";
             
             //Select
             Match match = Regex.Match(miniSQLQuery, selectPattern);
