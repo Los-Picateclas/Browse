@@ -67,6 +67,15 @@ namespace BrowseLib
         }
 
 
+        public void updateColumn(int position, string update) {
+
+            column[position] = update;
+        
+        }
+
+        
+
+     
 
     }
 }
