@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace BrowseLib.MiniSQL
 {
-    class CreateTable : MiniSQLQuery
+    public class CreateTable : MiniSQLQuery
     {
-        public string Table = null;
-        public List<string> Columns = null;
+        public string Table;
+        public List<string> Columns;
 
         public CreateTable(string table, List<string> columns)
         {
