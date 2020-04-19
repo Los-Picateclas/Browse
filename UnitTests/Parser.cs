@@ -64,16 +64,8 @@ namespace UnitTests
         [TestMethod]
         public void CreateTable()
         {
-            MiniSQLQuery query = MiniSQLParser.Parse("CREATE TABLE table1 (age INT);");
-           /* 
-            * SQLParser parser = new SQLParser();
-            CreateTable sbres = (CreateTable)par.Parser("CREATE TABLE table1 (age INT);");
-            string[] a = new string[2];
-            a[0] = "age";
-            CreateTable sel = new CreateTable("table1", a);
-            Assert.AreEqual(sbres.GetType(), sel.GetType());
-            Assert.AreEqual(sbres.getTabla(), sel.getTabla());
-            */
+            MiniSQLQuery query = MiniSQLParser.Parse("CREATE TABLE Table1;");
+            CreateTable createTable = query as CreateTable;
         }
     }
 }
