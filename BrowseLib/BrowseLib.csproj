@@ -50,6 +50,7 @@
     <Compile Include="MiniSQL\MiniSQLQuery.cs" />
     <Compile Include="MiniSQL\MiniSQLParser.cs" />
     <Compile Include="MiniSQL\Select.cs" />
+    <Compile Include="MiniSQL\Update.cs" />
     <Compile Include="Table.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Column.cs" />

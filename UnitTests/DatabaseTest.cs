@@ -31,16 +31,16 @@ namespace UnitTests
             db1.addTable(table);
             db1.dropTable(table);
             Assert.IsTrue(db1.tables.Count == 0);
-           
-            
+
+
         }
         [TestMethod]
         public void updateName()
         {
-            db1.updateName(db1.databaseName);   
+            db1.updateName(db1.databaseName);
         }
 
-        
+
         [TestMethod]
         public void loadTables()
         {
@@ -58,7 +58,7 @@ namespace UnitTests
             db1.loadTables(path);
             Assert.IsTrue(db1.tables.Count > 0);
         }
-        
+
 
         [TestMethod]
         public void saveTables()
@@ -105,7 +105,7 @@ namespace UnitTests
             List<string> selectColumns = new List<string>();
             selectColumns.Add("Name");
             selectColumns.Add("Age");
-            
+
             String select = dbWork.Select("Person", selectColumns);
             Assert.AreEqual(select, "{'Name','Age'} => {Ander,20}{Borja,21}");
         }
@@ -259,6 +259,30 @@ namespace UnitTests
 
 
         }
-    }    
-}
 
+        [TestMethod]
+        public void parseAndUpdate()
+        {
+
+            Column clName = new Column("Name", "TEXT");
+            Column clAge = new Column("Age", "INT");
+            Column clYear = new Column("Year", "INT");
+            clName.insert("Borja");
+            clName.insert("Unai");
+            clAge.insert("21");
+            clAge.insert("21");
+            clYear.insert("1999");
+            clYear.insert("1998");
+            Table tbPerson = new Table("Person");
+            tbPerson.addColumn(clName);
+            tbPerson.addColumn(clAge);
+            tbPerson.addColumn(clYear);
+            Database dbWork = new Database("Work", "username", "password");
+            dbWork.addTable(tbPerson);
+            String result = dbWork.ExecuteMiniSQLQuery("UPDATE Person SET Age=22 WHERE Year=1998;");
+            Assert.AreEqual("{'21'} => {'22'}", result);
+
+
+        }
+    }
+}

@@ -15,7 +15,8 @@ namespace BrowseLib.MiniSQL
             const string insertPattern = "INSERT INTO (\\w+) VALUES \\(([\\w,\\s]+)\\)\\s?;";
             const string deletePattern = "DELETE FROM (\\w+) WHERE (\\w+\\s?[=<>]\\s?\\d+);";
             const string dropPattern = "DROP TABLE (\\w+);";
-            
+            const string updatePattern = "UPDATE (\\w+) SET (\\w+)=(\\w+) WHERE (\\w+\\s?[=<>]\\s?\\d+);";
+
             //Select
             Match match = Regex.Match(miniSQLQuery, selectPattern);
             if (match.Success)
@@ -33,6 +34,17 @@ namespace BrowseLib.MiniSQL
  
                 List<string> columnNames = CommaSeparatedNames(match.Groups[2].Value);
                 return new Insert(table, columnNames);
+            }
+
+            //Update
+            match = Regex.Match(miniSQLQuery, updatePattern);
+            if (match.Success)
+            {
+                string table = match.Groups[1].Value;
+                string targetColumn=match.Groups[2].Value;
+                string update = match.Groups[3].Value;
+                string condition = match.Groups[4].Value;
+                return new Update(table, condition, update, targetColumn);
             }
 
             //Delete
@@ -67,5 +79,9 @@ namespace BrowseLib.MiniSQL
             }
             return names;
         }
+
+
+
+
     }
 }

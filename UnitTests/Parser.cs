@@ -38,6 +38,20 @@ namespace UnitTests
             Assert.AreEqual("Person", deleteQuery.Table);
         }
 
+
+        [TestMethod]
+        public void Update()
+        {
+            MiniSQLQuery query = MiniSQLParser.Parse("UPDATE Person SET Age=22 WHERE Year=1998;");
+            Update updateQuery = query as Update;
+            Assert.AreEqual("Person", updateQuery.Table);
+            Assert.AreEqual("22", updateQuery.UpdateValue);
+            Assert.AreEqual("Age", updateQuery.TargetColumn);
+            Assert.AreEqual("Year=1998", updateQuery.Condition);
+
+
+        }
+
         [TestMethod]
         public void DropTable()
         {
