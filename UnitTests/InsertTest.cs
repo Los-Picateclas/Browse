@@ -18,17 +18,21 @@ namespace UnitTests
         {
 
 
-            Database db = new Database("pruebaInsert","usuario", "123");
+            Browse browse = new Browse();
+            Database db = new Database("Borja", "Borja", "Borja");
             Table table = new Table("MiTabla");
             Column name = new Column("name", "TEXT");
             name.insert("Borja");
             name.insert("Unai");
             table.addColumn(name);
+            db.addTable(table);
+            browse.addDataabse(db);
             string query = "INSERT INTO MiTabla VALUES Ander";
             MiniSQLParse mini = new MiniSQLParse(query);
-            table.addColumn(name);
-            db.addTable(table);
-            db.saveDataBase();
+            browse.saveBrowse();
+            db.saveDatabase();
+            table.save(table);
+
         }
 
 

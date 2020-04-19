@@ -13,6 +13,9 @@ namespace BrowseLib.MiniSQL
         {
             const string selectPattern = "SELECT ([\\w,\\s]+) FROM (\\w+)\\s*;";
             const string insertPattern = "INSERT INTO (\\w+) VALUES \\(([\\w,\\s]+)\\)\\s?;";
+            const string deletePattern = "DELETE FROM (\\w+) WHERE (\\w+\\s?[=<>]\\s?\\d+);";
+            const string dropPattern = "DROP TABLE (\\w+);";
+            
             //Select
             Match match = Regex.Match(miniSQLQuery, selectPattern);
             if (match.Success)
@@ -21,13 +24,34 @@ namespace BrowseLib.MiniSQL
                 string table = match.Groups[2].Value;
                 return new Select(table, columnNames);
             }
+
             //Insert
             match = Regex.Match(miniSQLQuery, insertPattern);
             if (match.Success)
             {
                 string table = match.Groups[1].Value;
+ 
                 List<string> columnNames = CommaSeparatedNames(match.Groups[2].Value);
                 return new Insert(table, columnNames);
+            }
+
+            //Delete
+            match = Regex.Match(miniSQLQuery, deletePattern);
+            if (match.Success)
+            {
+                string table = match.Groups[1].Value;
+                string condition = match.Groups[2].Value;
+                return new Delete(table, condition);
+            }
+
+            //drop
+            match = Regex.Match(miniSQLQuery, dropPattern);
+            if (match.Success)
+            {
+                string table = match.Groups[1].Value;
+
+                
+                return new DropTable(table);
             }
             return null;
         }
@@ -36,13 +60,12 @@ namespace BrowseLib.MiniSQL
         static List<string> CommaSeparatedNames(string text)
         {
             List<string> names = new List<string>();
-            string[] namesSeparated = text.Split(' ');
+            string[] namesSeparated = text.Split(',');
             foreach(string name in namesSeparated)
             {
                 names.Add(name.Trim());
             }
             return names;
         }
-        
     }
 }

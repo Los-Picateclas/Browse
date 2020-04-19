@@ -6,20 +6,20 @@ using System.Threading.Tasks;
 
 namespace BrowseLib.MiniSQL
 {
-    public class Insert : MiniSQLQuery
+    public class Delete : MiniSQLQuery
     {
         public string Table = null;
-        public List<string> Columns = null;
-        
-        public Insert(string table, List<string> columns)
+        public string Condition = null;
+
+        public Delete(string table, string condition)
         {
             Table = table;
-            Columns = columns;
+            Condition = condition;
         }
-        
+
         public string Execute(Database database)
-        { 
-            return  database.insert(Table, Columns);
+        {
+            return database.delete(Table, Condition);
         }
     }
 }

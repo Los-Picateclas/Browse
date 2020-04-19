@@ -12,8 +12,7 @@ namespace BrowseLib
     public class Table
     {
         private string name;
-
-        private List<Column> columns;
+        public List<Column> columns;
 
         public Table(string n)
         {
@@ -28,6 +27,16 @@ namespace BrowseLib
         public string getName()
         {
             return name;
+        }
+        public List<string> getColumnNames() {
+            List<string> aux = null;
+            foreach (Column c in  columns) {
+                string n = c.name;
+                aux.Add(n);
+
+
+            }
+            return aux;
         }
         public List<Column> getColumns() {
             return columns;
@@ -145,7 +154,24 @@ namespace BrowseLib
               }
           }**/
 
+        public string selectTuple(int pos)
+        {
+            string result = "{";
+            foreach (Column c in columns)
+            {
+                result += c.column[pos] + ",";                
+            }
+            result = result.TrimEnd(',') + "}";
+            return result;
+        }
 
+        public void deleteTuple(int pos)
+        {
+            foreach (Column c in columns)
+            {
+                c.column.RemoveAt(pos);
+            }
+        }
     }
 }
 

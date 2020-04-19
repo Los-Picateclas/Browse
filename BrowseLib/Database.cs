@@ -30,7 +30,7 @@ namespace BrowseLib
         {
             for (int i = 0; i < tables.Count; i++)
             {
-                tables.ElementAt(i).save(tables.ElementAt(i),d );
+                tables.ElementAt(i).save(tables.ElementAt(i), d);
             }
 
         }
@@ -55,7 +55,7 @@ namespace BrowseLib
             return tables.ElementAt(position);
         }
 
-        public void loadTables (string path)
+        public void loadTables(string path)
         {
             try
             {
@@ -68,20 +68,32 @@ namespace BrowseLib
             }
             catch (Exception e)
             {
-               throw e;
+                throw e;
             }
 
         }
+
+
+
+        public string drop(string table) {
+
+            string route = "../data/Browse/" + databaseName + "/" + table;
+            File.Delete(route);
+            return table+" deleted";
+
+        }
+
+
+
+
         public string ExecuteMiniSQLQuery(string query) {
 
             MiniSQLQuery miniSQLQuery = MiniSQLParser.Parse(query);
 
-            if (miniSQLQuery == null) { 
-            return "Error"; }
-            
-
-
-
+            if (miniSQLQuery == null)
+            {
+                return "Error";
+            }
 
             return miniSQLQuery.Execute(this);
 
@@ -105,7 +117,7 @@ namespace BrowseLib
             {
                 foreach (Table tb in tables)
                 {
-                    Directory.CreateDirectory(Path.Combine(path, tb.getName()));
+                    Directory.CreateDirectory("../data/Browse/" + tables);
                 }
             }
             catch (Exception e)
@@ -126,6 +138,179 @@ namespace BrowseLib
             }
         }
 
-        
+
+
+        public string insert(string tab, List<String> Col){
+            string resultado = "";
+            string datos = "";
+            foreach (Table tb in tables){
+                if (tab.Equals(tb.getName())) {
+                    int i = 0;
+                    List<Column> columnsFromTb = tb.getColumns();
+                    resultado += "{";
+                    foreach (Column c in columnsFromTb) {
+                        c.insert(Col[i]);
+                        if (i == 0)
+                        {
+                            resultado += "'" + c.name + "'";
+                            datos += Col[i];
+                        }
+                        else
+                        {
+                            resultado += ",'" + c.name + "'";
+                            datos += "," + Col[i];
+                        }
+                        i++;
+                    }
+                    resultado += "}";
+                }
+            }
+            resultado += " => {" + datos + "}";
+            return resultado;
+        }
+
+
+
+
+
+
+
+    public string Select(string table, List<string> columns)
+        {
+            string select = "";
+            List<int> numCl = new List<int>();
+
+            foreach (Table tb in tables)
+            {
+                if (table == tb.getName())
+                {
+                    select = "{";
+                    foreach (string column in columns)
+                    {
+                        foreach (Column cl in tb.columns)
+                        {
+                            if (column == cl.name)
+                            {
+                                if (numCl.Count()==0)
+                                {
+                                    numCl.Add(tb.columns.IndexOf(cl));
+                                    select += "'" + column + "'";
+                                }
+                                else
+                                {
+                                    numCl.Add(tb.columns.IndexOf(cl));
+                                    select += ",'" + column + "'";
+                                }
+                                
+                            }
+                        }
+                    }
+                    select += "} => ";
+                    
+                    int columnLength = tb.columnSize()-1;
+                    for (int j = 0; j < columnLength; j++)
+                    {
+                        select += "{";
+                        foreach (int i in numCl)
+                        {
+                            if (i == 0)
+                            {
+                                select += tb.selectColumn(i).column[j];
+                            }
+                            else
+                            {
+                                select += "," + tb.selectColumn(i).column[j];
+                            }
+                        }
+                        select += "}";
+                    }
+                }
+            }
+
+            return select;
+        }
+
+        // Delete the tuples from the given table that satisfy the condition (only accept a condition of type) 
+        public string delete(string table, string condition)
+        {
+            char[] delimiterChars = { '<', '=', '>' };
+            string[] words = condition.Split(delimiterChars);
+
+            string column = words[0];
+            string postCon = words[1];
+            int postNum;
+            bool esNumero = int.TryParse(postCon, out postNum);
+            char symbol;
+
+            if (condition.Contains('<'))
+            {
+                symbol = '<';
+            }
+            else if (condition.Contains('='))
+            {
+                symbol = '=';
+            }
+            else
+            {
+                symbol = '>';
+            }
+
+            string result = "{'" + column + "'} => ";
+            foreach (Table tb in tables)
+            {
+                if (table.Equals(tb.getName()))
+                {
+                    foreach (Column c in tb.columns)
+                    {
+                        if (column.Equals(c.name))
+                        {
+                            for (int i = 0; i < c.getColumnSize(); i++)
+                            {
+                                switch (symbol)
+                                {
+                                    case '<':
+                                        {
+                                            if (esNumero && Int32.Parse(c.column[i]) < postNum)
+                                            {
+                                                result += tb.selectTuple(i);
+                                                tb.deleteTuple(i);
+                                                i = i - 1;
+                                            }
+                                        }
+                                        break;
+                                    case '=':
+                                        {
+                                            if (esNumero && Int32.Parse(c.column[i]) == postNum)
+                                            {
+                                                result += tb.selectTuple(i);
+                                                tb.deleteTuple(i);
+                                                i = i - 1;
+                                            }
+                                            else if (!esNumero && c.column[i] == postCon)
+                                            {
+                                                result += tb.selectTuple(i);
+                                                tb.deleteTuple(i);
+                                                i = i - 1;
+                                            }
+                                        }
+                                        break;
+                                    case '>':
+                                        {
+                                            if (esNumero && Int32.Parse(c.column[i]) > postNum)
+                                            {
+                                                result += tb.selectTuple(i);
+                                                tb.deleteTuple(i);
+                                                i = i - 1;
+                                            }
+                                        }
+                                        break;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            return result;
+        }
     }
 }
