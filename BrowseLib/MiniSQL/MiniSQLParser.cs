@@ -16,6 +16,7 @@ namespace BrowseLib.MiniSQL
             const string deletePattern = "DELETE FROM (\\w+) WHERE (\\w+\\s?[=<>]\\s?\\d+);";
             const string dropPattern = "DROP TABLE (\\w+);";
             const string updatePattern = "UPDATE (\\w+) SET (\\w+)=(\\w+) WHERE (\\w+\\s?[=<>]\\s?\\d+);";
+            const string createPattern = "CREATE TABLE (\\w+)\\s+\\((\\w+)\\s+(INT|DOUBLE|TEXT)(\\,\\s+(\\w+)\\s+(INT|DOUBLE|TEXT))+\\);";
 
             //Select
             Match match = Regex.Match(miniSQLQuery, selectPattern);
@@ -31,7 +32,7 @@ namespace BrowseLib.MiniSQL
             if (match.Success)
             {
                 string table = match.Groups[1].Value;
- 
+
                 List<string> columnNames = CommaSeparatedNames(match.Groups[2].Value);
                 return new Insert(table, columnNames);
             }
@@ -41,7 +42,7 @@ namespace BrowseLib.MiniSQL
             if (match.Success)
             {
                 string table = match.Groups[1].Value;
-                string targetColumn=match.Groups[2].Value;
+                string targetColumn = match.Groups[2].Value;
                 string update = match.Groups[3].Value;
                 string condition = match.Groups[4].Value;
                 return new Update(table, condition, update, targetColumn);
@@ -56,16 +57,29 @@ namespace BrowseLib.MiniSQL
                 return new Delete(table, condition);
             }
 
-            //drop
+            //Drop
             match = Regex.Match(miniSQLQuery, dropPattern);
             if (match.Success)
             {
                 string table = match.Groups[1].Value;
 
-                
+
                 return new DropTable(table);
             }
+
+        
+            //CreateTable
+            match = Regex.Match(miniSQLQuery, createPattern);
+
+            if (match.Success)
+            {
+                string table = match.Groups[1].Value;
+                List<string> columnNames = CommaSeparatedNames(match.Groups[2].Value);
+                return new CreateTable(table, columnNames);
+
+            }
             return null;
+
         }
 
         // Returns the list of words divided by commas and removes spaces

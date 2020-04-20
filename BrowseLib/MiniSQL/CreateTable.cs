@@ -32,7 +32,7 @@ namespace BrowseLib.MiniSQL
 
         public string Execute(Database database)
         {
-            throw new NotImplementedException();
+            return database.createTable(Table, Columns);
         }
     }
 }

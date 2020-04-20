@@ -436,7 +436,41 @@ namespace BrowseLib
             }
         }
         return result;
+        }
+        public string createTable(string table, List<String> columns)
+        {
+            string resultado = "";
+            string datos = "";
+            foreach (Table tb in tables)
+            {
+                if (table.Equals(tb.getName()))
+                {
+                    int i = 0;
+                    List<Column> columnsFromTb = tb.getColumns();
+                    resultado += "{";
+                    foreach (Column c in columnsFromTb)
+                    {
+                        c.insert(columns[i]);
+                        if (i == 0)
+                        {
+                            resultado += "'" + c.name + "'";
+                            datos += columns[i];
+                        }
+                        else
+                        {
+                            resultado += ",'" + c.name + "'";
+                            datos += "," + columns[i];
+                        }
+                        i++;
+                    }
+                    resultado += "}";
+                }
+            }
+            resultado += " => {" + datos + "}";
+            return resultado;
+        }
+
+
     }
-}
 }
                                              
