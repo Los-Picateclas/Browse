@@ -38,6 +38,20 @@ namespace UnitTests
             Assert.AreEqual("Person", deleteQuery.Table);
         }
 
+
+        [TestMethod]
+        public void Update()
+        {
+            MiniSQLQuery query = MiniSQLParser.Parse("UPDATE Person SET Age=22 WHERE Year=1998;");
+            Update updateQuery = query as Update;
+            Assert.AreEqual("Person", updateQuery.Table);
+            Assert.AreEqual("22", updateQuery.UpdateValue);
+            Assert.AreEqual("Age", updateQuery.TargetColumn);
+            Assert.AreEqual("Year=1998", updateQuery.Condition);
+
+
+        }
+
         [TestMethod]
         public void DropTable()
         {
@@ -50,16 +64,11 @@ namespace UnitTests
         [TestMethod]
         public void CreateTable()
         {
-            MiniSQLQuery query = MiniSQLParser.Parse("CREATE TABLE table1 (age INT);");
-           /* 
-            * SQLParser parser = new SQLParser();
-            CreateTable sbres = (CreateTable)par.Parser("CREATE TABLE table1 (age INT);");
-            string[] a = new string[2];
-            a[0] = "age";
-            CreateTable sel = new CreateTable("table1", a);
-            Assert.AreEqual(sbres.GetType(), sel.GetType());
-            Assert.AreEqual(sbres.getTabla(), sel.getTabla());
-            */
+            MiniSQLQuery query = MiniSQLParser.Parse("CREATE TABLE MyTable (type1, type2);");
+            CreateTable createQuery = query as CreateTable;
+            //Assert.IsTrue(createQuery.Columns.Contains("type1"));
+            //Assert.IsTrue(createQuery.Columns.Contains("type2"));
+            //Assert.AreEqual("MyTable", createQuery.Table);
         }
     }
 }
