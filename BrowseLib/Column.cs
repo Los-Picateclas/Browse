@@ -23,7 +23,7 @@ namespace BrowseLib
         {
 
             column.Add(text);
-            MessageBox.Show("añadido");
+            //MessageBox.Show("añadido");
         }
 
         public int getIntFromColumn(int position)
