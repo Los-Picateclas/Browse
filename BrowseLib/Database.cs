@@ -80,7 +80,7 @@ namespace BrowseLib
         public string drop(string table)
         {
 
-            string route = "../BrowseProgram/" + databaseName + "/" + table;
+            string route = "../Browse/" + databaseName + "/" + table;
             File.Delete(route);
             return table + " deleted";
 
@@ -124,7 +124,7 @@ namespace BrowseLib
             {
                 foreach (Table tb in tables)
                 {
-                    Directory.CreateDirectory("../BrowseProgram/" + tables);
+                    Directory.CreateDirectory("../Browse/" + tables);
                 }
             }
             catch (Exception e)
@@ -137,7 +137,7 @@ namespace BrowseLib
         {
             try
             {
-                Directory.CreateDirectory("../dBrowseProgram/" + databaseName);
+                Directory.CreateDirectory("../data/Browse/" + databaseName);
             }
             catch (Exception e)
             {
