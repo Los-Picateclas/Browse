@@ -14,7 +14,7 @@ namespace BrowseLib.MiniSQL
 
         public CreateTable(string table, List<string> columns)
         {
-            string fileName = "../data/Browse/" + table + ".txt";
+            string fileName = "../BrowseProgram/" + table + ".txt";
             try
             {
                 if (!File.Exists(fileName))
@@ -24,6 +24,7 @@ namespace BrowseLib.MiniSQL
             }
             catch (Exception e)
             {
+                Console.WriteLine("No se ha creado");
                 throw e;
             }
             Table = table;

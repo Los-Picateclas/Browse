@@ -1,15 +1,18 @@
 ﻿
 using System;
 using System.Diagnostics;
+using System.IO;
 using BrowseLib;
 
 namespace Programa
 {
     class Program
     {
+       
 
         static void Main(string[] args)
         {
+            Directory.CreateDirectory("../../../BrowseProgram");
             Database db = new Database("db1","user", "pass");
 
             // Console.WriteLine(abc[0]);
