@@ -16,14 +16,14 @@ namespace Bundler
             List<string> files = new List<string>();
             string version;
 
-            version = GetVersion(RelPathToSolutionRootFolder + "Release/Demo.exe");
+            version = GetVersion(RelPathToSolutionRootFolder + "ConsoleClient/bin/Release/ConsoleClient.exe");
 
-            RootFolderInZip = "OurProject/"; //name of the folder created inside the zip file
+            RootFolderInZip = "Browse/"; //name of the folder created inside the zip file
 
-            files.Add(RelPathToSolutionRootFolder + "Release/Demo.exe");
-            files.Add(RelPathToSolutionRootFolder + "Release/MiniSQLEngine.dll");
+            files.Add(RelPathToSolutionRootFolder + "ConsoleClient/bin/Release/ConsoleClient.exe");
+            files.Add(RelPathToSolutionRootFolder + "BrowseLib/bin/Release/BrowseLib.dll");
 
-            string outputFile = RelPathToSolutionRootFolder + "OurProject-" + version + ".zip"; //name of the output zip file
+            string outputFile = RelPathToSolutionRootFolder + "Browse-" + version + ".zip"; //name of the output zip file
 
             Console.WriteLine("Compressing files");
             Compress(outputFile, files);
