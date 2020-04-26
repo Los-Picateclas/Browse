@@ -73,7 +73,7 @@ namespace UnitTests
                 Directory.Delete(Path.Combine(path, "Tables"));
             }
             db1.addTable(table);
-            db1.saveTables(path);
+            db1.saveTables(db1);
             Assert.IsTrue(Directory.Exists(path));
         }
 
@@ -296,7 +296,7 @@ namespace UnitTests
             types.Add("TEXT");
             types.Add("INT");
             types.Add("TEXT");
-            dbWork.createTable("MyTable", columnNames, types);
+            dbWork.createTable("MyTable", columnNames, types, db1);
             Assert.AreEqual(dbWork.tables[0].getName(), "MyTable");
             Assert.AreEqual(dbWork.tables[0].columns[0].name,"Name");
             Assert.AreEqual(dbWork.tables[0].columns[1].name, "Age");
@@ -319,7 +319,7 @@ namespace UnitTests
             types.Add("TEXT");
             types.Add("INT");
             types.Add("TEXT");
-            dbWork.createTable("MyTable", columnNames, types);
+            dbWork.createTable("MyTable", columnNames, types, dbWork);
             Assert.AreEqual(dbWork.tables[0].getName(), "MyTable");
             Assert.AreEqual(dbWork.tables[0].columns[0].name, "Name");
             Assert.AreEqual(dbWork.tables[0].columns[1].name, "Age");
