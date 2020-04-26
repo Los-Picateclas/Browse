@@ -64,11 +64,13 @@ namespace UnitTests
         [TestMethod]
         public void CreateTable()
         {
-            MiniSQLQuery query = MiniSQLParser.Parse("CREATE TABLE MyTable (type1, type2);");
+            MiniSQLQuery query = MiniSQLParser.Parse("CREATE TABLE MyTable (name1 TEXT, name2 INT);");
             CreateTable createQuery = query as CreateTable;
-            //Assert.IsTrue(createQuery.Columns.Contains("type1"));
-            //Assert.IsTrue(createQuery.Columns.Contains("type2"));
-            //Assert.AreEqual("MyTable", createQuery.Table);
+            Assert.AreEqual("MyTable", createQuery.Table);
+            Assert.IsTrue(createQuery.Columns.Contains("name1"));
+            Assert.IsTrue(createQuery.Columns.Contains("name2"));
+            Assert.IsTrue(createQuery.Types.Contains("TEXT"));
+            Assert.IsTrue(createQuery.Types.Contains("INT"));
         }
     }
 }

@@ -132,6 +132,7 @@ namespace UnitTests
             string result = dbWork.ExecuteMiniSQLQuery("SELECT Name, Age FROM Person;");
             Assert.AreEqual("{'Name','Age'} => {Ander,20}{Borja,21}", result);
         }
+
         [TestMethod]
         public void ParseAndInsert()
         {
@@ -281,8 +282,51 @@ namespace UnitTests
             dbWork.addTable(tbPerson);
             String result = dbWork.ExecuteMiniSQLQuery("UPDATE Person SET Age=22 WHERE Year=1998;");
             Assert.AreEqual("{'21'} => {'22'}", result);
+        }
 
+        [TestMethod]
+        public void createTable()
+        {
+            Database dbWork = new Database("Work", "username", "password");
+            List<string> columnNames = new List<string>();
+            List<string> types = new List<string>();
+            columnNames.Add("Name");
+            columnNames.Add("Age");
+            columnNames.Add("Address");
+            types.Add("TEXT");
+            types.Add("INT");
+            types.Add("TEXT");
+            dbWork.createTable("MyTable", columnNames, types);
+            Assert.AreEqual(dbWork.tables[0].getName(), "MyTable");
+            Assert.AreEqual(dbWork.tables[0].columns[0].name,"Name");
+            Assert.AreEqual(dbWork.tables[0].columns[1].name, "Age");
+            Assert.AreEqual(dbWork.tables[0].columns[2].name, "Address");
+            Assert.AreEqual(dbWork.tables[0].columns[0].type, "TEXT");
+            Assert.AreEqual(dbWork.tables[0].columns[1].type, "INT");
+            Assert.AreEqual(dbWork.tables[0].columns[2].type, "TEXT");
+        }
 
+        [TestMethod]
+        public void ParseAndCreateTable()
+        {
+            Database dbWork = new Database("Work", "username", "password");
+            string result = dbWork.ExecuteMiniSQLQuery("CREATE TABLE MyTable (Name TEXT, Age INT, Surname TEXT);");
+            List<string> columnNames = new List<string>();
+            List<string> types = new List<string>();
+            columnNames.Add("Name");
+            columnNames.Add("Age");
+            columnNames.Add("Address");
+            types.Add("TEXT");
+            types.Add("INT");
+            types.Add("TEXT");
+            dbWork.createTable("MyTable", columnNames, types);
+            Assert.AreEqual(dbWork.tables[0].getName(), "MyTable");
+            Assert.AreEqual(dbWork.tables[0].columns[0].name, "Name");
+            Assert.AreEqual(dbWork.tables[0].columns[1].name, "Age");
+            Assert.AreEqual(dbWork.tables[0].columns[2].name, "Surname");
+            Assert.AreEqual(dbWork.tables[0].columns[0].type, "TEXT");
+            Assert.AreEqual(dbWork.tables[0].columns[1].type, "INT");
+            Assert.AreEqual(dbWork.tables[0].columns[2].type, "TEXT");
         }
     }
 }

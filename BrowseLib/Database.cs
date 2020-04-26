@@ -437,40 +437,16 @@ namespace BrowseLib
         }
         return result;
         }
-        public string createTable(string table, List<String> columns)
+        public string createTable(string table, List<String> columns, List<string> types)
         {
-            string resultado = "";
-            string datos = "";
-            foreach (Table tb in tables)
+            Table tableCreated = new Table(table);
+            for (int i = 0; i<columns.Count; i++)
             {
-                if (table.Equals(tb.getName()))
-                {
-                    int i = 0;
-                    List<Column> columnsFromTb = tb.getColumns();
-                    resultado += "{";
-                    foreach (Column c in columnsFromTb)
-                    {
-                        c.insert(columns[i]);
-                        if (i == 0)
-                        {
-                            resultado += "'" + c.name + "'";
-                            datos += columns[i];
-                        }
-                        else
-                        {
-                            resultado += ",'" + c.name + "'";
-                            datos += "," + columns[i];
-                        }
-                        i++;
-                    }
-                    resultado += "}";
-                }
+                tableCreated.addColumn(new Column(columns[i], types[i]));
             }
-            resultado += " => {" + datos + "}";
-            return resultado;
+            tables.Add(tableCreated);
+            return "Table created";
         }
-
-
     }
 }
                                              

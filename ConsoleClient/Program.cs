@@ -19,7 +19,7 @@ namespace Programa
             //val = Console.ReadLine();
 
             string linea = "";
-            System.IO.StreamReader file = new System.IO.StreamReader(@"input-file.txt");
+            System.IO.StreamReader file = new System.IO.StreamReader("../../../Inputs/input-file.txt");
 
             while (linea != null)
             {
@@ -28,8 +28,9 @@ namespace Programa
                 {
                     Stopwatch sw = new Stopwatch();
                     sw.Start();
-                    string output = db.ExecuteMiniSQLQuery(linea) + "(";
-                    output += sw.Elapsed.TotalMilliseconds + ")";
+                    string output = db.ExecuteMiniSQLQuery(linea);
+                    double miliSec = sw.Elapsed.TotalMilliseconds;
+                    output += "(" + miliSec + ")";
                     Console.WriteLine(output);
                     sw.Stop();
                 }

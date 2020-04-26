@@ -11,29 +11,18 @@ namespace BrowseLib.MiniSQL
     {
         public string Table;
         public List<string> Columns;
+        public List<string> Types;
 
-        public CreateTable(string table, List<string> columns)
+        public CreateTable(string table, List<string> columns, List<string> types)
         {
-            string fileName = "../BrowseProgram/" + table + ".txt";
-            try
-            {
-                if (!File.Exists(fileName))
-                {
-                    File.Create(fileName);
-                }
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("No se ha creado");
-                throw e;
-            }
             Table = table;
             Columns = columns;
+            Types = types;
         }
 
         public string Execute(Database database)
         {
-            return database.createTable(Table, Columns);
+            return database.createTable(Table, Columns, Types);
         }
     }
 }

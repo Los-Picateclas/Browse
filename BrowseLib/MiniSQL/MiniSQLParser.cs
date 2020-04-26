@@ -16,8 +16,9 @@ namespace BrowseLib.MiniSQL
             const string deletePattern = "DELETE FROM (\\w+) WHERE (\\w+\\s?[=<>]\\s?\\d+);";
             const string dropPattern = "DROP TABLE (\\w+);";
             const string updatePattern = "UPDATE (\\w+) SET (\\w+)=(\\w+) WHERE (\\w+\\s?[=<>]\\s?\\d+);";
-            const string createPattern = "CREATE TABLE (\\w+)\\s+\\((\\w+)\\s+(INT|DOUBLE|TEXT)(\\,\\s+(\\w+)\\s+(INT|DOUBLE|TEXT))+\\);";
-            const string createPattern2 = "CREATE TABLE (\\w) \\((\\w) \\((INT|DOUBLE|TEXT)));";
+            //const string createPattern = "CREATE TABLE (\\w+)\\s+\\((\\w+)\\s+(INT|DOUBLE|TEXT)(\\,\\s+(\\w+)\\s+(INT|DOUBLE|TEXT))+\\);";
+            //const string createPattern2 = "CREATE TABLE (\\w) \\((\\w) \\((INT|DOUBLE|TEXT)));";
+            const string createPattern = "CREATE TABLE (\\w+) \\(((\\w+) (\\w+),?\\s?)+\\);";
 
             //Select
             Match match = Regex.Match(miniSQLQuery, selectPattern);
@@ -71,15 +72,19 @@ namespace BrowseLib.MiniSQL
         
             //CreateTable
             match = Regex.Match(miniSQLQuery, createPattern);
-
             if (match.Success)
             {
                 string table = match.Groups[1].Value;
-                List<string> columnNames = CommaSeparatedNames(match.Groups[2].Value);
-                Console.WriteLine("Nombre: " + table );
-                foreach (String elements in columnNames) { 
-                Console.WriteLine("Columnas: " + elements); }
-                return new CreateTable(table, columnNames);
+                List<string> columnNames = new List<string>();
+                List<string> columnTypes = new List<string>();
+                CaptureCollection ccNames = match.Groups[3].Captures;
+                CaptureCollection ccTypes = match.Groups[4].Captures;
+                for (int i = 0; i< ccNames.Count; i++)
+                {
+                    columnNames.Add(ccNames[i].Value);
+                    columnTypes.Add(ccTypes[i].Value);
+                }
+                return new CreateTable(table, columnNames, columnTypes);
 
             }
             return null;
