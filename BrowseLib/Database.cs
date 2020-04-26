@@ -118,13 +118,16 @@ namespace BrowseLib
             return aux;
         }
 
-        public void saveTables(string path)
+        public void saveTables(Database db)
         {
+            Console.WriteLine("Se van a guardar las tablas");
             try
             {
                 foreach (Table tb in tables)
                 {
-                    Directory.CreateDirectory("../Browse/" + tables);
+                    //Directory.CreateDirectory("../../../BrowseProgram/" + tb.getName());
+                    tb.save(tb, db);
+                    Console.WriteLine("Tabla guardada: "+ tb.getName());
                 }
             }
             catch (Exception e)
@@ -137,7 +140,10 @@ namespace BrowseLib
         {
             try
             {
-                Directory.CreateDirectory("../data/Browse/" + databaseName);
+                string path = "../../../BrowseProgram/" + databaseName;
+                Directory.CreateDirectory(path);
+                Console.WriteLine("Se ha creado la carpeta "+databaseName);
+                Console.WriteLine("En la direccion" +path);
             }
             catch (Exception e)
             {
@@ -437,7 +443,7 @@ namespace BrowseLib
         }
         return result;
         }
-        public string createTable(string table, List<String> columns, List<string> types)
+        public string createTable(string table, List<String> columns, List<string> types, Database db)
         {
             Table tableCreated = new Table(table);
             for (int i = 0; i<columns.Count; i++)
@@ -445,6 +451,9 @@ namespace BrowseLib
                 tableCreated.addColumn(new Column(columns[i], types[i]));
             }
             tables.Add(tableCreated);
+            db.saveTables(db);
+            
+            
             return "Table created";
         }
     }

@@ -14,12 +14,13 @@ namespace Programa
         {
             Directory.CreateDirectory("../../../BrowseProgram");
             Database db = new Database("db1","user", "pass");
-
+            db.saveDatabase();
             // Console.WriteLine(abc[0]);
             //val = Console.ReadLine();
 
             string linea = "";
             System.IO.StreamReader file = new System.IO.StreamReader("../../../Inputs/input-file.txt");
+            
 
             while (linea != null)
             {

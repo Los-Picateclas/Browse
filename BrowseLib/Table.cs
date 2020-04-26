@@ -72,6 +72,7 @@ namespace BrowseLib
             //string ruta = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop),t.getName()+".txt");
             //This one actually works but it is an absolute route 
             //string ruta = "C:\\Users\\docencia\\Documents\\Browse\\" + t.getName() + ".txt";
+            //string ruta = "..\\data\\Browse\\" + t.getName() + ".txt";
             string ruta = "..\\data\\Browse\\" + t.getName() + ".txt";
             try
             {
@@ -110,7 +111,10 @@ namespace BrowseLib
 
             //This will create a .txt in the desktop
             //string ruta = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop),t.getName()+".txt");
-            string ruta = "C:\\Users\\docencia\\Documents\\Browse\\" + db.databaseName + "\\" + t.getName() + ".txt";
+            //string ruta = "C:\\Users\\docencia\\Documents\\Browse\\" + db.databaseName + "\\" + t.getName() + ".txt";
+            // string ruta = "..\\Browse\\" + db.databaseName + "\\" + t.getName() + ".txt";
+            string ruta = "../../../BrowseProgram/" + db.databaseName + "/" + t.getName() + ".txt";
+            Console.WriteLine(ruta);
             try
             {
                 using (StreamWriter sw = new StreamWriter(ruta))
