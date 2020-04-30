@@ -70,14 +70,14 @@ namespace BrowseLib
         }
 
 
-        public void save(Table t, String dbname)
+        public void save(Table t, Database db)
         {
             //This will create a .txt in the desktop
             //string ruta = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop),t.getName()+".txt");
             //This one actually works but it is an absolute route 
             //string ruta = "C:\\Users\\docencia\\Documents\\Browse\\" + t.getName() + ".txt";
             //string ruta = "..\\data\\Browse\\" + t.getName() + ".txt";
-            string ruta = "../../../BrowseProgram/" + dbname + "/" + t.getName() + ".txt";
+            string ruta = "../../../BrowseProgram/" + db.databaseName + "/" + t.getName() + ".txt";
             try
             {
                 using (StreamWriter sw = new StreamWriter(ruta))
@@ -110,14 +110,14 @@ namespace BrowseLib
                 //MessageBox.Show(ex.Message);
             }
         }
-        public void save(Table t, Database db)
+        public void save(Table t, string db)
         {
 
             //This will create a .txt in the desktop
             //string ruta = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop),t.getName()+".txt");
             //string ruta = "C:\\Users\\docencia\\Documents\\Browse\\" + db.databaseName + "\\" + t.getName() + ".txt";
             // string ruta = "..\\Browse\\" + db.databaseName + "\\" + t.getName() + ".txt";
-            string ruta = "../../../BrowseProgram/" + db.databaseName + "/" + t.getName() + ".txt";
+            string ruta = "../../../BrowseProgram/" + db + "/" + t.getName() + ".txt";
             Console.WriteLine(ruta);
             try
             {

@@ -65,6 +65,7 @@ namespace BrowseLib
             return column.Count;
 
         }
+       
 
 
         public void updateColumn(int position, string update) {

@@ -329,6 +329,7 @@ namespace BrowseLib
                         }
                     }
                 }
+                tb.save(tb, databaseName);
             }
             return result;
         }
