@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Diagnostics;
 using System.IO;
 using BrowseLib;
@@ -8,18 +7,20 @@ namespace Programa
 {
     class Program
     {
-       
+
 
         static void Main(string[] args)
         {
             Directory.CreateDirectory("../../../BrowseProgram");
-            Database db = new Database("db1","user", "pass");
-
+            Database db = new Database("db1", "user", "pass");
+            db.saveDatabase();
+            int nDB = 2;
             // Console.WriteLine(abc[0]);
             //val = Console.ReadLine();
 
             string linea = "";
             System.IO.StreamReader file = new System.IO.StreamReader("../../../Inputs/input-file.txt");
+
 
             while (linea != null)
             {
@@ -28,14 +29,23 @@ namespace Programa
                 {
                     Stopwatch sw = new Stopwatch();
                     sw.Start();
+                    
                     string output = db.ExecuteMiniSQLQuery(linea);
                     double miliSec = sw.Elapsed.TotalMilliseconds;
                     output += "(" + miliSec + ")";
                     Console.WriteLine(output);
                     sw.Stop();
                 }
+                else if (linea == "") {
+                    Console.WriteLine("nUEVA DATABASE ");
+                    Database dbAux = new Database("db"+nDB, "user", "pass");
+                    nDB = nDB + 1;
+                    dbAux.saveDatabase();
+                    db = dbAux;
+                }
             }
             Console.WriteLine("Querys Finished");
         }
     }
 }
+

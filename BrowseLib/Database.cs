@@ -118,13 +118,16 @@ namespace BrowseLib
             return aux;
         }
 
-        public void saveTables(string path)
+        public void saveTables(Database db)
         {
+           // Console.WriteLine("Se van a guardar las tablas");
             try
             {
                 foreach (Table tb in tables)
                 {
-                    Directory.CreateDirectory("../Browse/" + tables);
+                    //Directory.CreateDirectory("../../../BrowseProgram/" + tb.getName());
+                    tb.save(tb, db);
+                    //Console.WriteLine("Tabla guardada: " + tb.getName());
                 }
             }
             catch (Exception e)
@@ -137,7 +140,10 @@ namespace BrowseLib
         {
             try
             {
-                Directory.CreateDirectory("../data/Browse/" + databaseName);
+                string path = "../../../BrowseProgram/" + databaseName;
+                Directory.CreateDirectory(path);
+                Console.WriteLine("Se ha creado la carpeta " + databaseName);
+                Console.WriteLine("En la direccion" + path);
             }
             catch (Exception e)
             {
@@ -149,6 +155,7 @@ namespace BrowseLib
 
         public string insert(string tab, List<String> Col)
         {
+            Console.WriteLine("Se ha llamado al metodo insert");
             string resultado = "";
             string datos = "";
             foreach (Table tb in tables)
@@ -175,8 +182,10 @@ namespace BrowseLib
                     }
                     resultado += "}";
                 }
+                tb.save(tb, databaseName);
             }
             resultado += " => {" + datos + "}";
+            
             return resultado;
         }
 
@@ -323,130 +332,133 @@ namespace BrowseLib
             }
             return result;
         }
-    
+
 
         //'targetColumn' must be the column where you want to make changes
         // 'update' parameter must be the new value that we are setting 
-    public string update(string table, string condition, string update, string targetColumn)
-    {
+        public string update(string table, string condition, string update, string targetColumn)
+        {
 
-        char[] delimiterChars = { '<', '=', '>' };
-        string[] words = condition.Split(delimiterChars);
+            char[] delimiterChars = { '<', '=', '>' };
+            string[] words = condition.Split(delimiterChars);
 
-        string column = words[0];
-        string postCon = words[1];
-        int postNum;
-        bool esNumero = int.TryParse(postCon, out postNum);
-        char symbol;
+            string column = words[0];
+            string postCon = words[1];
+            int postNum;
+            bool esNumero = int.TryParse(postCon, out postNum);
+            char symbol;
 
-        if (condition.Contains('<'))
-        {
-            symbol = '<';
-        }
-        else if (condition.Contains('='))
-        {
-            symbol = '=';
-        }
-        else
-        {
-            symbol = '>';
-        }
-      string result = " ";
-  
-        foreach (Table tb in tables)
-        {
-            if (table.Equals(tb.getName()))
+            if (condition.Contains('<'))
             {
-                foreach (Column searchColumn1 in tb.columns)
+                symbol = '<';
+            }
+            else if (condition.Contains('='))
+            {
+                symbol = '=';
+            }
+            else
+            {
+                symbol = '>';
+            }
+            string result = " ";
+
+            foreach (Table tb in tables)
+            {
+                if (table.Equals(tb.getName()))
                 {
-                    if (column.Equals(searchColumn1.name))
+                    foreach (Column searchColumn1 in tb.columns)
                     {
-                        for (int i = 0; i < searchColumn1.getColumnSize(); i++)
+                        if (column.Equals(searchColumn1.name))
                         {
-                            switch (symbol)
+                            for (int i = 0; i < searchColumn1.getColumnSize(); i++)
                             {
-                                case '<':
-                                    {
-                                        if (esNumero && Int32.Parse(searchColumn1.column[i]) < postNum)
+                                switch (symbol)
+                                {
+                                    case '<':
                                         {
-                                            foreach (Column searchColumn2 in tb.columns)
+                                            if (esNumero && Int32.Parse(searchColumn1.column[i]) < postNum)
                                             {
+                                                foreach (Column searchColumn2 in tb.columns)
+                                                {
                                                     if (searchColumn2.name.Equals(targetColumn))
                                                     {
                                                         result = "{'" + searchColumn2.getTextFromColumn(i) + "'} => ";
                                                         searchColumn2.updateColumn(i, update);
                                                         result = result + "{'" + searchColumn2.getTextFromColumn(i) + "'}";
                                                     }
-                                                    
+
                                                 }
+                                            }
                                         }
-                                    }
-                                    break;
-                                case '=':
-                                    {
-                                        if (esNumero && Int32.Parse(searchColumn1.column[i]) == postNum)
+                                        break;
+                                    case '=':
                                         {
-                                            foreach (Column searchColumn2 in tb.columns)
+                                            if (esNumero && Int32.Parse(searchColumn1.column[i]) == postNum)
                                             {
+                                                foreach (Column searchColumn2 in tb.columns)
+                                                {
                                                     if (searchColumn2.name.Equals(targetColumn))
                                                     {
                                                         result = "{'" + searchColumn2.getTextFromColumn(i) + "'} => ";
                                                         searchColumn2.updateColumn(i, update);
                                                         result = result + "{'" + searchColumn2.getTextFromColumn(i) + "'}";
                                                     }
-                                                   
+
                                                 }
-                                        }
-                                        else if (!esNumero && searchColumn1.column[i] == postCon)
-                                        {
-                                            foreach (Column searchColumn2 in tb.columns)
+                                            }
+                                            else if (!esNumero && searchColumn1.column[i] == postCon)
                                             {
+                                                foreach (Column searchColumn2 in tb.columns)
+                                                {
                                                     if (searchColumn2.name.Equals(targetColumn))
                                                     {
                                                         result = "{'" + searchColumn2.getTextFromColumn(i) + "'} => ";
                                                         searchColumn2.updateColumn(i, update);
                                                         result = result + "{'" + searchColumn2.getTextFromColumn(i) + "'}";
                                                     }
-                                                   
+
                                                 }
+                                            }
                                         }
-                                    }
-                                    break;
-                                case '>':
-                                    {
-                                        if (esNumero && Int32.Parse(searchColumn1.column[i]) > postNum)
+                                        break;
+                                    case '>':
                                         {
-                                            foreach (Column searchColumn2 in tb.columns)
+                                            if (esNumero && Int32.Parse(searchColumn1.column[i]) > postNum)
                                             {
+                                                foreach (Column searchColumn2 in tb.columns)
+                                                {
                                                     if (searchColumn2.name.Equals(targetColumn))
                                                     {
                                                         result = "{'" + searchColumn2.getTextFromColumn(i) + "'} => ";
                                                         searchColumn2.updateColumn(i, update);
                                                         result = result + "{'" + searchColumn2.getTextFromColumn(i) + "'}";
                                                     }
-                                                    
+
                                                 }
+                                            }
                                         }
-                                    }
-                                    break;
+                                        break;
+                                }
                             }
                         }
                     }
                 }
             }
+            return result;
         }
-        return result;
-        }
-        public string createTable(string table, List<String> columns, List<string> types)
+        public string createTable(string table, List<String> columns, List<string> types, Database db)
         {
+            
             Table tableCreated = new Table(table);
-            for (int i = 0; i<columns.Count; i++)
+            for (int i = 0; i < columns.Count; i++)
             {
                 tableCreated.addColumn(new Column(columns[i], types[i]));
             }
             tables.Add(tableCreated);
+            db.saveTables(db);
+
+
             return "Table created";
         }
     }
 }
-                                             

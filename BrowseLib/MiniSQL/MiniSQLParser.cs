@@ -12,7 +12,8 @@ namespace BrowseLib.MiniSQL
         public static MiniSQLQuery Parse(string miniSQLQuery)
         {
             const string selectPattern = "SELECT ([\\w,\\s]+) FROM (\\w+)\\s*;";
-            const string insertPattern = "INSERT INTO (\\w+) VALUES \\(([\\w,\\s]+)\\)\\s?;";
+            //const string insertPattern = "INSERT INTO (\\w+) VALUES \\(([\\w,\\s]+)\\)\\s?;";
+            const string insertPattern = "INSERT INTO (\\w+) VALUES \\((.+)\\);";
             const string deletePattern = "DELETE FROM (\\w+) WHERE (\\w+\\s?[=<>]\\s?\\d+);";
             const string dropPattern = "DROP TABLE (\\w+);";
             const string updatePattern = "UPDATE (\\w+) SET (\\w+)=(\\w+) WHERE (\\w+\\s?[=<>]\\s?\\d+);";
@@ -34,8 +35,10 @@ namespace BrowseLib.MiniSQL
             if (match.Success)
             {
                 string table = match.Groups[1].Value;
+                Console.WriteLine(table);
 
                 List<string> columnNames = CommaSeparatedNames(match.Groups[2].Value);
+                Console.WriteLine(columnNames);
                 return new Insert(table, columnNames);
             }
 
@@ -69,7 +72,7 @@ namespace BrowseLib.MiniSQL
                 return new DropTable(table);
             }
 
-        
+
             //CreateTable
             match = Regex.Match(miniSQLQuery, createPattern);
             if (match.Success)
@@ -79,7 +82,7 @@ namespace BrowseLib.MiniSQL
                 List<string> columnTypes = new List<string>();
                 CaptureCollection ccNames = match.Groups[3].Captures;
                 CaptureCollection ccTypes = match.Groups[4].Captures;
-                for (int i = 0; i< ccNames.Count; i++)
+                for (int i = 0; i < ccNames.Count; i++)
                 {
                     columnNames.Add(ccNames[i].Value);
                     columnTypes.Add(ccTypes[i].Value);
@@ -96,7 +99,7 @@ namespace BrowseLib.MiniSQL
         {
             List<string> names = new List<string>();
             string[] namesSeparated = text.Split(',');
-            foreach(string name in namesSeparated)
+            foreach (string name in namesSeparated)
             {
                 names.Add(name.Trim());
             }

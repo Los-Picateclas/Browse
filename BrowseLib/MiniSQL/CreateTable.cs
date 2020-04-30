@@ -22,7 +22,7 @@ namespace BrowseLib.MiniSQL
 
         public string Execute(Database database)
         {
-            return database.createTable(Table, Columns, Types);
+            return database.createTable(Table, Columns, Types, database);
         }
     }
 }

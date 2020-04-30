@@ -28,9 +28,11 @@ namespace BrowseLib
         {
             return name;
         }
-        public List<string> getColumnNames() {
+        public List<string> getColumnNames()
+        {
             List<string> aux = null;
-            foreach (Column c in  columns) {
+            foreach (Column c in columns)
+            {
                 string n = c.name;
                 aux.Add(n);
 
@@ -38,7 +40,8 @@ namespace BrowseLib
             }
             return aux;
         }
-        public List<Column> getColumns() {
+        public List<Column> getColumns()
+        {
             return columns;
         }
 
@@ -65,14 +68,16 @@ namespace BrowseLib
         {
             return columns.Count();
         }
+        
 
-        public void save(Table t)
+        public void save(Table t, String dbname)
         {
             //This will create a .txt in the desktop
             //string ruta = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop),t.getName()+".txt");
             //This one actually works but it is an absolute route 
             //string ruta = "C:\\Users\\docencia\\Documents\\Browse\\" + t.getName() + ".txt";
-            string ruta = "..\\data\\Browse\\" + t.getName() + ".txt";
+            //string ruta = "..\\data\\Browse\\" + t.getName() + ".txt";
+            string ruta = "../../../BrowseProgram/"+dbname+"/" + t.getName() + ".txt";
             try
             {
                 using (StreamWriter sw = new StreamWriter(ruta))
@@ -110,7 +115,10 @@ namespace BrowseLib
 
             //This will create a .txt in the desktop
             //string ruta = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop),t.getName()+".txt");
-            string ruta = "C:\\Users\\docencia\\Documents\\Browse\\" + db.databaseName + "\\" + t.getName() + ".txt";
+            //string ruta = "C:\\Users\\docencia\\Documents\\Browse\\" + db.databaseName + "\\" + t.getName() + ".txt";
+            // string ruta = "..\\Browse\\" + db.databaseName + "\\" + t.getName() + ".txt";
+            string ruta = "../../../BrowseProgram/" + db.databaseName + "/" + t.getName() + ".txt";
+            Console.WriteLine(ruta);
             try
             {
                 using (StreamWriter sw = new StreamWriter(ruta))
@@ -159,7 +167,7 @@ namespace BrowseLib
             string result = "{";
             foreach (Column c in columns)
             {
-                result += c.column[pos] + ",";                
+                result += c.column[pos] + ",";
             }
             result = result.TrimEnd(',') + "}";
             return result;
