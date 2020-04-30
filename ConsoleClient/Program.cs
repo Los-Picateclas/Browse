@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Diagnostics;
 using System.IO;
 using BrowseLib;
@@ -29,16 +29,17 @@ namespace Programa
                 {
                     Stopwatch sw = new Stopwatch();
                     sw.Start();
-                    
+
                     string output = db.ExecuteMiniSQLQuery(linea);
                     double miliSec = sw.Elapsed.TotalMilliseconds;
                     output += "(" + miliSec + ")";
                     Console.WriteLine(output);
                     sw.Stop();
                 }
-                else if (linea == "") {
+                else if (linea == "")
+                {
                     Console.WriteLine("nUEVA DATABASE ");
-                    Database dbAux = new Database("db"+nDB, "user", "pass");
+                    Database dbAux = new Database("db" + nDB, "user", "pass");
                     nDB = nDB + 1;
                     dbAux.saveDatabase();
                     db = dbAux;
@@ -48,4 +49,3 @@ namespace Programa
         }
     }
 }
-

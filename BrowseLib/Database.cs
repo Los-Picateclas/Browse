@@ -1,4 +1,4 @@
-﻿using BrowseLib.MiniSQL;
+using BrowseLib.MiniSQL;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -120,7 +120,7 @@ namespace BrowseLib
 
         public void saveTables(Database db)
         {
-           // Console.WriteLine("Se van a guardar las tablas");
+            // Console.WriteLine("Se van a guardar las tablas");
             try
             {
                 foreach (Table tb in tables)
@@ -185,7 +185,7 @@ namespace BrowseLib
                 tb.save(tb, databaseName);
             }
             resultado += " => {" + datos + "}";
-            
+
             return resultado;
         }
 
@@ -448,7 +448,7 @@ namespace BrowseLib
         }
         public string createTable(string table, List<String> columns, List<string> types, Database db)
         {
-            
+
             Table tableCreated = new Table(table);
             for (int i = 0; i < columns.Count; i++)
             {
@@ -462,3 +462,5 @@ namespace BrowseLib
         }
     }
 }
+
+

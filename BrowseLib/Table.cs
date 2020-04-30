@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -68,7 +68,7 @@ namespace BrowseLib
         {
             return columns.Count();
         }
-        
+
 
         public void save(Table t, String dbname)
         {
@@ -77,7 +77,7 @@ namespace BrowseLib
             //This one actually works but it is an absolute route 
             //string ruta = "C:\\Users\\docencia\\Documents\\Browse\\" + t.getName() + ".txt";
             //string ruta = "..\\data\\Browse\\" + t.getName() + ".txt";
-            string ruta = "../../../BrowseProgram/"+dbname+"/" + t.getName() + ".txt";
+            string ruta = "../../../BrowseProgram/" + dbname + "/" + t.getName() + ".txt";
             try
             {
                 using (StreamWriter sw = new StreamWriter(ruta))
@@ -182,4 +182,3 @@ namespace BrowseLib
         }
     }
 }
-

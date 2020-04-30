@@ -68,21 +68,21 @@ namespace UnitTests
         {
             Directory.Delete("../data/Browse", true);
             Browse1.addDatabase(TestDb1);
-            Assert.IsFalse(Directory.Exists("../data/Browse/TestDb1"));
+            Assert.IsFalse(Directory.Exists("../../../BrowseLib/db1"));
             Browse1.saveDatabases();
-            Assert.IsTrue(Directory.Exists("../data/Browse/TestDb1"));
+            Assert.IsTrue(Directory.Exists("../../../BrowseLib/db1"));
             Browse1.addDatabase(TestDb2);
-            Assert.IsFalse(Directory.Exists("../data/Browse/TestDb2"));
+            Assert.IsFalse(Directory.Exists("../../../BrowseLib/db1"));
             Browse1.saveDatabases();
-            Assert.IsTrue(Directory.Exists("../data/Browse/TestDb2"));
+            Assert.IsTrue(Directory.Exists("../../../BrowseLib/db1"));
         }
 
         // Check that the method loadDatabases() load the databases into the list from the directories
         [TestMethod]
         public void loadDatabases()
         {
-            Directory.CreateDirectory("../data/Browse/db1");
-            Directory.CreateDirectory("../data/Browse/db2");
+            Directory.CreateDirectory("../../../BrowseLib/db1");
+            Directory.CreateDirectory("../../../BrowseLib/db2");
             Browse1.loadDatabases();
             Assert.IsTrue(Browse1.getDatabase(0).databaseName == "db1");
             Assert.IsTrue(Browse1.getDatabase(1).databaseName == "db2");
