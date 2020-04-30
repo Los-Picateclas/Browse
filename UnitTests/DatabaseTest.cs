@@ -81,7 +81,7 @@ namespace UnitTests
         public void saveDatabase()
         {
             db1.saveDatabase();
-            Assert.IsTrue(Directory.Exists("../data/Browse/test-db1"));
+            Assert.IsTrue(Directory.Exists("../../../BrowseProgram/test-db1"));
         }
 
         [TestMethod]
@@ -106,7 +106,7 @@ namespace UnitTests
             selectColumns.Add("Name");
             selectColumns.Add("Age");
 
-            String select = dbWork.Select("Person", selectColumns);
+            String select = dbWork.Select("Person", selectColumns,"");
             Assert.AreEqual(select, "{'Name','Age'} => {Ander,20}{Borja,21}");
         }
 
@@ -131,6 +131,8 @@ namespace UnitTests
 
             string result = dbWork.ExecuteMiniSQLQuery("SELECT Name, Age FROM Person;");
             Assert.AreEqual("{'Name','Age'} => {Ander,20}{Borja,21}", result);
+            string result2 = dbWork.ExecuteMiniSQLQuery("SELECT Name, Age FROM Person WHERE Age=20;");
+            Assert.AreEqual("{'Name','Age'} => {Ander,20}", result2);
         }
 
         [TestMethod]
@@ -153,7 +155,7 @@ namespace UnitTests
             dbWork.addTable(tbPerson);
 
             string result = dbWork.ExecuteMiniSQLQuery("INSERT INTO Person VALUES (Unai, Foncea, 22);");
-            Assert.AreEqual("{'Name','Surname','Age'} => {Unai,Foncea,22}", result);
+            Assert.AreEqual("Tuple added", result);
         }
 
         [TestMethod]
@@ -178,10 +180,11 @@ namespace UnitTests
             Database dbWork = new Database("Work", "username", "password");
             dbWork.addTable(tbPerson);
 
+            string no = tbPerson.columns[0].column[1];
+            Assert.AreEqual(tbPerson.columns[0].column[1], "Borja");
             String delete = dbWork.delete("Person", "Age>20");
-            Assert.AreEqual("{'Age'} => {Borja,Rey,21}{Unai,Foncea,22}", delete);
-            String delete2 = dbWork.delete("Person", "Name=Ander");
-            Assert.AreEqual("{'Name'} => {Ander,Pascual,20}", delete2);
+            Assert.IsTrue(tbPerson.columns[0].column.Count == 1);
+            Assert.AreEqual("Tuple(s) deleted", delete);
         }
 
         [TestMethod]
@@ -204,7 +207,7 @@ namespace UnitTests
             dbWork.addTable(tbPerson);
 
             string result = dbWork.ExecuteMiniSQLQuery("DELETE FROM Person WHERE Age>20;");
-            Assert.AreEqual("{'Age'} => {Borja,Rey,21}", result);
+            Assert.AreEqual("Tuple(s) deleted", result);
         }
 
         [TestMethod]

@@ -36,7 +36,7 @@ namespace UnitTests
             age.insert("21");
             age.insert("22");
             table.addColumn(age);
-            table.save(table);
+            //table.save(table);
             //MessageBox.Show(name.getTextFromColumn(0));
             //MessageBox.Show(name.getTextFromColumn(1));
             //MessageBox.Show(age.getTextFromColumn(0));

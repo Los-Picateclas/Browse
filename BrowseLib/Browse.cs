@@ -47,7 +47,7 @@ namespace BrowseLib
         {
             try
             {
-                Directory.CreateDirectory("../data/Browse");
+                Directory.CreateDirectory("../../../BrowseProgram");
             }
             catch (Exception e)
             {
@@ -67,7 +67,7 @@ namespace BrowseLib
         // Load the databases into the list from the directories
         public void loadDatabases()
         {
-            DirectoryInfo dirInfo = new DirectoryInfo("../data/Browse");
+            DirectoryInfo dirInfo = new DirectoryInfo("../../../BrowseProgram");
             DirectoryInfo[] directoryNames = dirInfo.GetDirectories();
 
             foreach (DirectoryInfo di in directoryNames)

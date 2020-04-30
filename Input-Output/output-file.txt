@@ -1,0 +1,24 @@
+# TEST 1
+Table created (9,5413 ms)
+Tuple added (3,7596 ms)
+Tuple added (1,5652 ms)
+Tuple added (0,9345 ms)
+Tuple(s) deleted (2,0587 ms)
+{'Name','Age'} => {Ramon1,26}{Miren1,26} (1,642 ms)
+TOTAL TIME: 19,5013ms
+
+# TEST 2
+Table created (1,0032 ms)
+Tuple added (1,1036 ms)
+Tuple added (0,8579 ms)
+Tuple added (0,8043 ms)
+{'Name','Age'} => {Eva,18} (0,0288 ms)
+TOTAL TIME: 3,7978ms
+
+# TEST 3
+Table created (0,8608 ms)
+Tuple added (1,1147 ms)
+Tuple added (2,4361 ms)
+Tuple added (1,0335 ms)
+{'Name','Age'} =>  (0,0313 ms)
+TOTAL TIME: 5,4764ms

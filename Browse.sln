@@ -15,7 +15,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "installers", "installers", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bundler", "Bundler\Bundler.csproj", "{E0F54D5C-B352-4A0E-B7FC-DBEDC4935BF2}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Inputs", "Inputs", "{9E0A4CF6-0E6C-437A-AC69-059A3BF88574}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Input-Output", "Input-Output", "{9E0A4CF6-0E6C-437A-AC69-059A3BF88574}"
 	ProjectSection(SolutionItems) = preProject
 		Inputs\input-file.txt = Inputs\input-file.txt
 	EndProjectSection

@@ -11,7 +11,7 @@ namespace BrowseLib.MiniSQL
     {
         public static MiniSQLQuery Parse(string miniSQLQuery)
         {
-            const string selectPattern = "SELECT ([\\w,\\s]+) FROM (\\w+)\\s*;";
+            const string selectPattern = "SELECT ([\\w,\\s]+) FROM (\\w+)[\\sWHERE\\s]*([\\w=<>]+)?\\s?;";
             //const string insertPattern = "INSERT INTO (\\w+) VALUES \\(([\\w,\\s]+)\\)\\s?;";
             const string insertPattern = "INSERT INTO (\\w+) VALUES \\((.+)\\);";
             const string deletePattern = "DELETE FROM (\\w+) WHERE (\\w+\\s?[=<>]\\s?\\d+);";
@@ -27,7 +27,8 @@ namespace BrowseLib.MiniSQL
             {
                 List<string> columnNames = CommaSeparatedNames(match.Groups[1].Value);
                 string table = match.Groups[2].Value;
-                return new Select(table, columnNames);
+                string condition = match.Groups[3].Value;
+                return new Select(table, columnNames, condition);
             }
 
             //Insert
@@ -35,10 +36,8 @@ namespace BrowseLib.MiniSQL
             if (match.Success)
             {
                 string table = match.Groups[1].Value;
-                Console.WriteLine(table);
 
                 List<string> columnNames = CommaSeparatedNames(match.Groups[2].Value);
-                Console.WriteLine(columnNames);
                 return new Insert(table, columnNames);
             }
 
@@ -101,7 +100,7 @@ namespace BrowseLib.MiniSQL
             string[] namesSeparated = text.Split(',');
             foreach (string name in namesSeparated)
             {
-                names.Add(name.Trim());
+                names.Add(name.Trim().Trim('\''));
             }
             return names;
         }

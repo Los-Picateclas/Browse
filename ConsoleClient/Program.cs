@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using BrowseLib;
@@ -11,40 +12,53 @@ namespace Programa
 
         static void Main(string[] args)
         {
-            Directory.CreateDirectory("../../../BrowseProgram");
+            Browse br = new Browse();
+            br.saveBrowse();
             Database db = new Database("db1", "user", "pass");
             db.saveDatabase();
+            string line = "";
+            StreamReader inputFile = new StreamReader("../../../Input-Output/input-file.txt");
+            List<string> lines = new List<string>();
+            Console.WriteLine("# TEST 1");
+            lines.Add("# TEST 1");
             int nDB = 2;
-            // Console.WriteLine(abc[0]);
-            //val = Console.ReadLine();
-
-            string linea = "";
-            System.IO.StreamReader file = new System.IO.StreamReader("../../../Inputs/input-file.txt");
+            double sumTime = 0;
 
 
-            while (linea != null)
+            while (line != null)
             {
-                linea = file.ReadLine();
-                if (linea != "" && linea != null)
+                line = inputFile.ReadLine();
+                if (line == "")
+                {
+                    string output = "TOTAL TIME: " + sumTime + "ms\n\n# TEST " + nDB;
+                    Console.WriteLine(output);
+                    lines.Add(output);
+                    Database dbAux = new Database("db" + nDB, "user", "pass");
+                    dbAux.saveDatabase();
+                    db = dbAux;
+                    nDB++;
+                    sumTime = 0;
+                }
+                else if (line != "" && line != null)
                 {
                     Stopwatch sw = new Stopwatch();
                     sw.Start();
-
-                    string output = db.ExecuteMiniSQLQuery(linea);
-                    double miliSec = sw.Elapsed.TotalMilliseconds;
-                    output += "(" + miliSec + ")";
-                    Console.WriteLine(output);
+                    string output = db.ExecuteMiniSQLQuery(line);
                     sw.Stop();
+                    double miliSec = sw.Elapsed.TotalMilliseconds;
+                    output += " (" + miliSec + " ms)";
+                    Console.WriteLine(output);
+                    lines.Add(output);
+                    sumTime += miliSec;
                 }
-                else if (linea == "")
+                else if (line == null)
                 {
-                    Console.WriteLine("nUEVA DATABASE ");
-                    Database dbAux = new Database("db" + nDB, "user", "pass");
-                    nDB = nDB + 1;
-                    dbAux.saveDatabase();
-                    db = dbAux;
+                    string output = "TOTAL TIME: " + sumTime + "ms";
+                    Console.WriteLine(output);
+                    lines.Add(output);
                 }
             }
+            File.WriteAllLines("../../../Input-Output/output-file.txt", lines);
             Console.WriteLine("Querys Finished");
         }
     }

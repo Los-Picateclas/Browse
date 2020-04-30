@@ -59,30 +59,34 @@ namespace UnitTests
         public void saveBrowse()
         {
             Browse1.saveBrowse();
-            Assert.IsTrue(Directory.Exists("../data/Browse"));
+            Assert.IsTrue(Directory.Exists("../../../BrowseProgram"));
         }
 
         // Check that the method saveDatabases() saves the different directories for the databases in the list
         [TestMethod]
         public void saveDatabases()
         {
-            Directory.Delete("../data/Browse", true);
+            if (Directory.Exists("../../../BrowseProgram"))
+            {
+                Directory.Delete("../../../BrowseProgram", true);
+            }
+            Browse1.saveBrowse();
             Browse1.addDatabase(TestDb1);
-            Assert.IsFalse(Directory.Exists("../../../BrowseLib/db1"));
+            Assert.IsFalse(Directory.Exists("../../../BrowseProgram/TestDb1"));
             Browse1.saveDatabases();
-            Assert.IsTrue(Directory.Exists("../../../BrowseLib/db1"));
+            Assert.IsTrue(Directory.Exists("../../../BrowseProgram/TestDb1"));
             Browse1.addDatabase(TestDb2);
-            Assert.IsFalse(Directory.Exists("../../../BrowseLib/db1"));
+            Assert.IsFalse(Directory.Exists("../../../BrowseProgram/TestDb2"));
             Browse1.saveDatabases();
-            Assert.IsTrue(Directory.Exists("../../../BrowseLib/db1"));
+            Assert.IsTrue(Directory.Exists("../../../BrowseProgram/TestDb2"));
         }
 
         // Check that the method loadDatabases() load the databases into the list from the directories
         [TestMethod]
         public void loadDatabases()
         {
-            Directory.CreateDirectory("../../../BrowseLib/db1");
-            Directory.CreateDirectory("../../../BrowseLib/db2");
+            Directory.CreateDirectory("../../../BrowseProgram/db1");
+            Directory.CreateDirectory("../../../BrowseProgram/db2");
             Browse1.loadDatabases();
             Assert.IsTrue(Browse1.getDatabase(0).databaseName == "db1");
             Assert.IsTrue(Browse1.getDatabase(1).databaseName == "db2");

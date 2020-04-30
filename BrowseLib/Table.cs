@@ -118,7 +118,6 @@ namespace BrowseLib
             //string ruta = "C:\\Users\\docencia\\Documents\\Browse\\" + db.databaseName + "\\" + t.getName() + ".txt";
             // string ruta = "..\\Browse\\" + db.databaseName + "\\" + t.getName() + ".txt";
             string ruta = "../../../BrowseProgram/" + db + "/" + t.getName() + ".txt";
-            Console.WriteLine(ruta);
             try
             {
                 using (StreamWriter sw = new StreamWriter(ruta))
