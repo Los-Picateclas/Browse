@@ -1,65 +1,31 @@
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
 using BrowseLib;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace Programa
+namespace ConsoleClient
 {
     class Program
     {
-
-
+        //minisql-tester.exe -i input-file.txt -o output-file.txt
+        enum Parameter { Unset, InputFile, OutputFile };
         static void Main(string[] args)
         {
-            Browse br = new Browse();
-            br.saveBrowse();
-            Database db = new Database("db1", "user", "pass");
-            db.saveDatabase();
-            string line = "";
-            StreamReader inputFile = new StreamReader("../../../Input-Output/input-file.txt");
-            List<string> lines = new List<string>();
-            Console.WriteLine("# TEST 1");
-            lines.Add("# TEST 1");
-            int nDB = 2;
-            double sumTime = 0;
-
-
-            while (line != null)
+            string inputFile = "input-file.txt";
+            string outputFile = "output-file.txt";
+            Parameter lastParameter = Parameter.Unset;
+            foreach (string arg in args)
             {
-                line = inputFile.ReadLine();
-                if (line == "")
-                {
-                    string output = "TOTAL TIME: " + sumTime + "ms\n\n# TEST " + nDB;
-                    Console.WriteLine(output);
-                    lines.Add(output);
-                    Database dbAux = new Database("db" + nDB, "user", "pass");
-                    dbAux.saveDatabase();
-                    db = dbAux;
-                    nDB++;
-                    sumTime = 0;
-                }
-                else if (line != "" && line != null)
-                {
-                    Stopwatch sw = new Stopwatch();
-                    sw.Start();
-                    string output = db.ExecuteMiniSQLQuery(line);
-                    sw.Stop();
-                    double miliSec = sw.Elapsed.TotalMilliseconds;
-                    output += " (" + miliSec + " ms)";
-                    Console.WriteLine(output);
-                    lines.Add(output);
-                    sumTime += miliSec;
-                }
-                else if (line == null)
-                {
-                    string output = "TOTAL TIME: " + sumTime + "ms";
-                    Console.WriteLine(output);
-                    lines.Add(output);
-                }
+                if (arg == "-i") lastParameter = Parameter.InputFile;
+                else if (arg == "-o") lastParameter = Parameter.OutputFile;
+                else if (lastParameter == Parameter.InputFile) inputFile = arg;
+                else if (lastParameter == Parameter.OutputFile) outputFile = arg;
             }
-            File.WriteAllLines("../../../Input-Output/output-file.txt", lines);
-            Console.WriteLine("Querys Finished");
+
+            Console.WriteLine("Input file: " + inputFile);
+            Console.WriteLine("Output file: " + outputFile);
         }
     }
 }
