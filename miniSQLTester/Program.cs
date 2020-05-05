@@ -58,8 +58,8 @@ namespace Programa
                     lines.Add(output);
                 }
             }
-           
-
+            File.WriteAllLines("../../../Input-Output/output-file.txt", lines);
+            Console.WriteLine("Querys Finished");
         }
     }
 }
