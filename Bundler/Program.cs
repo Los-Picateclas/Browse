@@ -16,11 +16,11 @@ namespace Bundler
             List<string> files = new List<string>();
             string version;
 
-            version = GetVersion(RelPathToSolutionRootFolder + "ConsoleClient/bin/Release/ConsoleClient.exe");
+            version = GetVersion(RelPathToSolutionRootFolder + "miniSQLTester/bin/Release/netcoreapp3.1/miniSQLTester.exe");
 
             RootFolderInZip = "Browse/"; //name of the folder created inside the zip file
 
-            files.Add(RelPathToSolutionRootFolder + "ConsoleClient/bin/Release/ConsoleClient.exe");
+            files.Add(RelPathToSolutionRootFolder + "miniSQLTester/bin/Release/netcoreapp3.1/miniSQLTester.exe");
             files.Add(RelPathToSolutionRootFolder + "BrowseLib/bin/Release/BrowseLib.dll");
 
             string outputFile = RelPathToSolutionRootFolder + "Browse-" + version + ".zip"; //name of the output zip file

@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.IO.Compression;
 using BrowseLib;
+using Bundler;
 
 namespace Programa
 {
     class Program
     {
-
-
         static void Main(string[] args)
         {
             Browse br = new Browse();
@@ -58,8 +58,8 @@ namespace Programa
                     lines.Add(output);
                 }
             }
-            File.WriteAllLines("../../../Input-Output/output-file.txt", lines);
-            Console.WriteLine("Querys Finished");
+           
+
         }
     }
 }
