@@ -20,6 +20,7 @@ namespace BrowseLib.MiniSQL
             //const string createPattern = "CREATE TABLE (\\w+)\\s+\\((\\w+)\\s+(INT|DOUBLE|TEXT)(\\,\\s+(\\w+)\\s+(INT|DOUBLE|TEXT))+\\);";
             //const string createPattern2 = "CREATE TABLE (\\w) \\((\\w) \\((INT|DOUBLE|TEXT)));";
             const string createPattern = "CREATE TABLE (\\w+) \\(((\\w+) (\\w+),?\\s?)+\\);";
+            const string createProfilePattern = "CREATE SECURITY PROFILE (\\w+);";
 
             //Select
             Match match = Regex.Match(miniSQLQuery, selectPattern);
@@ -87,6 +88,15 @@ namespace BrowseLib.MiniSQL
                     columnTypes.Add(ccTypes[i].Value);
                 }
                 return new CreateTable(table, columnNames, columnTypes);
+
+            }
+            //CreateProfile
+            match = Regex.Match(miniSQLQuery, createProfilePattern);
+            if (match.Success)
+            {
+                string profile = match.Groups[1].Value;
+               
+                //return new CreateProfile(profile);
 
             }
             return null;
