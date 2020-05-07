@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
 using BrowseLib;
+using BrowseLib.MiniSQL;
 using Bundler;
 
 namespace Programa
@@ -12,6 +13,7 @@ namespace Programa
     {
         static void Main(string[] args)
         {
+            Security sec = new Security();
             Browse br = new Browse();
             br.saveBrowse();
             Database db = new Database("db1", "user", "pass");

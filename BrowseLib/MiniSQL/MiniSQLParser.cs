@@ -20,6 +20,8 @@ namespace BrowseLib.MiniSQL
             //const string createPattern = "CREATE TABLE (\\w+)\\s+\\((\\w+)\\s+(INT|DOUBLE|TEXT)(\\,\\s+(\\w+)\\s+(INT|DOUBLE|TEXT))+\\);";
             //const string createPattern2 = "CREATE TABLE (\\w) \\((\\w) \\((INT|DOUBLE|TEXT)));";
             const string createPattern = "CREATE TABLE (\\w+) \\(((\\w+) (\\w+),?\\s?)+\\);";
+            const string createProfilePattern = "CREATE SECURITY PROFILE(\\W+)";
+
 
             //Select
             Match match = Regex.Match(miniSQLQuery, selectPattern);
@@ -89,9 +91,19 @@ namespace BrowseLib.MiniSQL
                 return new CreateTable(table, columnNames, columnTypes);
 
             }
+            //Create Profile
+            match = Regex.Match(miniSQLQuery, createProfilePattern);
+            if (match.Success)
+            {
+                string profile = match.Groups[1].Value;
+
+                return null;
+
+            }
             return null;
 
         }
+       
 
         // Returns the list of words divided by commas and removes spaces
         static List<string> CommaSeparatedNames(string text)
