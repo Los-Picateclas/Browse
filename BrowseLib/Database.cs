@@ -30,10 +30,17 @@ namespace BrowseLib
             this.password = pW;
             users = new List<User>();
             profiles = new List<Profile>();
+            initialize();
             Profile adminProfile = new Profile("admin");
             profiles.Add(adminProfile);
             User adminUser = new User("admin", "admin", adminProfile);
             users.Add(adminUser);
+        }
+        public void initialize() {
+            profiles = new List<Profile>();
+            users = new List<User>();
+
+
         }
         //It saves each table from the list
         public void saveAllTables(Database d)
@@ -44,6 +51,7 @@ namespace BrowseLib
             }
 
         }
+        public List<Profile> getProfiles() { return profiles; }
 
         public void addTable(Table table)
         {
@@ -547,6 +555,20 @@ namespace BrowseLib
             
 
             return "Profile created";
+        }
+        public string dropProfile(string name, Database db)
+        {
+            
+            profiles = new List<Profile>();
+                foreach (Profile pr in profiles)
+                    if (name.Equals(pr.getName()))
+                    {
+                        profiles.Remove(pr);
+                    }
+
+
+            Console.WriteLine("perfil borrado");
+            
         }
     }
 }

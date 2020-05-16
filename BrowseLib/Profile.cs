@@ -22,6 +22,9 @@ namespace BrowseLib
             tablePermissions.Remove(tp);
 
         }
+        public string getName() {
+            return name;
+        }
 
 
 
