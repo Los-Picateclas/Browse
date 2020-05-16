@@ -96,7 +96,8 @@ namespace BrowseLib.MiniSQL
             {
                 string profile = match.Groups[1].Value;
                
-                //return new CreateProfile(profile);
+
+                return new CreateProfile(profile);
 
             }
             return null;

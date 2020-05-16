@@ -19,6 +19,8 @@ namespace BrowseLib
         public string databaseName;
         public string username;
         public string password;
+        public List<User> users;
+        public List<Profile> profiles;
 
         public Database(string dN, string uN, string pW)
         {
@@ -26,6 +28,12 @@ namespace BrowseLib
             this.databaseName = dN;
             this.username = uN;
             this.password = pW;
+            users = new List<User>();
+            profiles = new List<Profile>();
+            Profile adminProfile = new Profile("admin");
+            profiles.Add(adminProfile);
+            User adminUser = new User("admin", "admin", adminProfile);
+            users.Add(adminUser);
         }
         //It saves each table from the list
         public void saveAllTables(Database d)
@@ -531,6 +539,14 @@ namespace BrowseLib
 
 
             return "Table created";
+        }
+        public string createProfile(string name) {
+
+            Profile profile = new Profile(name);
+            profiles.Add(profile);
+            
+
+            return "Profile created";
         }
     }
 }

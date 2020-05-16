@@ -58,6 +58,7 @@
     <Compile Include="TablePermission.cs" />
     <Compile Include="Profile.cs" />
     <Compile Include="Privileges.cs" />
+    <Compile Include="MiniSQL\CreateProfile.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
