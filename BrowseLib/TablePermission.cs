@@ -1,22 +1,29 @@
 ﻿using System;
+using System.Collections.Generic;
+
 namespace BrowseLib
 {
     public class TablePermission
     {
 
         private string table;
-        private Profile profile;
+        private List<Privileges> privileges;
 
 
 
-        public TablePermission(string tbname, Profile p)
+        public TablePermission(string tbname)
         {
             table = tbname;
-            profile = p;
+            privileges = new List<Privileges>();
         }
 
-
-
+        public void addPrivilege(Privileges p) {
+            privileges.Add(p);
+        }
+        public void removePrivilege(Privileges p)
+        {
+            privileges.Remove(p);
+        }
 
 
 

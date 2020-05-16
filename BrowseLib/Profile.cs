@@ -5,21 +5,24 @@ namespace BrowseLib
 {
     public class Profile
     {
-        public List<Privileges> privileges;
-        public Profile()
+        private string name;
+        public List<TablePermission> tablePermissions;
+        public Profile(string n)
         {
-            privileges = new List<Privileges>();
+            name = n;
+            tablePermissions = new List<TablePermission>();
         }
-        public void addPrivilege(Privileges p)
+        public void addTablePermission(TablePermission tp)
         {
-            privileges.Add(p);
+            tablePermissions.Add(tp);
 
         }
-        public void removePrivilege(Privileges p)
+        public void removePrivilege(TablePermission tp)
         {
-            privileges.Remove(p);
+            tablePermissions.Remove(tp);
 
         }
+
 
 
     }

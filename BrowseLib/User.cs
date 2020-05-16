@@ -7,33 +7,21 @@ namespace BrowseLib
     {
 
         private string user, password;
-        private List<TablePermission> privileges;
+        private Profile profile;
 
 
 
 
 
-        public User(string name, string pass)
+        public User(string name, string pass, Profile prof)
         {
             user = name;
             password = pass;
-            privileges = new List<TablePermission>();
+            profile = prof;
+           
         }
-        public void addPermission(TablePermission p)
-        {
-            privileges.Add(p);
 
-        }
-        public void removePermission(TablePermission p)
-        {
-            privileges.Remove(p);
 
-        }
-        public List<TablePermission> getTablePermission()
-        {
-
-            return privileges;
-        }
 
 
     }

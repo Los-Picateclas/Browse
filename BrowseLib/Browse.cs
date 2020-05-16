@@ -11,11 +11,20 @@ namespace BrowseLib
     public class Browse
     {
         public List<Database> Databases;
+        public List<User> users;
+        public List<Profile> profiles;
 
         // Constructor
         public Browse()
         {
             Databases = new List<Database>();
+            users = new List<User>();
+            profiles = new List<Profile>();
+            Profile adminProfile = new Profile("admin");
+            profiles.Add(adminProfile);
+            User adminUser = new User("admin", "admin", adminProfile);
+            users.Add(adminUser);
+
         }
 
         // Add a database to the list databases
