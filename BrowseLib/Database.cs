@@ -567,8 +567,8 @@ namespace BrowseLib
                     }
 
 
-            Console.WriteLine("perfil borrado");
             
+            return "Profile droped";
         }
     }
 }
