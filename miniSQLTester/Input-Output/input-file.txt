@@ -3,6 +3,7 @@ INSERT INTO MyTable VALUES ('Eva',18,'Calle Los Herran 16 2 Derecha. 01005 Vitor
 CREATE SECURITY PROFILE For;
 ADD USER ('user', 'password', For);
 GRANT INSERT ON MyTable TO Admin;
+REVOKE INSERT ON MyTable TO Admin;
 DELETE USER 'user';
 DROP SECURITY PROFILE For;
 INSERT INTO MyTable VALUES ('Ramon',26,'Larratxo kalea 23 2. Ezk. 20012 Donostia');

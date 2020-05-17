@@ -619,6 +619,33 @@ namespace BrowseLib
 
             return "Privileges granted";
         }
+        public string revoke(string privilege, string table, string profile)
+        {
+
+            Profile aux = null;
+            profiles = new List<Profile>();
+            
+            foreach (Profile pr in profiles)
+                if (profile.Equals(pr.getName()))
+                {
+                    aux = pr;
+                    profiles.Remove(aux);
+                }
+
+
+            
+            TablePermission tb = new TablePermission(table);
+            if (privilege.Equals("INSERT")) { tb.addPrivilege(Privileges.INSERT); }
+            else if (privilege.Equals("SELECT")) { tb.addPrivilege(Privileges.SELECT); }
+            else if (privilege.Equals("UPDATE")) { tb.addPrivilege(Privileges.UPDATE); }
+            else if (privilege.Equals("DELETE")) { tb.addPrivilege(Privileges.DELETE); }
+            
+            if (aux != null) { 
+            aux.removePrivilege(tb);
+            profiles.Add(aux);
+        }
+            return "Privileges revoked";
+        }
     }
 }
 

@@ -19,8 +19,17 @@ namespace BrowseLib
         }
         public void removePrivilege(TablePermission tp)
         {
-            tablePermissions.Remove(tp);
+            
+            
+            foreach (TablePermission tper in tablePermissions)
+            {
+                if (tp.getTableName().Equals(tper.getTableName())) {
+                    if (tp.samePrivileges(tper)) {
 
+                        tablePermissions.Remove(tper);
+                    }
+            }
+        }
         }
         public string getName() {
             return name;
