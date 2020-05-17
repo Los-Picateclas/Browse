@@ -21,7 +21,10 @@ namespace BrowseLib
            
         }
 
+        public string getName() {
+            return user;
 
+        }
 
 
     }

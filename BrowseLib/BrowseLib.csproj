@@ -61,6 +61,7 @@
     <Compile Include="MiniSQL\CreateProfile.cs" />
     <Compile Include="MiniSQL\DropProfile.cs" />
     <Compile Include="MiniSQL\AddUser.cs" />
+    <Compile Include="MiniSQL\DeleteUser.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

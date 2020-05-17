@@ -23,6 +23,7 @@ namespace BrowseLib.MiniSQL
             const string createProfilePattern = "CREATE SECURITY PROFILE (\\w+);";
             const string dropProfilePattern = "DROP SECURITY PROFILE (\\w+);";
             const string addUserPattern = "ADD USER \\((.+), (.+), (.+)\\);";
+            const string deleteUserPattern = "DELETE USER (.+);";
 
             //Select
             Match match = Regex.Match(miniSQLQuery, selectPattern);
@@ -122,6 +123,17 @@ namespace BrowseLib.MiniSQL
 
 
                 return new AddUser(user, password, profile);
+
+            }
+            //DeleteUser
+            match = Regex.Match(miniSQLQuery, deleteUserPattern);
+            if (match.Success)
+            {
+                string user = match.Groups[1].Value;
+                
+
+
+                return new DeleteUser(user);
 
             }
             return null;

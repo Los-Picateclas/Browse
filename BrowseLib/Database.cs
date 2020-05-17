@@ -587,6 +587,22 @@ namespace BrowseLib
 
             return "User added";
         }
+        public string deleteUser(string name)
+        {
+
+            users = new List<User>();
+            foreach (User us in users)
+                if (name.Equals(us.getName()))
+                {
+                    users.Remove(us);
+                }
+
+            
+
+
+
+            return "User deleted";
+        }
     }
 }
 
