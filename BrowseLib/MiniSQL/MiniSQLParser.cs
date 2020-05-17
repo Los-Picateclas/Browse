@@ -24,6 +24,7 @@ namespace BrowseLib.MiniSQL
             const string dropProfilePattern = "DROP SECURITY PROFILE (\\w+);";
             const string addUserPattern = "ADD USER \\((.+), (.+), (.+)\\);";
             const string deleteUserPattern = "DELETE USER (.+);";
+            const string grantPattern = "GRANT (DELETE|INSERT|UPDATE|SELECT) ON (\\w+) TO (\\w+);";
 
             //Select
             Match match = Regex.Match(miniSQLQuery, selectPattern);
@@ -134,6 +135,18 @@ namespace BrowseLib.MiniSQL
 
 
                 return new DeleteUser(user);
+
+            }
+            //Grant
+            match = Regex.Match(miniSQLQuery, grantPattern);
+            if (match.Success)
+            {
+                string privilege = match.Groups[1].Value;
+                string table = match.Groups[1].Value;
+                string profile = match.Groups[1].Value;
+
+
+                return new Grant(privilege, table, profile);
 
             }
             return null;

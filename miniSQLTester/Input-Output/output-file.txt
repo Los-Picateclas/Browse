@@ -1,28 +1,29 @@
 # TEST 1
-Table created (92,4619 ms)
-Tuple added (10,9654 ms)
-Profile created (0,4654 ms)
-User added (1,6665 ms)
-User deleted (6,5907 ms)
-Profile droped (4,1715 ms)
-Tuple added (1,0504 ms)
-Tuple added (0,5346 ms)
-Tuple(s) deleted (30,9664 ms)
-{'Name','Age'} => {Ramon,26}{Miren,26} (32,2434 ms)
-TOTAL TIME: 181,1162ms
+Table created (93,9328 ms)
+Tuple added (9,4503 ms)
+Profile created (0,5517 ms)
+User added (1,721 ms)
+Privileges granted (11,7978 ms)
+User deleted (1,3186 ms)
+Profile droped (1,3767 ms)
+Tuple added (0,568 ms)
+Tuple added (0,464 ms)
+Tuple(s) deleted (8,4088 ms)
+{'Name','Age'} => {Ramon,26}{Miren,26} (15,2931 ms)
+TOTAL TIME: 144,8828ms
 
 # TEST 2
-Table created (0,67 ms)
-Tuple added (0,4881 ms)
-Tuple added (0,4544 ms)
-Tuple added (1,2159 ms)
-{'Name','Age'} => {Eva,18} (0,0776 ms)
-TOTAL TIME: 2,906ms
+Table created (0,562 ms)
+Tuple added (0,4326 ms)
+Tuple added (0,3957 ms)
+Tuple added (0,5111 ms)
+{'Name','Age'} => {Eva,18} (0,0669 ms)
+TOTAL TIME: 1,9683000000000002ms
 
 # TEST 3
-Table created (0,6267 ms)
-Tuple added (0,5624 ms)
-Tuple added (0,543 ms)
-Tuple added (1,7952 ms)
-{'Name','Age'} =>  (0,0717 ms)
-TOTAL TIME: 3,5989999999999998ms
+Table created (1,5678 ms)
+Tuple added (0,668 ms)
+Tuple added (0,4718 ms)
+Tuple added (0,4739 ms)
+{'Name','Age'} =>  (0,0386 ms)
+TOTAL TIME: 3,2201000000000004ms

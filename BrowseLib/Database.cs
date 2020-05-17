@@ -603,6 +603,22 @@ namespace BrowseLib
 
             return "User deleted";
         }
+        public string grant(string privilege, string table, string profile)
+        {
+            TablePermission tb = new TablePermission(table);
+            if (privilege.Equals("INSERT")) { tb.addPrivilege(Privileges.INSERT); }
+            else if (privilege.Equals("SELECT")) { tb.addPrivilege(Privileges.SELECT); }
+            else if (privilege.Equals("UPDATE")) { tb.addPrivilege(Privileges.UPDATE); }
+            else if (privilege.Equals("DELETE")) { tb.addPrivilege(Privileges.DELETE); }
+
+            foreach (Profile pr in profiles)
+                if (profile.Equals(pr.getName()))
+                {
+                    pr.addTablePermission(tb);
+                }
+
+            return "Privileges granted";
+        }
     }
 }
 
