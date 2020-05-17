@@ -60,6 +60,7 @@
     <Compile Include="Privileges.cs" />
     <Compile Include="MiniSQL\CreateProfile.cs" />
     <Compile Include="MiniSQL\DropProfile.cs" />
+    <Compile Include="MiniSQL\AddUser.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

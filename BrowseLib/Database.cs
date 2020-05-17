@@ -570,6 +570,23 @@ namespace BrowseLib
             
             return "Profile droped";
         }
+        public string addUser(string name, string pass, string prof)
+        {
+           
+            Profile aux = null;
+            foreach (Profile pr in profiles)
+                if (prof.Equals(pr.getName()))
+                {
+                    aux = pr;
+                }
+            
+            User u = new User(name, pass, aux);
+            users.Add(u);
+
+
+
+            return "User added";
+        }
     }
 }
 
