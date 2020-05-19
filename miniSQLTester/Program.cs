@@ -1,24 +1,22 @@
-﻿using System;
+﻿using BrowseLib;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
 using System.Text.RegularExpressions;
-using BrowseLib;
-using BrowseLib.MiniSQL;
-using Bundler;
 
-namespace Programa
+namespace MiniSQLTest
 {
     class Program
     {
         static void Main(string[] args)
         {
-            
+
             Browse br = new Browse();
             br.saveBrowse();
             Database db = null;
-            
+
             string line = "";
             StreamReader inputFile = new StreamReader("../../../Input-Output/input-file.txt");
             List<string> lines = new List<string>();
@@ -33,9 +31,6 @@ namespace Programa
 
             while (line != null)
             {
-                
-               
-
                 Match match = Regex.Match(line, createDatabasePattern);
 
                 if (line == "")
@@ -85,11 +80,12 @@ namespace Programa
                     lines.Add(output);
                     line = inputFile.ReadLine();
                 }
-                else { line = inputFile.ReadLine(); }
+                else {
+                    line = inputFile.ReadLine();
+                }
             }
             File.WriteAllLines("../../../Input-Output/output-file.txt", lines);
             Console.WriteLine("Querys Finished");
         }
     }
 }
-
