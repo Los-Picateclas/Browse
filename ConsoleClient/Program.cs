@@ -26,6 +26,7 @@ namespace ConsoleClient
 
             Console.WriteLine("Input file: " + inputFile);
             Console.WriteLine("Output file: " + outputFile);
+            
         }
     }
 }

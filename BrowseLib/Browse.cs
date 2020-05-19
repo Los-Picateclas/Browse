@@ -11,11 +11,14 @@ namespace BrowseLib
     public class Browse
     {
         public List<Database> Databases;
+        
 
         // Constructor
         public Browse()
         {
             Databases = new List<Database>();
+           
+
         }
 
         // Add a database to the list databases

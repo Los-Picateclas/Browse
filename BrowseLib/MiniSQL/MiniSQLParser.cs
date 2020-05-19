@@ -20,8 +20,12 @@ namespace BrowseLib.MiniSQL
             //const string createPattern = "CREATE TABLE (\\w+)\\s+\\((\\w+)\\s+(INT|DOUBLE|TEXT)(\\,\\s+(\\w+)\\s+(INT|DOUBLE|TEXT))+\\);";
             //const string createPattern2 = "CREATE TABLE (\\w) \\((\\w) \\((INT|DOUBLE|TEXT)));";
             const string createPattern = "CREATE TABLE (\\w+) \\(((\\w+) (\\w+),?\\s?)+\\);";
-            const string createProfilePattern = "CREATE SECURITY PROFILE(\\W+)";
-
+            const string createProfilePattern = "CREATE SECURITY PROFILE (\\w+);";
+            const string dropProfilePattern = "DROP SECURITY PROFILE (\\w+);";
+            const string addUserPattern = "ADD USER \\((.+), (.+), (.+)\\);";
+            const string deleteUserPattern = "DELETE USER (.+);";
+            const string grantPattern = "GRANT (DELETE|INSERT|UPDATE|SELECT) ON (\\w+) TO (\\w+);";
+            const string revokePattern = "REVOKE (DELETE|INSERT|UPDATE|SELECT) ON (\\w+) TO (\\w+);";
 
             //Select
             Match match = Regex.Match(miniSQLQuery, selectPattern);
@@ -91,19 +95,77 @@ namespace BrowseLib.MiniSQL
                 return new CreateTable(table, columnNames, columnTypes);
 
             }
-            //Create Profile
+            //CreateProfile
             match = Regex.Match(miniSQLQuery, createProfilePattern);
             if (match.Success)
             {
                 string profile = match.Groups[1].Value;
+               
 
-                return null;
+                return new CreateProfile(profile);
+
+            }
+            //DropProfile
+            match = Regex.Match(miniSQLQuery, dropProfilePattern);
+            if (match.Success)
+            {
+                string profile = match.Groups[1].Value;
+
+
+                return new DropProfile(profile);
+
+            }
+            //AddUser
+            match = Regex.Match(miniSQLQuery, addUserPattern);
+            if (match.Success)
+            {
+                string user = match.Groups[1].Value;
+                string password = match.Groups[2].Value;
+                string profile = match.Groups[3].Value;
+
+
+                return new AddUser(user, password, profile);
+
+            }
+            //DeleteUser
+            match = Regex.Match(miniSQLQuery, deleteUserPattern);
+            if (match.Success)
+            {
+                string user = match.Groups[1].Value;
+                
+
+
+                return new DeleteUser(user);
+
+            }
+            //Grant
+            match = Regex.Match(miniSQLQuery, grantPattern);
+            if (match.Success)
+            {
+                string privilege = match.Groups[1].Value;
+                string table = match.Groups[2].Value;
+                string profile = match.Groups[3].Value;
+
+
+                return new Grant(privilege, table, profile);
+
+            }
+
+            //Revoke
+            match = Regex.Match(miniSQLQuery, revokePattern);
+            if (match.Success)
+            {
+                string privilege = match.Groups[1].Value;
+                string table = match.Groups[2].Value;
+                string profile = match.Groups[3].Value;
+
+
+                return new Revoke(privilege, table, profile);
 
             }
             return null;
 
         }
-       
 
         // Returns the list of words divided by commas and removes spaces
         static List<string> CommaSeparatedNames(string text)

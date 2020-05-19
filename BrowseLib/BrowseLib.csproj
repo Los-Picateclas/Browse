@@ -55,10 +55,15 @@
     <Compile Include="Column.cs" />
     <Compile Include="MiniSQL\DropTable.cs" />
     <Compile Include="User.cs" />
-    <Compile Include="MiniSQL\TablePermission.cs" />
+    <Compile Include="TablePermission.cs" />
     <Compile Include="Profile.cs" />
     <Compile Include="Privileges.cs" />
-    <Compile Include="MiniSQL\Security.cs" />
+    <Compile Include="MiniSQL\CreateProfile.cs" />
+    <Compile Include="MiniSQL\DropProfile.cs" />
+    <Compile Include="MiniSQL\AddUser.cs" />
+    <Compile Include="MiniSQL\DeleteUser.cs" />
+    <Compile Include="MiniSQL\Grant.cs" />
+    <Compile Include="MiniSQL\Revoke.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

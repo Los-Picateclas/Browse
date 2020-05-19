@@ -19,6 +19,9 @@ namespace BrowseLib
         public string databaseName;
         public string username;
         public string password;
+        public List<User> users;
+        public List<Profile> profiles;
+        public User actualUser;
 
         public Database(string dN, string uN, string pW)
         {
@@ -26,6 +29,19 @@ namespace BrowseLib
             this.databaseName = dN;
             this.username = uN;
             this.password = pW;
+            users = new List<User>();
+            profiles = new List<Profile>();
+          
+            Profile adminProfile = new Profile("admin");
+            profiles.Add(adminProfile);
+            User adminUser = new User("admin", "admin", adminProfile);
+            users.Add(adminUser);
+        }
+        public void initialize() {
+            profiles = new List<Profile>();
+            users = new List<User>();
+
+
         }
         //It saves each table from the list
         public void saveAllTables(Database d)
@@ -36,6 +52,7 @@ namespace BrowseLib
             }
 
         }
+        public List<Profile> getProfiles() { return profiles; }
 
         public void addTable(Table table)
         {
@@ -531,6 +548,105 @@ namespace BrowseLib
 
 
             return "Table created";
+        }
+        
+        public string createProfile(string name) {
+
+            Profile profile = new Profile(name);
+            profiles.Add(profile);
+            
+
+            return "Profile created";
+        }
+        public string dropProfile(string name, Database db)
+        {
+
+            Profile toDelete = null;
+
+           
+
+                 toDelete = profiles.Find(pr => pr.getName()==name);
+
+            
+
+            profiles.Remove(toDelete);
+            
+            return "Profile droped";
+        }
+        public string addUser(string name, string pass, string prof)
+        {
+           
+            Profile aux = null;
+            foreach (Profile pr in profiles)
+            {
+                if (prof.Equals(pr.getName()))
+                {
+                    aux = pr;
+                }
+            }
+            User u = new User(name, pass, aux);
+            users.Add(u);
+
+
+
+            return "User added";
+        }
+        public List<User> getUsers() { return users; }
+        public void setUsers(List<User> u) { users = u; }
+
+        public string deleteUser(string name, Database db)
+        {
+            User toDelete = null;
+
+
+            
+                toDelete = users.Find(us => us.getName() == name);
+            users.Remove(toDelete);
+
+
+
+            return "User deleted";
+        }
+        public string grant(string privilege, string table, string profile)
+        {
+            TablePermission tb = new TablePermission(table);
+            if (privilege.Equals("INSERT")) { tb.addPrivilege(Privileges.INSERT); }
+            else if (privilege.Equals("SELECT")) { tb.addPrivilege(Privileges.SELECT); }
+            else if (privilege.Equals("UPDATE")) { tb.addPrivilege(Privileges.UPDATE); }
+            else if (privilege.Equals("DELETE")) { tb.addPrivilege(Privileges.DELETE); }
+
+            foreach (Profile pr in profiles) { 
+            if (profile.Equals(pr.getName()))
+            {
+                pr.addTablePermission(tb);
+            }
+        }
+            return "Privileges granted";
+        }
+        public string revoke(string privilege, string table, string profile)
+        {
+
+            Profile toDelete = null;
+
+
+
+            toDelete = profiles.Find(pr => pr.getName() == profile);
+            Profile aux = toDelete;
+
+
+            profiles.Remove(toDelete);
+
+            TablePermission tb = new TablePermission(table);
+            if (privilege.Equals("INSERT")) { tb.addPrivilege(Privileges.INSERT); }
+            else if (privilege.Equals("SELECT")) { tb.addPrivilege(Privileges.SELECT); }
+            else if (privilege.Equals("UPDATE")) { tb.addPrivilege(Privileges.UPDATE); }
+            else if (privilege.Equals("DELETE")) { tb.addPrivilege(Privileges.DELETE); }
+            
+            if (aux != null) { 
+            aux.removePrivilege(tb);
+            profiles.Add(aux);
+        }
+            return "Privileges revoked";
         }
     }
 }
