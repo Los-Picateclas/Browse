@@ -1,5 +1,0 @@
-TEXT, INT, TEXT
-Name, Age, Address
-
-Ramon1, 26, Larratxo kalea 23 2. Ezk. 20012 Donostia, 
-Miren1, 26, Larratxo kalea 23 2. Ezk. 20012 Donostia, 

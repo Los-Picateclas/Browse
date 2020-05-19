@@ -16,12 +16,13 @@ namespace Bundler
             List<string> files = new List<string>();
             string version;
 
-            version = GetVersion(RelPathToSolutionRootFolder + "miniSQLTester/bin/Release/netcoreapp3.1/miniSQLTester.exe");
+            version = GetVersion(RelPathToSolutionRootFolder + "MiniSQLTester/bin/Release/miniSQLTester.exe");
 
             RootFolderInZip = "Browse/"; //name of the folder created inside the zip file
 
-            files.Add(RelPathToSolutionRootFolder + "miniSQLTester/bin/Release/netcoreapp3.1/miniSQLTester.exe");
-            files.Add(RelPathToSolutionRootFolder + "BrowseLib/bin/Release/BrowseLib.dll");
+            files.Add(RelPathToSolutionRootFolder + "MiniSQLTester/bin/Release/miniSQLTester.exe");
+            files.Add(RelPathToSolutionRootFolder + "MiniSQLTester/bin/Release/BrowseLib.dll");
+            files.Add(RelPathToSolutionRootFolder + "Input-Output/input-file.txt");
 
             string outputFile = RelPathToSolutionRootFolder + "Browse-" + version + ".zip"; //name of the output zip file
 
