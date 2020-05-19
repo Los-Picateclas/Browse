@@ -11,7 +11,7 @@ namespace BrowseLib.MiniSQL
 
         public string Execute(Database database)
         {
-            return database.deleteUser(user);
+            return database.deleteUser(user, database);
         }
     }
 }

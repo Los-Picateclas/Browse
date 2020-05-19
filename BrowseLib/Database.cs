@@ -30,7 +30,7 @@ namespace BrowseLib
             this.password = pW;
             users = new List<User>();
             profiles = new List<Profile>();
-            initialize();
+          
             Profile adminProfile = new Profile("admin");
             profiles.Add(adminProfile);
             User adminUser = new User("admin", "admin", adminProfile);
@@ -548,6 +548,7 @@ namespace BrowseLib
 
             return "Table created";
         }
+        
         public string createProfile(string name) {
 
             Profile profile = new Profile(name);
@@ -558,15 +559,16 @@ namespace BrowseLib
         }
         public string dropProfile(string name, Database db)
         {
+
+            Profile toDelete = null;
+
+           
+
+                 toDelete = profiles.Find(pr => pr.getName()==name);
+
             
-            profiles = new List<Profile>();
-                foreach (Profile pr in profiles)
-                    if (name.Equals(pr.getName()))
-                    {
-                        profiles.Remove(pr);
-                    }
 
-
+            profiles.Remove(toDelete);
             
             return "Profile droped";
         }
@@ -575,11 +577,12 @@ namespace BrowseLib
            
             Profile aux = null;
             foreach (Profile pr in profiles)
+            {
                 if (prof.Equals(pr.getName()))
                 {
                     aux = pr;
                 }
-            
+            }
             User u = new User(name, pass, aux);
             users.Add(u);
 
@@ -587,17 +590,17 @@ namespace BrowseLib
 
             return "User added";
         }
-        public string deleteUser(string name)
-        {
+        public List<User> getUsers() { return users; }
+        public void setUsers(List<User> u) { users = u; }
 
-            users = new List<User>();
-            foreach (User us in users)
-                if (name.Equals(us.getName()))
-                {
-                    users.Remove(us);
-                }
+        public string deleteUser(string name, Database db)
+        {
+            User toDelete = null;
+
 
             
+                toDelete = users.Find(us => us.getName() == name);
+            users.Remove(toDelete);
 
 
 
@@ -611,29 +614,27 @@ namespace BrowseLib
             else if (privilege.Equals("UPDATE")) { tb.addPrivilege(Privileges.UPDATE); }
             else if (privilege.Equals("DELETE")) { tb.addPrivilege(Privileges.DELETE); }
 
-            foreach (Profile pr in profiles)
-                if (profile.Equals(pr.getName()))
-                {
-                    pr.addTablePermission(tb);
-                }
-
+            foreach (Profile pr in profiles) { 
+            if (profile.Equals(pr.getName()))
+            {
+                pr.addTablePermission(tb);
+            }
+        }
             return "Privileges granted";
         }
         public string revoke(string privilege, string table, string profile)
         {
 
-            Profile aux = null;
-            profiles = new List<Profile>();
-            
-            foreach (Profile pr in profiles)
-                if (profile.Equals(pr.getName()))
-                {
-                    aux = pr;
-                    profiles.Remove(aux);
-                }
+            Profile toDelete = null;
 
 
-            
+
+            toDelete = profiles.Find(pr => pr.getName() == profile);
+            Profile aux = toDelete;
+
+
+            profiles.Remove(toDelete);
+
             TablePermission tb = new TablePermission(table);
             if (privilege.Equals("INSERT")) { tb.addPrivilege(Privileges.INSERT); }
             else if (privilege.Equals("SELECT")) { tb.addPrivilege(Privileges.SELECT); }
