@@ -21,6 +21,7 @@ namespace BrowseLib
         public string password;
         public List<User> users;
         public List<Profile> profiles;
+        public User actualUser;
 
         public Database(string dN, string uN, string pW)
         {

@@ -143,20 +143,21 @@ namespace BrowseLib.MiniSQL
             if (match.Success)
             {
                 string privilege = match.Groups[1].Value;
-                string table = match.Groups[1].Value;
-                string profile = match.Groups[1].Value;
+                string table = match.Groups[2].Value;
+                string profile = match.Groups[3].Value;
 
 
                 return new Grant(privilege, table, profile);
 
             }
+
             //Revoke
             match = Regex.Match(miniSQLQuery, revokePattern);
             if (match.Success)
             {
                 string privilege = match.Groups[1].Value;
-                string table = match.Groups[1].Value;
-                string profile = match.Groups[1].Value;
+                string table = match.Groups[2].Value;
+                string profile = match.Groups[3].Value;
 
 
                 return new Revoke(privilege, table, profile);
