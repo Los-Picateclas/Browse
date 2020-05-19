@@ -27,7 +27,7 @@ namespace MiniSQLTest
             string createDatabasePattern = "(\\w+), (\\w+), (\\w+)";
 
             line = inputFile.ReadLine();
-
+            string output = "";
 
             while (line != null)
             {
@@ -35,12 +35,9 @@ namespace MiniSQLTest
 
                 if (line == "")
                 {
-                    string output = "TOTAL TIME: " + sumTime + "ms\n\n# TEST " + testNumber;
-                    Console.WriteLine(output);
-                    lines.Add(output);
+                    output = "TOTAL TIME: " + sumTime + "ms\n\n# TEST " + testNumber;
                     testNumber = testNumber + 1;
                     sumTime = 0;
-                    line = inputFile.ReadLine();
                 }
                 else if (match.Success)
                 {
@@ -52,10 +49,20 @@ namespace MiniSQLTest
                     string profileName = match.Groups[3].Value;
 
                     //if exists
+                    if (br.Databases.Contains(br.Databases.Find(d => d.databaseName == databaseName)))
+                    {
+                        sw.Stop();
+                        output = "Database opened " + sw.ElapsedMilliseconds + " ms";
+                    }
                     //if it doesnt exists
-                    db = new Database(databaseName, userName, profileName);
-                    db.saveDatabase();
-                    line = inputFile.ReadLine();
+                    else
+                    {
+                        db = new Database(databaseName, userName, profileName);
+                        db.saveDatabase();
+                        br.addDatabase(db);
+                        output = "Database created " + sw.ElapsedMilliseconds + " ms";
+                    }
+                    
                 }
                 else if (line != "" && line != null && !match.Success)
                 {
@@ -63,26 +70,20 @@ namespace MiniSQLTest
                     {
                         Stopwatch sw = new Stopwatch();
                         sw.Start();
-                        string output = db.ExecuteMiniSQLQuery(line);
+                        output = db.ExecuteMiniSQLQuery(line);
                         sw.Stop();
                         double miliSec = sw.Elapsed.TotalMilliseconds;
                         output += " (" + miliSec + " ms)";
-                        Console.WriteLine(output);
-                        lines.Add(output);
                         sumTime += miliSec;
                     }
-                    line = inputFile.ReadLine();
                 }
                 else if (line == null)
                 {
-                    string output = "TOTAL TIME: " + sumTime + "ms";
-                    Console.WriteLine(output);
-                    lines.Add(output);
-                    line = inputFile.ReadLine();
+                    output = "TOTAL TIME: " + sumTime + "ms";
                 }
-                else {
-                    line = inputFile.ReadLine();
-                }
+                Console.WriteLine(output);
+                lines.Add(output);
+                line = inputFile.ReadLine();
             }
             File.WriteAllLines("../../../Input-Output/output-file.txt", lines);
             Console.WriteLine("Querys Finished");

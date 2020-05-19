@@ -537,17 +537,21 @@ namespace BrowseLib
         }
         public string createTable(string table, List<String> columns, List<string> types, Database db)
         {
-
-            Table tableCreated = new Table(table);
-            for (int i = 0; i < columns.Count; i++)
+            if (tables.Contains(tables.Find(t => t.getName() == table)))
             {
-                tableCreated.addColumn(new Column(columns[i], types[i]));
+                return "Table exists";
             }
-            tables.Add(tableCreated);
-            db.saveTables(db);
-
-
-            return "Table created";
+            else
+            {
+                Table tableCreated = new Table(table);
+                for (int i = 0; i < columns.Count; i++)
+                {
+                    tableCreated.addColumn(new Column(columns[i], types[i]));
+                }
+                tables.Add(tableCreated);
+                db.saveTables(db);
+                return "Table created";
+            }
         }
         
         public string createProfile(string name) {
