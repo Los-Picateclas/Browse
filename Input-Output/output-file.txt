@@ -1,27 +1,27 @@
 # TEST 1
 Database created 6 ms
-Table created (42,7008 ms)
-Tuple added (3,925 ms)
-Tuple added (12,125 ms)
-Tuple added (1,5374 ms)
-Tuple(s) deleted (7,7572 ms)
-{'Name','Age'} => {Ramon,26}{Miren,22} (9,4339 ms)
-TOTAL TIME: 77,4793ms
+Table created (32,3191 ms)
+Tuple added (4,5325 ms)
+Tuple added (0,7147 ms)
+Tuple added (0,9854 ms)
+Tuple(s) deleted (4,8645 ms)
+{'Name','Age'} => {Ramon,26}{Miren,22} (9,007 ms)
+TOTAL TIME: 52,4232ms
 
 # TEST 2
 Database opened 0 ms
-{'Name','Age'} => {Ramon,26}{Miren,22} (0,1575 ms)
-{'Name','Age'} => {Miren,22} (0,0895 ms)
- (0,0779 ms)
-Table created (1,3874 ms)
-Tuple added (0,9275 ms)
-Tuple added (0,7996 ms)
-Tuple added (0,7648 ms)
-Profile created (0,4821 ms)
-Privileges granted (6,5807 ms)
-Error (0,1579 ms)
-Error (0,0983 ms)
-TOTAL TIME: 11,5232ms
+{'Name','Age'} => {Ramon,26}{Miren,22} (0,1437 ms)
+{'Name','Age'} => {Miren,22} (0,0925 ms)
+ (0,039 ms)
+Table created (1,6842 ms)
+Tuple added (0,8348 ms)
+Tuple added (1,337 ms)
+Tuple added (0,9279 ms)
+Profile created (0,4895 ms)
+Privileges granted (7,5121 ms)
+User added (1,2453 ms)
+User added (0,0679 ms)
+TOTAL TIME: 14,3739ms
 
 # TEST 3
 Database opened 0 ms
@@ -33,5 +33,6 @@ TOTAL TIME: 0ms
 
 # TEST 5
 Database opened 0 ms
-{'Name','Age'} => {Ramon,26}{Miren,22} (0,0832 ms)
-{'Name','Role'} => {Eva,Programming manager} (0,0507 ms)
+Tuple added (1,3591 ms)
+This user doesn´t have select privilege (0,1314 ms)
+{'Name','Role'} => {Eva,Programming manager} (2,2356 ms)

@@ -51,8 +51,9 @@ namespace MiniSQLTest
                     //if exists
                     if (br.Databases.Contains(br.Databases.Find(d => d.databaseName == databaseName)))
                     {
-                        Database dbaux = br.Databases.Find(d => d.databaseName == databaseName);
+                       Database dbaux = br.Databases.Find(d => d.databaseName == databaseName);
                         dbaux.setActualUser(userName);
+                       
                         sw.Stop();
                         output = "Database opened " + sw.ElapsedMilliseconds + " ms";
                     }

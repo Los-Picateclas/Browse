@@ -44,53 +44,82 @@ namespace BrowseLib
 
         }
         public Boolean hasSelectPrivilege(string table) {
-            Console.WriteLine("Se ha llmaado al metodo hasselectprivilege, con el susuario "+ actualUser.getName() );
-            Console.WriteLine("Que tiene el perfil " + actualUser.getProfile().getName());
+            
             Boolean has = false;
-            if (actualUser.getName()=="admin") {
+            User au = getActualUser();
+            string actualuserName = au.getName() ;
+            
+            if (actualuserName=="admin") {
+                
                 has = true;
 
                }
             else {
-                Profile actual = actualUser.getProfile();
-                TablePermission tablePermissionActual = null;
-                Console.WriteLine("1er foreach");
-                foreach (TablePermission tp in actual.getTablePermissions())
-                {
-                    if (tp.getTableName().Equals(table))
-                    {
-                        tablePermissionActual = tp;
+              Console.WriteLine(actualuserName);
+              Console.WriteLine(actualUser.getProfile().getName());
+                Profile actualProfile = actualUser.getProfile();
 
+                TablePermission tp;
+                foreach (TablePermission TABPER in actualProfile.getTablePermissions()) {
+                    if (TABPER.getTableName()==table) {
+                        
+                        tp = TABPER;
+                        if (tp.hasPrivilege("SELECT")) {
+                            
+                            has = true;
+
+                        } ;
                     }
 
                 }
-                Console.WriteLine("2o foreach");
-                foreach (Privileges pri in tablePermissionActual.getPrivileges())
-                {
-                    Console.WriteLine(pri);
-                    if (pri.Equals("SELECT")) { has = true; }
-                }
+               //TablePermission tp = actualProfile.getTablePermissions().Find(t => t.getTableName() == table);
+               
+                //if (tp!=null) {
+
+                 //   Console.WriteLine();
+               // }
+
+                //if (tp.hasPrivilege()){ has = true; }
+                // Privileges p = tp.getPrivileges().Find(pr => pr == Privileges.SELECT);
+                //if (p != null) { has = true; }
+
+                
             }
-            Console.WriteLine("Va a devolver "+ has);
+            
 
             return has;
 
         }
-        public void setActualUser(string u) {
-            User aux = null;
-            Console.WriteLine("El actual user es "+ actualUser.getName());
-            Console.WriteLine("el nuevo user es " + u);
-            foreach (User us in users) {
-                if (us.getName().Equals(u)) {
-                    aux = us;
-                }
 
+
+        public User getActualUser() { return actualUser; }
+
+
+        public void setActualUser(string u) {
+
+            foreach (User user in users) {
+                Console.WriteLine(user.getName());
             }
-            Console.Write("El nuevo user es de verdfad : "+aux.getName());
+          
+
+            User aux = users.Find(us => us.getName().Equals(u));
+            
+           
             actualUser = aux;
 
 
         }
+
+
+
+
+
+
+
+
+
+
+
         //It saves each table from the list
         public void saveAllTables(Database d)
         {
@@ -250,9 +279,8 @@ namespace BrowseLib
         public string Select(string table, List<string> columns, string condition)
         {
             string select = "";
-            Console.WriteLine("Se va a ejecutar el select de la tabla " + table);
-            Console.WriteLine("Con el usuario " + actualUser.getName());
-            Console.WriteLine("Con el usuario " + actualUser.getProfile().getName());
+           
+            
             if (hasSelectPrivilege(table))
             {
 
@@ -394,10 +422,11 @@ namespace BrowseLib
                 }
 
                 return select;
-            }
+           }
             else {
-                select = "This user doesn´t have select privilege";
+                select = "This user does not have select privilege";
                 return select; }
+           
         }
 
         // Delete the tuples from the given table that satisfy the condition (only accept a condition of type) 
@@ -618,7 +647,6 @@ namespace BrowseLib
             Profile profile = new Profile(name);
             profiles.Add(profile);
             
-
             return "Profile created";
         }
         public string dropProfile(string name, Database db)
@@ -639,14 +667,14 @@ namespace BrowseLib
         public string addUser(string name, string pass, string prof)
         {
             
-            Profile aux = null;
+            
            
-            aux = profiles.Find(pr => pr.getName() == prof);
+            Profile aux = profiles.Find(pr => pr.getName() == prof);
           
             User u = new User(name, pass, aux);
             users.Add(u);
 
-
+            Console.WriteLine(users.Count());
 
             return "User added";
         }
@@ -669,8 +697,9 @@ namespace BrowseLib
         public string grant(string privilege, string table, string profile)
         {
             TablePermission tb = new TablePermission(table);
+            
             if (privilege.Equals("INSERT")) { tb.addPrivilege(Privileges.INSERT); }
-            else if (privilege.Equals("SELECT")) { tb.addPrivilege(Privileges.SELECT); }
+            else if (privilege.Equals("SELECT")) {  tb.addPrivilege(Privileges.SELECT); }
             else if (privilege.Equals("UPDATE")) { tb.addPrivilege(Privileges.UPDATE); }
             else if (privilege.Equals("DELETE")) { tb.addPrivilege(Privileges.DELETE); }
 

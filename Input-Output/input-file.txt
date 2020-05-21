@@ -24,5 +24,6 @@ Database1,Adolfo,1234
 Database1,Eva,123
 
 Database1,Eva,1234
+INSERT INTO EmployeesPublic VALUES ('Borja','Programming manager');
 SELECT Name,Age FROM EmployeesPersonal WHERE Age>17;
 SELECT Name,Role FROM EmployeesPublic;
