@@ -110,7 +110,7 @@ namespace UnitTests
             Assert.AreEqual(select, "{'Name','Age'} => {Ander,20}{Borja,21}");
         }
 
-        [TestMethod]
+       /* [TestMethod]
         public void ParseAndSelect()
         {
             Column clName = new Column("Name", "TEXT");
@@ -133,7 +133,7 @@ namespace UnitTests
             Assert.AreEqual("{'Name','Age'} => {Ander,20}{Borja,21}", result);
             string result2 = dbWork.ExecuteMiniSQLQuery("SELECT Name, Age FROM Person WHERE Age=20;");
             Assert.AreEqual("{'Name','Age'} => {Ander,20}", result2);
-        }
+        }*/
 
         [TestMethod]
         public void ParseAndInsert()
