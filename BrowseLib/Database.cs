@@ -43,6 +43,21 @@ namespace BrowseLib
 
 
         }
+        public Boolean hasPrivileges() { return false; }
+        public void setActualUser(string u) {
+            User aux = null;
+
+            foreach (User us in users) {
+                if (us.getName().Equals(u)) {
+                    aux = us;
+                }
+
+            }
+
+            actualUser = aux;
+
+
+        }
         //It saves each table from the list
         public void saveAllTables(Database d)
         {

@@ -24,7 +24,7 @@ namespace MiniSQLTest
             lines.Add("# TEST 1");
             int testNumber = 2;
             double sumTime = 0;
-            string createDatabasePattern = "(\\w+), (\\w+), (\\w+)";
+            string createDatabasePattern = "(\\w+),(\\w+),(\\w+)";
 
             line = inputFile.ReadLine();
             string output = "";
@@ -51,6 +51,8 @@ namespace MiniSQLTest
                     //if exists
                     if (br.Databases.Contains(br.Databases.Find(d => d.databaseName == databaseName)))
                     {
+                        Database dbaux = br.Databases.Find(d => d.databaseName == databaseName);
+                        dbaux.setActualUser(userName);
                         sw.Stop();
                         output = "Database opened " + sw.ElapsedMilliseconds + " ms";
                     }
@@ -60,6 +62,7 @@ namespace MiniSQLTest
                         db = new Database(databaseName, userName, profileName);
                         db.saveDatabase();
                         br.addDatabase(db);
+                        db.setActualUser(userName);
                         output = "Database created " + sw.ElapsedMilliseconds + " ms";
                     }
                     

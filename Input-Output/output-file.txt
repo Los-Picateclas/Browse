@@ -1,32 +1,37 @@
 # TEST 1
-Database created 0 ms
-Table created (9,8063 ms)
-Tuple added (3,422 ms)
-Profile created (0,4118 ms)
-User added (0,5406 ms)
-Privileges granted (1,8422 ms)
-Privileges revoked (0,6361 ms)
-User deleted (0,4873 ms)
-Profile droped (0,6137 ms)
-Tuple added (1,299 ms)
-Tuple added (1,9517 ms)
-Tuple(s) deleted (2,1737 ms)
-{'Name','Age'} => {Ramon,26}{Miren,26} (2,4776 ms)
-TOTAL TIME: 25,662ms
+Database created 6 ms
+Table created (42,7008 ms)
+Tuple added (3,925 ms)
+Tuple added (12,125 ms)
+Tuple added (1,5374 ms)
+Tuple(s) deleted (7,7572 ms)
+{'Name','Age'} => {Ramon,26}{Miren,22} (9,4339 ms)
+TOTAL TIME: 77,4793ms
 
 # TEST 2
-Database created 0 ms
-Table created (1,0028 ms)
-Tuple added (0,7741 ms)
-Tuple added (0,7422 ms)
-Tuple added (0,7198 ms)
-{'Name','Age'} => {Eva,18} (0,0317 ms)
-TOTAL TIME: 3,2706ms
+Database opened 0 ms
+{'Name','Age'} => {Ramon,26}{Miren,22} (0,1575 ms)
+{'Name','Age'} => {Miren,22} (0,0895 ms)
+ (0,0779 ms)
+Table created (1,3874 ms)
+Tuple added (0,9275 ms)
+Tuple added (0,7996 ms)
+Tuple added (0,7648 ms)
+Profile created (0,4821 ms)
+Privileges granted (6,5807 ms)
+Error (0,1579 ms)
+Error (0,0983 ms)
+TOTAL TIME: 11,5232ms
 
 # TEST 3
 Database opened 0 ms
-Table exists (0,2256 ms)
-Tuple added (0,9418 ms)
-Tuple added (0,7611 ms)
-Tuple added (0,8034 ms)
-{'Name','Age'} => {Eva,18} (0,0327 ms)
+TOTAL TIME: 0ms
+
+# TEST 4
+Database opened 0 ms
+TOTAL TIME: 0ms
+
+# TEST 5
+Database opened 0 ms
+{'Name','Age'} => {Ramon,26}{Miren,22} (0,0832 ms)
+{'Name','Role'} => {Eva,Programming manager} (0,0507 ms)
