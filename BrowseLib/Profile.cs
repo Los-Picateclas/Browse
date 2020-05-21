@@ -34,7 +34,7 @@ namespace BrowseLib
         public string getName() {
             return name;
         }
-
+        public List<TablePermission> getTablePermissions() { return tablePermissions; }
 
 
     }

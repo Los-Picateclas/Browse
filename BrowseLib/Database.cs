@@ -43,7 +43,39 @@ namespace BrowseLib
 
 
         }
-        public Boolean hasPrivileges() { return false; }
+        public Boolean hasSelectPrivilege(string table) {
+            Console.WriteLine("Se ha llmaado al metodo hasselectprivilege, con el susuario "+ actualUser.getName() );
+            Console.WriteLine("Que tiene el perfil " + actualUser.getProfile().getName());
+            Boolean has = false;
+            if (actualUser.getName()=="admin") {
+                has = true;
+
+               }
+            else {
+                Profile actual = actualUser.getProfile();
+                TablePermission tablePermissionActual = null;
+                Console.WriteLine("1er foreach");
+                foreach (TablePermission tp in actual.getTablePermissions())
+                {
+                    if (tp.getTableName().Equals(table))
+                    {
+                        tablePermissionActual = tp;
+
+                    }
+
+                }
+                Console.WriteLine("2o foreach");
+                foreach (Privileges pri in tablePermissionActual.getPrivileges())
+                {
+                    Console.WriteLine(pri);
+                    if (pri.Equals(Privileges.SELECT)) { has = true; }
+                }
+            }
+            Console.WriteLine("Va a devolver "+ has);
+
+            return has;
+
+        }
         public void setActualUser(string u) {
             User aux = null;
 
@@ -217,143 +249,151 @@ namespace BrowseLib
         public string Select(string table, List<string> columns, string condition)
         {
             string select = "";
-            string datos = "";
-            List<int> numCl = new List<int>();
-
-            char[] delimiterChars = { '<', '=', '>' };
-            string[] words = condition.Split(delimiterChars);
-
-            string columnName;
-            string postCon;
-            int postNum;
-            bool esNumero;
-            char symbol;
-            List<int> numCon = new List<int>();
-
-            if (condition.Contains('<'))
+            if (hasSelectPrivilege(table))
             {
-                symbol = '<';
-            }
-            else if (condition.Contains('='))
-            {
-                symbol = '=';
-            }
-            else
-            {
-                symbol = '>';
-            }
 
-            foreach (Table tb in tables)
-            {
-                if (table == tb.getName())
+                string datos = "";
+                List<int> numCl = new List<int>();
+
+                char[] delimiterChars = { '<', '=', '>' };
+                string[] words = condition.Split(delimiterChars);
+
+                string columnName;
+                string postCon;
+                int postNum;
+                bool esNumero;
+                char symbol;
+                List<int> numCon = new List<int>();
+
+                if (condition.Contains('<'))
                 {
-                    select = "{";
-                    foreach (string cName in columns)
+                    symbol = '<';
+                }
+                else if (condition.Contains('='))
+                {
+                    symbol = '=';
+                }
+                else
+                {
+                    symbol = '>';
+                }
+
+                foreach (Table tb in tables)
+                {
+                    if (table == tb.getName())
                     {
-                        foreach (Column cl in tb.columns)
+                        select = "{";
+                        foreach (string cName in columns)
                         {
-                            if (cName == cl.name)
+                            foreach (Column cl in tb.columns)
                             {
-                                if (condition != "")
+                                if (cName == cl.name)
                                 {
-                                    columnName = words[0];
-                                    postCon = words[1];
-                                    esNumero = int.TryParse(postCon, out postNum);
-                                    for (int i = 0; i < cl.getColumnSize(); i++)
+                                    if (condition != "")
                                     {
-                                        string name = cl.name;
-                                        if (name == columnName)
+                                        columnName = words[0];
+                                        postCon = words[1];
+                                        esNumero = int.TryParse(postCon, out postNum);
+                                        for (int i = 0; i < cl.getColumnSize(); i++)
                                         {
-                                            switch (symbol)
+                                            string name = cl.name;
+                                            if (name == columnName)
                                             {
-                                                case '<':
-                                                    {
-                                                        if (esNumero && Int32.Parse(cl.column[i]) < postNum)
+                                                switch (symbol)
+                                                {
+                                                    case '<':
                                                         {
-                                                            numCon.Add(i);
+                                                            if (esNumero && Int32.Parse(cl.column[i]) < postNum)
+                                                            {
+                                                                numCon.Add(i);
+                                                            }
                                                         }
-                                                    }
-                                                    break;
-                                                case '=':
-                                                    {
-                                                        if (esNumero && Int32.Parse(cl.column[i]) == postNum)
+                                                        break;
+                                                    case '=':
                                                         {
-                                                            numCon.Add(i);
+                                                            if (esNumero && Int32.Parse(cl.column[i]) == postNum)
+                                                            {
+                                                                numCon.Add(i);
+                                                            }
+                                                            else if (!esNumero && cl.column[i] == postCon)
+                                                            {
+                                                                numCon.Add(i);
+                                                            }
                                                         }
-                                                        else if (!esNumero && cl.column[i] == postCon)
+                                                        break;
+                                                    case '>':
                                                         {
-                                                            numCon.Add(i);
+                                                            if (esNumero && Int32.Parse(cl.column[i]) > postNum)
+                                                            {
+                                                                numCon.Add(i);
+                                                            }
                                                         }
-                                                    }
-                                                    break;
-                                                case '>':
-                                                    {
-                                                        if (esNumero && Int32.Parse(cl.column[i]) > postNum)
-                                                        {
-                                                            numCon.Add(i);
-                                                        }
-                                                    }
-                                                    break;
+                                                        break;
+                                                }
                                             }
+
                                         }
-                                        
-                                    }
-                                    if (numCl.Count() == 0)
-                                    {
-                                        numCl.Add(tb.columns.IndexOf(cl));
-                                        select += "'" + cName + "'";
+                                        if (numCl.Count() == 0)
+                                        {
+                                            numCl.Add(tb.columns.IndexOf(cl));
+                                            select += "'" + cName + "'";
+                                        }
+                                        else
+                                        {
+                                            numCl.Add(tb.columns.IndexOf(cl));
+                                            select += ",'" + cName + "'";
+                                        }
                                     }
                                     else
                                     {
-                                        numCl.Add(tb.columns.IndexOf(cl));
-                                        select += ",'" + cName + "'";
+                                        if (numCl.Count() == 0)
+                                        {
+                                            numCl.Add(tb.columns.IndexOf(cl));
+                                            select += "'" + cName + "'";
+                                        }
+                                        else
+                                        {
+                                            numCl.Add(tb.columns.IndexOf(cl));
+                                            select += ",'" + cName + "'";
+                                        }
                                     }
+
+                                }
+                            }
+                        }
+                        if (condition == "")
+                        {
+                            for (int i = 0; i < tb.columnSize() - 1; i++)
+                            {
+                                numCon.Add(i);
+                            }
+                        }
+                        select += "} => ";
+                        int columnLength = tb.columnSize() - 1;
+                        foreach (int j in numCon)
+                        {
+                            select += "{";
+                            foreach (int k in numCl)
+                            {
+                                if (k == 0)
+                                {
+                                    select += tb.selectColumn(k).column[j];
                                 }
                                 else
                                 {
-                                    if (numCl.Count() == 0)
-                                    {
-                                        numCl.Add(tb.columns.IndexOf(cl));
-                                        select += "'" + cName + "'";
-                                    }
-                                    else
-                                    {
-                                        numCl.Add(tb.columns.IndexOf(cl));
-                                        select += ",'" + cName + "'";
-                                    }
+                                    select += "," + tb.selectColumn(k).column[j];
                                 }
-
                             }
+                            select += "}";
                         }
-                    }
-                    if (condition == "")
-                    {
-                        for (int i = 0; i < tb.columnSize() - 1; i++)
-                        {
-                            numCon.Add(i);
-                        }
-                    }
-                    select += "} => ";
-                    int columnLength = tb.columnSize() - 1;
-                    foreach (int j in numCon)
-                    {
-                        select += "{";
-                        foreach (int k in numCl)
-                        {
-                            if (k == 0)
-                            {
-                                select += tb.selectColumn(k).column[j];
-                            }
-                            else
-                            {
-                                select += "," + tb.selectColumn(k).column[j];
-                            }
-                        }
-                        select += "}";
                     }
                 }
+
+                return select;
             }
-            return select;
+            else {
+                select = "This user doesn´t have select privilege";
+                return select; }
         }
 
         // Delete the tuples from the given table that satisfy the condition (only accept a condition of type) 

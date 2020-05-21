@@ -25,7 +25,7 @@ namespace BrowseLib
             return user;
 
         }
-
+        public Profile getProfile() { return profile; }
 
     }
 
