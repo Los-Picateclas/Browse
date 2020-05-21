@@ -22,7 +22,7 @@ namespace BrowseLib.MiniSQL
             const string createPattern = "CREATE TABLE (\\w+) \\(((\\w+) (\\w+),?\\s?)+\\);";
             const string createProfilePattern = "CREATE SECURITY PROFILE (\\w+);";
             const string dropProfilePattern = "DROP SECURITY PROFILE (\\w+);";
-            const string addUserPattern = "ADD USER \\((.+), (.+), (.+)\\);";
+            const string addUserPattern = "ADD USER \\((.+),(.+),(.+)\\);";
             const string deleteUserPattern = "DELETE USER (.+);";
             const string grantPattern = "GRANT (DELETE|INSERT|UPDATE|SELECT) ON (\\w+) TO (\\w+);";
             const string revokePattern = "REVOKE (DELETE|INSERT|UPDATE|SELECT) ON (\\w+) TO (\\w+);";

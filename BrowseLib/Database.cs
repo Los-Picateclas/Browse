@@ -68,7 +68,7 @@ namespace BrowseLib
                 foreach (Privileges pri in tablePermissionActual.getPrivileges())
                 {
                     Console.WriteLine(pri);
-                    if (pri.Equals(Privileges.SELECT)) { has = true; }
+                    if (pri.Equals("SELECT")) { has = true; }
                 }
             }
             Console.WriteLine("Va a devolver "+ has);
@@ -78,14 +78,15 @@ namespace BrowseLib
         }
         public void setActualUser(string u) {
             User aux = null;
-
+            Console.WriteLine("El actual user es "+ actualUser.getName());
+            Console.WriteLine("el nuevo user es " + u);
             foreach (User us in users) {
                 if (us.getName().Equals(u)) {
                     aux = us;
                 }
 
             }
-
+            Console.Write("El nuevo user es de verdfad : "+aux.getName());
             actualUser = aux;
 
 
@@ -249,6 +250,9 @@ namespace BrowseLib
         public string Select(string table, List<string> columns, string condition)
         {
             string select = "";
+            Console.WriteLine("Se va a ejecutar el select de la tabla " + table);
+            Console.WriteLine("Con el usuario " + actualUser.getName());
+            Console.WriteLine("Con el usuario " + actualUser.getProfile().getName());
             if (hasSelectPrivilege(table))
             {
 
@@ -634,15 +638,11 @@ namespace BrowseLib
         }
         public string addUser(string name, string pass, string prof)
         {
-           
+            
             Profile aux = null;
-            foreach (Profile pr in profiles)
-            {
-                if (prof.Equals(pr.getName()))
-                {
-                    aux = pr;
-                }
-            }
+           
+            aux = profiles.Find(pr => pr.getName() == prof);
+          
             User u = new User(name, pass, aux);
             users.Add(u);
 
