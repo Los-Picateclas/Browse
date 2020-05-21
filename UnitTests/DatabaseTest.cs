@@ -84,7 +84,7 @@ namespace UnitTests
             Assert.IsTrue(Directory.Exists("../../../BrowseProgram/test-db1"));
         }
 
-        [TestMethod]
+       /*[TestMethod]
         public void select()
         {
             Column clName = new Column("Name", "TEXT");
@@ -110,7 +110,7 @@ namespace UnitTests
             Assert.AreEqual(select, "{'Name','Age'} => {Ander,20}{Borja,21}");
         }
 
-       /* [TestMethod]
+        [TestMethod]
         public void ParseAndSelect()
         {
             Column clName = new Column("Name", "TEXT");
