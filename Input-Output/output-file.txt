@@ -1,27 +1,27 @@
 # TEST 1
-Database created 13 ms
-Table created (52,7368 ms)
-Tuple added (9,0456 ms)
-Tuple added (1,2831 ms)
-Tuple added (0,9558 ms)
-Tuple(s) deleted (10,2392 ms)
-{'Name','Age'} => {Ramon,26}{Miren,22} (8,3457 ms)
-TOTAL TIME: 82,6062ms
+Database created 10 ms
+Table created (25,7546 ms)
+Tuple added (3,1944 ms)
+Tuple added (0,5625 ms)
+Tuple added (0,3925 ms)
+Tuple(s) deleted (4,5746 ms)
+{'Name','Age'} => {Ramon,26}{Miren,22} (6,1438 ms)
+TOTAL TIME: 40,6224ms
 
 # TEST 2
 Database opened 0 ms
-{'Name','Age'} => {Ramon,26}{Miren,22} (0,0995 ms)
-{'Name','Age'} => {Miren,22} (0,0829 ms)
- (0,0641 ms)
-Table created (6,1346 ms)
-Tuple added (1,4119 ms)
-Tuple added (1,6029 ms)
-Tuple added (1,2348 ms)
-Profile created (6,7708 ms)
-Privileges granted (14,6531 ms)
-User added (1,4335 ms)
-User added (0,1386 ms)
-TOTAL TIME: 33,6267ms
+{'Name','Age'} => {Ramon,26}{Miren,22} (0,0764 ms)
+{'Name','Age'} => {Miren,22} (0,0425 ms)
+ (0,0224 ms)
+Table created (1,2777 ms)
+Tuple added (0,8559 ms)
+Tuple added (1,1144 ms)
+Tuple added (1,0983 ms)
+Profile created (0,6115 ms)
+Privileges granted (5,7992 ms)
+User added (1,1078 ms)
+User added (0,0407 ms)
+TOTAL TIME: 12,0468ms
 
 # TEST 3
 Database opened 0 ms
@@ -33,7 +33,7 @@ TOTAL TIME: 0ms
 
 # TEST 5
 Database opened 0 ms
-This user does not have insert privilege (0,1995 ms)
-Tuple added (8,0084 ms)
-This user does not have select privilege (0,1329 ms)
-This user does not have select privilege (0,1231 ms)
+This user does not have insert privilege (0,0494 ms)
+This user does not have insert privilege (2,7193 ms)
+This user does not have select privilege (0,0983 ms)
+This user does not have select privilege (0,0437 ms)

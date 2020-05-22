@@ -123,6 +123,36 @@ namespace BrowseLib
 
 
 
+        public Boolean hasUpdatePrivilege(string table)
+        {
+            Boolean has = false;
+            User au = getActualUser();
+            string actualuserName = au.getName();
+            if (actualuserName == "admin")
+            {
+                has = true;
+            }
+            else
+            {
+                Profile actualProfile = actualUser.getProfile();
+                TablePermission tp;
+                foreach (TablePermission TABPER in actualProfile.getTablePermissions())
+                {
+                    if (TABPER.getTableName() == table)
+                    {
+                        tp = TABPER;
+                        if (tp.hasPrivilege("UPDATE"))
+                        {
+                            has = true;
+                        };
+                    }
+                }
+            }
+            return has;
+        }
+
+
+
         public User getActualUser() { return actualUser; }
 
 
@@ -551,113 +581,119 @@ namespace BrowseLib
         // 'update' parameter must be the new value that we are setting 
         public string update(string table, string condition, string update, string targetColumn)
         {
-
-            char[] delimiterChars = { '<', '=', '>' };
-            string[] words = condition.Split(delimiterChars);
-
-            string column = words[0];
-            string postCon = words[1];
-            int postNum;
-            bool esNumero = int.TryParse(postCon, out postNum);
-            char symbol;
-
-            if (condition.Contains('<'))
-            {
-                symbol = '<';
-            }
-            else if (condition.Contains('='))
-            {
-                symbol = '=';
-            }
-            else
-            {
-                symbol = '>';
-            }
             string result = " ";
 
-            foreach (Table tb in tables)
-            {
-                if (table.Equals(tb.getName()))
+            if (hasUpdatePrivilege(table)) {
+                char[] delimiterChars = { '<', '=', '>' };
+                string[] words = condition.Split(delimiterChars);
+
+                string column = words[0];
+                string postCon = words[1];
+                int postNum;
+                bool esNumero = int.TryParse(postCon, out postNum);
+                char symbol;
+
+                if (condition.Contains('<'))
                 {
-                    foreach (Column searchColumn1 in tb.columns)
+                    symbol = '<';
+                }
+                else if (condition.Contains('='))
+                {
+                    symbol = '=';
+                }
+                else
+                {
+                    symbol = '>';
+                }
+
+
+                foreach (Table tb in tables)
+                {
+                    if (table.Equals(tb.getName()))
                     {
-                        if (column.Equals(searchColumn1.name))
+                        foreach (Column searchColumn1 in tb.columns)
                         {
-                            for (int i = 0; i < searchColumn1.getColumnSize(); i++)
+                            if (column.Equals(searchColumn1.name))
                             {
-                                switch (symbol)
+                                for (int i = 0; i < searchColumn1.getColumnSize(); i++)
                                 {
-                                    case '<':
-                                        {
-                                            if (esNumero && Int32.Parse(searchColumn1.column[i]) < postNum)
+                                    switch (symbol)
+                                    {
+                                        case '<':
                                             {
-                                                foreach (Column searchColumn2 in tb.columns)
+                                                if (esNumero && Int32.Parse(searchColumn1.column[i]) < postNum)
                                                 {
-                                                    if (searchColumn2.name.Equals(targetColumn))
+                                                    foreach (Column searchColumn2 in tb.columns)
                                                     {
-                                                        result = "{'" + searchColumn2.getTextFromColumn(i) + "'} => ";
-                                                        searchColumn2.updateColumn(i, update);
-                                                        result = result + "{'" + searchColumn2.getTextFromColumn(i) + "'}";
-                                                    }
+                                                        if (searchColumn2.name.Equals(targetColumn))
+                                                        {
+                                                            result = "{'" + searchColumn2.getTextFromColumn(i) + "'} => ";
+                                                            searchColumn2.updateColumn(i, update);
+                                                            result = result + "{'" + searchColumn2.getTextFromColumn(i) + "'}";
+                                                        }
 
+                                                    }
                                                 }
                                             }
-                                        }
-                                        break;
-                                    case '=':
-                                        {
-                                            if (esNumero && Int32.Parse(searchColumn1.column[i]) == postNum)
+                                            break;
+                                        case '=':
                                             {
-                                                foreach (Column searchColumn2 in tb.columns)
+                                                if (esNumero && Int32.Parse(searchColumn1.column[i]) == postNum)
                                                 {
-                                                    if (searchColumn2.name.Equals(targetColumn))
+                                                    foreach (Column searchColumn2 in tb.columns)
                                                     {
-                                                        result = "{'" + searchColumn2.getTextFromColumn(i) + "'} => ";
-                                                        searchColumn2.updateColumn(i, update);
-                                                        result = result + "{'" + searchColumn2.getTextFromColumn(i) + "'}";
-                                                    }
+                                                        if (searchColumn2.name.Equals(targetColumn))
+                                                        {
+                                                            result = "{'" + searchColumn2.getTextFromColumn(i) + "'} => ";
+                                                            searchColumn2.updateColumn(i, update);
+                                                            result = result + "{'" + searchColumn2.getTextFromColumn(i) + "'}";
+                                                        }
 
+                                                    }
+                                                }
+                                                else if (!esNumero && searchColumn1.column[i] == postCon)
+                                                {
+                                                    foreach (Column searchColumn2 in tb.columns)
+                                                    {
+                                                        if (searchColumn2.name.Equals(targetColumn))
+                                                        {
+                                                            result = "{'" + searchColumn2.getTextFromColumn(i) + "'} => ";
+                                                            searchColumn2.updateColumn(i, update);
+                                                            result = result + "{'" + searchColumn2.getTextFromColumn(i) + "'}";
+                                                        }
+
+                                                    }
                                                 }
                                             }
-                                            else if (!esNumero && searchColumn1.column[i] == postCon)
+                                            break;
+                                        case '>':
                                             {
-                                                foreach (Column searchColumn2 in tb.columns)
+                                                if (esNumero && Int32.Parse(searchColumn1.column[i]) > postNum)
                                                 {
-                                                    if (searchColumn2.name.Equals(targetColumn))
+                                                    foreach (Column searchColumn2 in tb.columns)
                                                     {
-                                                        result = "{'" + searchColumn2.getTextFromColumn(i) + "'} => ";
-                                                        searchColumn2.updateColumn(i, update);
-                                                        result = result + "{'" + searchColumn2.getTextFromColumn(i) + "'}";
-                                                    }
+                                                        if (searchColumn2.name.Equals(targetColumn))
+                                                        {
+                                                            result = "{'" + searchColumn2.getTextFromColumn(i) + "'} => ";
+                                                            searchColumn2.updateColumn(i, update);
+                                                            result = result + "{'" + searchColumn2.getTextFromColumn(i) + "'}";
+                                                        }
 
+                                                    }
                                                 }
                                             }
-                                        }
-                                        break;
-                                    case '>':
-                                        {
-                                            if (esNumero && Int32.Parse(searchColumn1.column[i]) > postNum)
-                                            {
-                                                foreach (Column searchColumn2 in tb.columns)
-                                                {
-                                                    if (searchColumn2.name.Equals(targetColumn))
-                                                    {
-                                                        result = "{'" + searchColumn2.getTextFromColumn(i) + "'} => ";
-                                                        searchColumn2.updateColumn(i, update);
-                                                        result = result + "{'" + searchColumn2.getTextFromColumn(i) + "'}";
-                                                    }
-
-                                                }
-                                            }
-                                        }
-                                        break;
+                                            break;
+                                    }
                                 }
                             }
                         }
                     }
                 }
+                return result; }
+            else {
+                result = "It does not have Update privilege";
+                return result;
             }
-            return result;
         }
         public string createTable(string table, List<String> columns, List<string> types, Database db)
         {

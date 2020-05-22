@@ -15,7 +15,7 @@ INSERT INTO EmployeesPublic VALUES ('Eva','Programming manager');
 INSERT INTO EmployeesPublic VALUES ('Ramon','Programmer');
 INSERT INTO EmployeesPublic VALUES ('Miren','Sales');
 CREATE SECURITY PROFILE Employee;
-GRANT INSERT ON EmployeesPublic TO Employee;
+GRANT UPDATE ON EmployeesPublic TO Employee;
 ADD USER ('Eva','1234',Employee);
 ADD USER ('Ramon','abcd',Employee);
 

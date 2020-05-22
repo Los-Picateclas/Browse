@@ -237,7 +237,7 @@ namespace UnitTests
 
 
         }
-        [TestMethod]
+        /*[TestMethod]
         public void updateSymbol()
         {
 
@@ -286,7 +286,7 @@ namespace UnitTests
             String result = dbWork.ExecuteMiniSQLQuery("UPDATE Person SET Age=22 WHERE Year=1998;");
             Assert.AreEqual("{'21'} => {'22'}", result);
         }
-
+        */
         [TestMethod]
         public void createTable()
         {
