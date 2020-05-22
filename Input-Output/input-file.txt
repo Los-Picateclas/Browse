@@ -15,7 +15,7 @@ INSERT INTO EmployeesPublic VALUES ('Eva','Programming manager');
 INSERT INTO EmployeesPublic VALUES ('Ramon','Programmer');
 INSERT INTO EmployeesPublic VALUES ('Miren','Sales');
 CREATE SECURITY PROFILE Employee;
-GRANT SELECT ON EmployeesPublic TO Employee;
+GRANT INSERT ON EmployeesPublic TO Employee;
 ADD USER ('Eva','1234',Employee);
 ADD USER ('Ramon','abcd',Employee);
 
@@ -24,6 +24,7 @@ Database1,Adolfo,1234
 Database1,Eva,123
 
 Database1,Eva,1234
+INSERT INTO EmployeesPersonal VALUES ('Borja','Programming manager');
 INSERT INTO EmployeesPublic VALUES ('Borja','Programming manager');
 SELECT Name,Age FROM EmployeesPersonal WHERE Age>17;
 SELECT Name,Role FROM EmployeesPublic;

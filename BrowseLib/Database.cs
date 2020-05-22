@@ -55,8 +55,7 @@ namespace BrowseLib
 
                }
             else {
-              Console.WriteLine(actualuserName);
-              Console.WriteLine(actualUser.getProfile().getName());
+             
                 Profile actualProfile = actualUser.getProfile();
 
                 TablePermission tp;
@@ -90,6 +89,38 @@ namespace BrowseLib
             return has;
 
         }
+
+
+
+
+        public Boolean hasInsertPrivilege(string table)
+        {
+            Boolean has = false;
+            User au = getActualUser();
+            string actualuserName = au.getName();
+           if (actualuserName == "admin")
+            {
+      has = true;
+               }
+            else
+            {
+                Profile actualProfile = actualUser.getProfile();
+                TablePermission tp;
+                foreach (TablePermission TABPER in actualProfile.getTablePermissions())
+                {
+                    if (TABPER.getTableName() == table)
+                    {
+                        tp = TABPER;
+                        if (tp.hasPrivilege("INSERT"))
+                        {
+                            has = true;
+                        };
+                    }
+                }
+               }
+            return has;
+        }
+
 
 
         public User getActualUser() { return actualUser; }
@@ -248,30 +279,35 @@ namespace BrowseLib
         public string insert(string tab, List<String> Col)
         {
             string result = "";
-            string datos = "";
-            foreach (Table tb in tables)
+            if (hasInsertPrivilege(tab))
             {
-                if (tab.Equals(tb.getName()))
+                string datos = "";
+                foreach (Table tb in tables)
                 {
-                    int i = 0;
-                    List<Column> columnsFromTb = tb.getColumns();
-                    foreach (Column c in columnsFromTb)
+                    if (tab.Equals(tb.getName()))
                     {
-                        c.insert(Col[i]);
-                        if (i == 0)
+                        int i = 0;
+                        List<Column> columnsFromTb = tb.getColumns();
+                        foreach (Column c in columnsFromTb)
                         {
-                            datos += Col[i];
+                            c.insert(Col[i]);
+                            if (i == 0)
+                            {
+                                datos += Col[i];
+                            }
+                            else
+                            {
+                                datos += "," + Col[i];
+                            }
+                            i++;
                         }
-                        else
-                        {
-                            datos += "," + Col[i];
-                        }
-                        i++;
                     }
+                    tb.save(tb, databaseName);
                 }
-                tb.save(tb, databaseName);
+                result = "Tuple added";
             }
-            result = "Tuple added";
+            else { result = "This user does not have insert privilege"; }
+           
 
             return result;
         }

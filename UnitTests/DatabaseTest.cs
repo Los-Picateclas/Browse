@@ -135,7 +135,7 @@ namespace UnitTests
             Assert.AreEqual("{'Name','Age'} => {Ander,20}", result2);
         }*/
 
-        [TestMethod]
+       /* [TestMethod]
         public void ParseAndInsert()
         {
             Column clName = new Column("Name", "TEXT");
@@ -156,7 +156,7 @@ namespace UnitTests
 
             string result = dbWork.ExecuteMiniSQLQuery("INSERT INTO Person VALUES (Unai, Foncea, 22);");
             Assert.AreEqual("Tuple added", result);
-        }
+        }*/
 
         [TestMethod]
         public void delete()
