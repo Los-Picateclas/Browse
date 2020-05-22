@@ -210,7 +210,7 @@ namespace UnitTests
             Assert.AreEqual("Tuple(s) deleted", result);
         }
 
-        [TestMethod]
+    /*    [TestMethod]
 
 
         public void updateSymbolEquals() {
@@ -237,7 +237,7 @@ namespace UnitTests
 
 
         }
-        /*[TestMethod]
+        [TestMethod]
         public void updateSymbol()
         {
 
