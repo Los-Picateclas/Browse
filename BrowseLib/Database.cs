@@ -153,6 +153,35 @@ namespace BrowseLib
 
 
 
+        public Boolean hasDeletePrivilege(string table)
+        {
+            Boolean has = false;
+            User au = getActualUser();
+            string actualuserName = au.getName();
+            if (actualuserName == "admin")
+            {
+                has = true;
+            }
+            else
+            {
+                Profile actualProfile = actualUser.getProfile();
+                TablePermission tp;
+                foreach (TablePermission TABPER in actualProfile.getTablePermissions())
+                {
+                    if (TABPER.getTableName() == table)
+                    {
+                        tp = TABPER;
+                        if (tp.hasPrivilege("DELETE"))
+                        {
+                            has = true;
+                        };
+                    }
+                }
+            }
+            return has;
+        }
+
+
         public User getActualUser() { return actualUser; }
 
 
@@ -498,82 +527,88 @@ namespace BrowseLib
         // Delete the tuples from the given table that satisfy the condition (only accept a condition of type) 
         public string delete(string table, string condition)
         {
-            char[] delimiterChars = { '<', '=', '>' };
-            string[] words = condition.Split(delimiterChars);
-
-            string column = words[0];
-            string postCon = words[1];
-            int postNum;
-            bool esNumero = int.TryParse(postCon, out postNum);
-            char symbol;
-
-            if (condition.Contains('<'))
-            {
-                symbol = '<';
-            }
-            else if (condition.Contains('='))
-            {
-                symbol = '=';
-            }
-            else
-            {
-                symbol = '>';
-            }
-
             string result = "";
-            foreach (Table tb in tables)
-            {
-                if (table.Equals(tb.getName()))
+            if (hasDeletePrivilege(table)) {
+                char[] delimiterChars = { '<', '=', '>' };
+                string[] words = condition.Split(delimiterChars);
+
+                string column = words[0];
+                string postCon = words[1];
+                int postNum;
+                bool esNumero = int.TryParse(postCon, out postNum);
+                char symbol;
+
+                if (condition.Contains('<'))
                 {
-                    foreach (Column c in tb.columns)
+                    symbol = '<';
+                }
+                else if (condition.Contains('='))
+                {
+                    symbol = '=';
+                }
+                else
+                {
+                    symbol = '>';
+                }
+
+
+                foreach (Table tb in tables)
+                {
+                    if (table.Equals(tb.getName()))
                     {
-                        if (column.Equals(c.name))
+                        foreach (Column c in tb.columns)
                         {
-                            for (int i = 0; i < c.getColumnSize(); i++)
+                            if (column.Equals(c.name))
                             {
-                                switch (symbol)
+                                for (int i = 0; i < c.getColumnSize(); i++)
                                 {
-                                    case '<':
-                                        {
-                                            if (esNumero && Int32.Parse(c.column[i]) < postNum)
+                                    switch (symbol)
+                                    {
+                                        case '<':
                                             {
-                                                tb.deleteTuple(i);
-                                                i = i - 1;
+                                                if (esNumero && Int32.Parse(c.column[i]) < postNum)
+                                                {
+                                                    tb.deleteTuple(i);
+                                                    i = i - 1;
+                                                }
                                             }
-                                        }
-                                        break;
-                                    case '=':
-                                        {
-                                            if (esNumero && Int32.Parse(c.column[i]) == postNum)
+                                            break;
+                                        case '=':
                                             {
-                                                tb.deleteTuple(i);
-                                                i = i - 1;
+                                                if (esNumero && Int32.Parse(c.column[i]) == postNum)
+                                                {
+                                                    tb.deleteTuple(i);
+                                                    i = i - 1;
+                                                }
+                                                else if (!esNumero && c.column[i] == postCon)
+                                                {
+                                                    tb.deleteTuple(i);
+                                                    i = i - 1;
+                                                }
                                             }
-                                            else if (!esNumero && c.column[i] == postCon)
+                                            break;
+                                        case '>':
                                             {
-                                                tb.deleteTuple(i);
-                                                i = i - 1;
+                                                if (esNumero && Int32.Parse(c.column[i]) > postNum)
+                                                {
+                                                    tb.deleteTuple(i);
+                                                    i = i - 1;
+                                                }
                                             }
-                                        }
-                                        break;
-                                    case '>':
-                                        {
-                                            if (esNumero && Int32.Parse(c.column[i]) > postNum)
-                                            {
-                                                tb.deleteTuple(i);
-                                                i = i - 1;
-                                            }
-                                        }
-                                        break;
+                                            break;
+                                    }
                                 }
                             }
                         }
                     }
+                    tb.save(tb, databaseName);
                 }
-                tb.save(tb, databaseName);
+                result = "Tuple(s) deleted";
+                return result; }
+            else {
+                result = "It does not have delete privilege";
+                return result;
             }
-            result = "Tuple(s) deleted";
-            return result;
         }
 
 

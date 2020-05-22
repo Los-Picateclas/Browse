@@ -158,7 +158,7 @@ namespace UnitTests
             Assert.AreEqual("Tuple added", result);
         }*/
 
-        [TestMethod]
+     /*   [TestMethod]
         public void delete()
         {
             Column clName = new Column("Name", "TEXT");
@@ -209,7 +209,7 @@ namespace UnitTests
             string result = dbWork.ExecuteMiniSQLQuery("DELETE FROM Person WHERE Age>20;");
             Assert.AreEqual("Tuple(s) deleted", result);
         }
-
+        */
     /*    [TestMethod]
 
 
