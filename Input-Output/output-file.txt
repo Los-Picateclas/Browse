@@ -1,0 +1,130 @@
+# TEST 1
+Database created 2 ms
+Table created (18,8002 ms)
+Table not found (6,4411 ms)
+Error (0,1627 ms)
+Tuple added (6,1236 ms)
+Tuple added (2,2116 ms)
+Tuple added (2,224 ms)
+Tuple(s) deleted (5,1668 ms)
+Table not found (2,2481 ms)
+{'Name','Age'} => {Ramon,26}{Miren,22} (0,9001 ms)
+TOTAL TIME: 44,2782ms
+
+# TEST 2
+Database opened 0 ms
+{'Name','Age'} => {Ramon,26}{Miren,22} (0,0302 ms)
+{'Name','Age'} => {Miren,22} (0,0448 ms)
+Table not found (0,0189 ms)
+Table created (2,9807 ms)
+Table created (5,9463 ms)
+Tuple added (4,533 ms)
+{'Name','Age'} => {Ramon,26}{Miren,22} (0,0439 ms)
+{'Name','Role'} => {Borja,Programming manager} (0,032 ms)
+{} => {} (0,0243 ms)
+Table not found (0,0149 ms)
+Table not found (5,2116 ms)
+Tuple added (7,0668 ms)
+Tuple added (4,6933 ms)
+Tuple added (4,4547 ms)
+Profile created (0,7616 ms)
+Privileges granted (3,106 ms)
+User added (1,113 ms)
+User added (0,0257 ms)
+TOTAL TIME: 40,1017ms
+
+# TEST 3
+Database opened 0 ms
+TOTAL TIME: 0ms
+
+# TEST 4
+Database opened 0 ms
+TOTAL TIME: 0ms
+
+# TEST 5
+Database opened 0 ms
+This user does not have select privilege (0,4839 ms)
+{'Name','Role'} => {Eva,Programming manager} (2,5594 ms)
+Error (0,1701 ms)
+Error (0,0317 ms)
+Error (0,1492 ms)
+TOTAL TIME: 3,3943ms
+
+# TEST 6
+Database opened 0 ms
+Privileges granted (0,0596 ms)
+TOTAL TIME: 0,0596ms
+
+# TEST 7
+Database opened 0 ms
+This user does not have select privilege (0,0293 ms)
+{'Name','Role'} => {Eva,Programming manager} (0,0367 ms)
+Error (0,1379 ms)
+Error (0,0336 ms)
+Error (0,1096 ms)
+This user does not have insert privilege (0,0284 ms)
+TOTAL TIME: 0,3755ms
+
+# TEST 8
+Database opened 0 ms
+Privileges granted (0,0423 ms)
+TOTAL TIME: 0,0423ms
+
+# TEST 9
+Database opened 0 ms
+This user does not have select privilege (0,0256 ms)
+{'Name','Role'} => {Eva,Programming manager} (0,034 ms)
+Error (0,0907 ms)
+Tuple added (5,0472 ms)
+{'Name','Role'} => {Eva,Programming manager} (0,0379 ms)
+Error (0,0221 ms)
+TOTAL TIME: 5,2575ms
+
+# TEST 10
+Database opened 0 ms
+Privileges granted (0,0343 ms)
+TOTAL TIME: 0,0343ms
+
+# TEST 11
+Database opened 0 ms
+{'Name','Role'} => {Eva,Programming manager} (0,0555 ms)
+Error (0,0354 ms)
+{'Name','Role'} => {Eva,Programming manager} (0,0485 ms)
+TOTAL TIME: 0,1394ms
+
+# TEST 12
+Database opened 0 ms
+Privileges revoked (3,559 ms)
+Privileges revoked (0,0303 ms)
+TOTAL TIME: 3,5893ms
+
+# TEST 13
+Database opened 0 ms
+Tuple added (13,4314 ms)
+Error (0,0231 ms)
+TOTAL TIME: 13,4545ms
+
+# TEST 14
+Database opened 0 ms
+User deleted (0,856 ms)
+TOTAL TIME: 0,856ms
+
+# TEST 15
+Database opened 0 ms
+TOTAL TIME: 0ms
+
+# TEST 16
+Database opened 0 ms
+Tuple added (12,4872 ms)
+Error (0,0548 ms)
+TOTAL TIME: 12,542ms
+
+# TEST 17
+Database opened 0 ms
+Profile droped (0,8281 ms)
+TOTAL TIME: 0,8281ms
+
+# TEST 18
+Database opened 0 ms
+Tuple added (11,7575 ms)
+Error (0,0513 ms)
