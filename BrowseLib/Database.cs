@@ -381,7 +381,7 @@ namespace BrowseLib
 
                 char[] delimiterChars = { '<', '=', '>' };
                 string[] words = condition.Split(delimiterChars);
-
+                bool tableFound = false;
                 string columnName;
                 string postCon;
                 int postNum;
@@ -406,6 +406,7 @@ namespace BrowseLib
                 {
                     if (table == tb.getName())
                     {
+                         tableFound = true;
                         select = "{";
                         foreach (string cName in columns)
                         {
@@ -511,10 +512,23 @@ namespace BrowseLib
                             select += "}";
                         }
                     }
+
+
+
                     
                 }
+                if (tableFound)
+                {
+                    return select;
+                }
+                else
+                {
 
-                return select;
+                    select = "Table not found";
+                    return select;
+                }
+
+                
            }
             else {
                 select = "This user does not have select privilege";
