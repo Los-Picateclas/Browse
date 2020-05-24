@@ -379,8 +379,6 @@ namespace BrowseLib
             
             if (hasSelectPrivilege(table))
             {
-
-                string datos = "";
                 List<int> numCl = new List<int>();
 
                 char[] delimiterChars = { '<', '=', '>' };

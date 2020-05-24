@@ -1,7 +1,6 @@
 TEXT, TEXT
 Name, Role
 
-Eva, Programming manager, 
 Ramon, Programmer, 
 Miren, Sales, 
 Maite, Human Resources, 

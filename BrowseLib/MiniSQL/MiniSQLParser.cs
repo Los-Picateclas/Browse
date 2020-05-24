@@ -11,10 +11,10 @@ namespace BrowseLib.MiniSQL
     {
         public static MiniSQLQuery Parse(string miniSQLQuery)
         {
-            const string selectPattern = "SELECT ([\\w,\\s]+) FROM (\\w+)[\\sWHERE\\s]*([\\w=<>]+)?\\s?;";
+            const string selectPattern = "SELECT ([\\w,\\s]+) FROM (\\w+)[\\sWHERE\\s]*(.+)?\\s?;";
             //const string insertPattern = "INSERT INTO (\\w+) VALUES \\(([\\w,\\s]+)\\)\\s?;";
             const string insertPattern = "INSERT INTO (\\w+) VALUES \\((.+)\\);";
-            const string deletePattern = "DELETE FROM (\\w+) WHERE (\\w+\\s?[=<>]\\s?\\d+);";
+            const string deletePattern = "DELETE FROM (\\w+) WHERE (.+);";
             const string dropPattern = "DROP TABLE (\\w+);";
             const string updatePattern = "UPDATE (\\w+) SET (\\w+)=(\\w+) WHERE (\\w+\\s?[=<>]\\s?\\d+);";
             //const string createPattern = "CREATE TABLE (\\w+)\\s+\\((\\w+)\\s+(INT|DOUBLE|TEXT)(\\,\\s+(\\w+)\\s+(INT|DOUBLE|TEXT))+\\);";
@@ -33,7 +33,7 @@ namespace BrowseLib.MiniSQL
             {
                 List<string> columnNames = CommaSeparatedNames(match.Groups[1].Value);
                 string table = match.Groups[2].Value;
-                string condition = match.Groups[3].Value;
+                string condition = RemoveQuotesCondition(match.Groups[3].Value);
                 return new Select(table, columnNames, condition);
             }
 
@@ -54,7 +54,7 @@ namespace BrowseLib.MiniSQL
                 string table = match.Groups[1].Value;
                 string targetColumn = match.Groups[2].Value;
                 string update = match.Groups[3].Value;
-                string condition = match.Groups[4].Value;
+                string condition = RemoveQuotesCondition(match.Groups[4].Value);
                 return new Update(table, condition, update, targetColumn);
             }
 
@@ -63,7 +63,7 @@ namespace BrowseLib.MiniSQL
             if (match.Success)
             {
                 string table = match.Groups[1].Value;
-                string condition = match.Groups[2].Value;
+                string condition = RemoveQuotesCondition(match.Groups[2].Value);
                 return new Delete(table, condition);
             }
 
@@ -179,7 +179,10 @@ namespace BrowseLib.MiniSQL
             return names;
         }
 
-
+        static string RemoveQuotesCondition(string conditionQuoted)
+        {
+            return conditionQuoted.Replace("\'", String.Empty);
+        }
 
 
     }
