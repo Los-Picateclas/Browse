@@ -333,6 +333,7 @@ namespace BrowseLib
         public string insert(string tab, List<String> Col)
         {
             string result = "";
+            bool tableFound = false;
             if (hasInsertPrivilege(tab))
             {
                 string datos = "";
@@ -340,6 +341,7 @@ namespace BrowseLib
                 {
                     if (tab.Equals(tb.getName()))
                     {
+                        tableFound = true;
                         int i = 0;
                         List<Column> columnsFromTb = tb.getColumns();
                         foreach (Column c in columnsFromTb)
@@ -360,6 +362,8 @@ namespace BrowseLib
                    
                     tb.save(tb, databaseName);
                 }
+                if (tableFound) { }
+                else { result = "Table not found"; }
                 
             }
             else { result = "This user does not have insert privilege"; }
@@ -653,7 +657,7 @@ namespace BrowseLib
         public string update(string table, string condition, string update, string targetColumn)
         {
             string result = " ";
-
+            bool tableFound = false;
             if (hasUpdatePrivilege(table)) {
                 char[] delimiterChars = { '<', '=', '>' };
                 string[] words = condition.Split(delimiterChars);
@@ -682,6 +686,7 @@ namespace BrowseLib
                 {
                     if (table.Equals(tb.getName()))
                     {
+                        tableFound = true;
                         foreach (Column searchColumn1 in tb.columns)
                         {
                             if (column.Equals(searchColumn1.name))
@@ -765,7 +770,13 @@ namespace BrowseLib
 
 
                 }
-                return result; }
+                if (tableFound) { return result; }
+
+
+                else{ result = "Table not found";
+
+                    return result;
+                } }
             else {
                 result = "It does not have Update privilege";
                 return result;

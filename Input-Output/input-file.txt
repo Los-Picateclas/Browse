@@ -1,6 +1,7 @@
 Database1,admin,admin
 CREATE TABLE EmployeesPersonal (Name TEXT,Age INT,Address TEXT);
 SELECT Name,Age FROM EmplodfsdsfyeesPersonal WHERE Age<23;
+INSERT INTO gfdgf VALUES ('Eva',18,'Calle Los Herran 16 2 Derecha. 01005
 INSERT INTO EmployeesPersonal VALUES ('Eva',18,'Calle Los Herran 16 2 Derecha. 01005 Vitoria-Gasteiz');
 INSERT INTO EmployeesPersonal VALUES ('Ramon',26,'Larratxo kalea 23 2. Ezk. 20012 Donostia');
 INSERT INTO EmployeesPersonal VALUES ('Miren',22,'Larratxo kalea 23 2. Ezk. 20012 Donostia');
