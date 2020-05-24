@@ -26,6 +26,7 @@ namespace BrowseLib
 
         }
         public Profile getProfile() { return profile; }
+        public string getPassword() { return password; }
 
     }
 

@@ -187,12 +187,7 @@ namespace BrowseLib
 
         public void setActualUser(string u) {
 
-            foreach (User user in users) {
-                Console.WriteLine(user.getName());
-            }
-          
-
-            User aux = users.Find(us => us.getName().Equals(u));
+           User aux = users.Find(us => us.getName().Equals(u));
             
            
             actualUser = aux;
@@ -360,10 +355,12 @@ namespace BrowseLib
                             }
                             i++;
                         }
+                        result = "Tuple added";
                     }
+                   
                     tb.save(tb, databaseName);
                 }
-                result = "Tuple added";
+                
             }
             else { result = "This user does not have insert privilege"; }
            
@@ -514,6 +511,7 @@ namespace BrowseLib
                             select += "}";
                         }
                     }
+                    
                 }
 
                 return select;
@@ -527,11 +525,12 @@ namespace BrowseLib
         // Delete the tuples from the given table that satisfy the condition (only accept a condition of type) 
         public string delete(string table, string condition)
         {
+           
             string result = "";
             if (hasDeletePrivilege(table)) {
                 char[] delimiterChars = { '<', '=', '>' };
                 string[] words = condition.Split(delimiterChars);
-
+                bool tableFound = false;
                 string column = words[0];
                 string postCon = words[1];
                 int postNum;
@@ -550,12 +549,15 @@ namespace BrowseLib
                 {
                     symbol = '>';
                 }
-
+               
 
                 foreach (Table tb in tables)
                 {
                     if (table.Equals(tb.getName()))
                     {
+                        
+                        tableFound = true;
+
                         foreach (Column c in tb.columns)
                         {
                             if (column.Equals(c.name))
@@ -601,17 +603,37 @@ namespace BrowseLib
                             }
                         }
                     }
+                    
                     tb.save(tb, databaseName);
                 }
-                result = "Tuple(s) deleted";
-                return result; }
+
+                if (tableFound) {
+                    result = "Tuple(s) deleted";
+                    return result;
+                }
+                else
+                {
+                    
+                    result = "Table not found";
+                    return result;
+                }
+              
+            
+            }
             else {
                 result = "It does not have delete privilege";
                 return result;
             }
         }
 
+        public Boolean checkPassword(string us, string pass)
+        {
+            Boolean userExists = false;
+            User user = users.Find(u => u.getName() == us);
+            if (user.getPassword() == pass) { userExists = true; }
 
+            return userExists;
+        }
         //'targetColumn' must be the column where you want to make changes
         // 'update' parameter must be the new value that we are setting 
         public string update(string table, string condition, string update, string targetColumn)
@@ -723,6 +745,11 @@ namespace BrowseLib
                             }
                         }
                     }
+                   
+
+                    
+
+
                 }
                 return result; }
             else {
@@ -781,7 +808,7 @@ namespace BrowseLib
             User u = new User(name, pass, aux);
             users.Add(u);
 
-            Console.WriteLine(users.Count());
+          
 
             return "User added";
         }
@@ -832,10 +859,10 @@ namespace BrowseLib
             profiles.Remove(toDelete);
 
             TablePermission tb = new TablePermission(table);
-            if (privilege.Equals("INSERT")) { tb.addPrivilege(Privileges.INSERT); }
-            else if (privilege.Equals("SELECT")) { tb.addPrivilege(Privileges.SELECT); }
-            else if (privilege.Equals("UPDATE")) { tb.addPrivilege(Privileges.UPDATE); }
-            else if (privilege.Equals("DELETE")) { tb.addPrivilege(Privileges.DELETE); }
+            if (privilege.Equals("INSERT")) { tb.removePrivilege(Privileges.INSERT); }
+            else if (privilege.Equals("SELECT")) { tb.removePrivilege(Privileges.SELECT); }
+            else if (privilege.Equals("UPDATE")) { tb.removePrivilege(Privileges.UPDATE); }
+            else if (privilege.Equals("DELETE")) { tb.removePrivilege(Privileges.DELETE); }
             
             if (aux != null) { 
             aux.removePrivilege(tb);

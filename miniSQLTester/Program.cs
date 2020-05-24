@@ -46,21 +46,24 @@ namespace MiniSQLTest
                     sw.Start();
                     string databaseName = match.Groups[1].Value;
                     string userName = match.Groups[2].Value;
-                    string profileName = match.Groups[3].Value;
+                    string password = match.Groups[3].Value;
 
                     //if exists
                     if (br.Databases.Contains(br.Databases.Find(d => d.databaseName == databaseName)))
                     {
                        Database dbaux = br.Databases.Find(d => d.databaseName == databaseName);
                         dbaux.setActualUser(userName);
+                        
+                           
+
+                            sw.Stop();
+                            output = "Database opened " + sw.ElapsedMilliseconds + " ms";
+                        }
                        
-                        sw.Stop();
-                        output = "Database opened " + sw.ElapsedMilliseconds + " ms";
-                    }
                     //if it doesnt exists
                     else
                     {
-                        db = new Database(databaseName, userName, profileName);
+                        db = new Database(databaseName, userName, password);
                         db.saveDatabase();
                         br.addDatabase(db);
                         db.setActualUser(userName);

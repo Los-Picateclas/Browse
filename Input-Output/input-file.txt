@@ -4,18 +4,26 @@ INSERT INTO EmployeesPersonal VALUES ('Eva',18,'Calle Los Herran 16 2 Derecha. 0
 INSERT INTO EmployeesPersonal VALUES ('Ramon',26,'Larratxo kalea 23 2. Ezk. 20012 Donostia');
 INSERT INTO EmployeesPersonal VALUES ('Miren',22,'Larratxo kalea 23 2. Ezk. 20012 Donostia');
 DELETE FROM EmployeesPersonal WHERE Age=18;
+DELETE FROM sdfdsdf WHERE Age=18;
 SELECT Name,Age FROM EmployeesPersonal;
 
 Database1,admin,admin
 SELECT Name,Age FROM EmployeesPersonal WHERE Age>17;
 SELECT Name,Age FROM EmployeesPersonal WHERE Age<23;
-SELECT Name,Role FROM EmployeesPublic;
-CREATE TABLE EmployeesPublic (Name TEXT,Role TEXT);
-INSERT INTO EmployeesPublic VALUES ('Eva','Programming manager');
-INSERT INTO EmployeesPublic VALUES ('Ramon','Programmer');
-INSERT INTO EmployeesPublic VALUES ('Miren','Sales');
+SELECT Name,Role FROM Employees_Public;
+CREATE TABLE Employees_Public (Name TEXT,Role TEXT);
+CREATE TABLE Hola (Name TEXT,Role TEXT);
+INSERT INTO Hola VALUES ('Borja','Programming manager');
+SELECT Name,Age FROM EmployeesPersonal WHERE Age>17;
+SELECT Name,Role FROM Hola;
+SELECT ss,d FROM Hola;
+SELECT Name,Role FROM HOLAAAA;
+INSERT INTO HOLAAAAA VALUES ('Eva','Programming manager');
+INSERT INTO Employees_Public VALUES ('Eva','Programming manager');
+INSERT INTO Employees_Public VALUES ('Ramon','Programmer');
+INSERT INTO Employees_Public VALUES ('Miren','Sales');
 CREATE SECURITY PROFILE Employee;
-GRANT UPDATE ON EmployeesPublic TO Employee;
+GRANT SELECT ON Employees_Public TO Employee;
 ADD USER ('Eva','1234',Employee);
 ADD USER ('Ramon','abcd',Employee);
 
@@ -24,7 +32,62 @@ Database1,Adolfo,1234
 Database1,Eva,123
 
 Database1,Eva,1234
-INSERT INTO EmployeesPersonal VALUES ('Borja','Programming manager');
-INSERT INTO EmployeesPublic VALUES ('Borja','Programming manager');
-SELECT Name,Age FROM EmployeesPersonal WHERE Age>17;
-SELECT Name,Role FROM EmployeesPublic;
+SELECT Name,Age FROM Employees_Personal WHERE Age>17;
+SELECT Name,Role FROM Employees_Public;
+SELECT Role FROM Employees_Public WHERE Name='Eva';
+DELETE FROM Employees_Public WHERE Name='Eva';
+SELECT Role FROM Employees_Public WHERE Name='Eva';
+
+Database1,admin,admin
+GRANT DELETE ON Employees_Public TO Employee;
+
+Database1,Eva,1234
+SELECT Name,Age FROM Employees_Personal WHERE Age>17;
+SELECT Name,Role FROM Employees_Public;
+SELECT Role FROM Employees_Public WHERE Name='Eva';
+DELETE FROM Employees_Public WHERE Name='Eva';
+SELECT Role FROM Employees_Public WHERE Name='Eva';
+INSERT INTO Employees_Public VALUES ('Maite','Human Resources');
+
+Database1,admin,admin
+GRANT INSERT ON Employees_Public TO Employee;
+
+Database1,Eva,1234
+SELECT Name,Age FROM Employees_Personal WHERE Age>17;
+SELECT Name,Role FROM Employees_Public;
+SELECT Role FROM Employees_Public WHERE Name='Eva';
+INSERT INTO Employees_Public VALUES ('Maite','Human Resources');
+SELECT Name,Role FROM Employees_Public;
+UPDATE Employees_Public SET Role='Human Resources' WHERE Name='Ramon';
+
+Database1,admin,admin
+GRANT UPDATE ON Employees_Public TO Employee;
+
+Database1,Eva,1234
+SELECT Name,Role FROM Employees_Public;
+UPDATE Employees_Public SET Role='Human Resources' WHERE Name='Ramon';
+SELECT Name,Role FROM Employees_Public;
+
+Database1,admin,admin
+REVOKE UPDATE ON Employees_Public TO Employee;
+REVOKE INSERT ON Employees_Public TO Employee;
+
+Database1,Eva,1234
+INSERT INTO Employees_Public VALUES ('Patxi','Programmer');
+UPDATE Employees_Public SET Role='Programmer' WHERE Name='Ramon';
+
+Database1,admin,admin
+DELETE USER Eva;
+
+Database1,Eva,1234
+
+Database1,Ramon,abcd
+INSERT INTO Employees_Public VALUES ('Patxi','Programmer');
+UPDATE Employees_Public SET Role='Programmer' WHERE Name='Ramon';
+
+Database1,admin,admin
+DELETE DROP SECURITY PROFILE Employee;
+
+Database1,Ramon,abcd
+INSERT INTO Employees_Public VALUES ('Patxi','Programmer');
+UPDATE Employees_Public SET Role='Programmer' WHERE Name='Ramon';
