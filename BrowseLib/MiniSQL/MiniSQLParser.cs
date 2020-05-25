@@ -11,7 +11,7 @@ namespace BrowseLib.MiniSQL
     {
         public static MiniSQLQuery Parse(string miniSQLQuery)
         {
-            const string selectPattern = "SELECT ([\\w,\\s]+) FROM (\\w+)[\\sWHERE\\s]*(.+)?\\s?;";
+            const string selectPattern = "SELECT ([\\w,\\*\\s]+) FROM (\\w+)[\\sWHERE\\s]*(.+)?\\s?;";
             //const string insertPattern = "INSERT INTO (\\w+) VALUES \\(([\\w,\\s]+)\\)\\s?;";
             const string insertPattern = "INSERT INTO (\\w+) VALUES \\((.+)\\);";
             const string deletePattern = "DELETE FROM (\\w+) WHERE (.+);";

@@ -84,6 +84,7 @@ DELETE USER Eva;
 Database1,Eva,1234
 
 Database1,Ramon,abcd
+SELECT * FROM Employees_Public
 INSERT INTO Employees_Public VALUES ('Patxi','Programmer');
 UPDATE Employees_Public SET Role='Programmer' WHERE Name='Ramon';
 
@@ -91,5 +92,6 @@ Database1,admin,admin
 DELETE DROP SECURITY PROFILE Employee;
 
 Database1,Ramon,abcd
+SELECT * FROM Employees_Public
 INSERT INTO Employees_Public VALUES ('Patxi','Programmer');
 UPDATE Employees_Public SET Role='Programmer' WHERE Name='Ramon';

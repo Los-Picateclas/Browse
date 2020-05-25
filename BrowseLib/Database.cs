@@ -384,12 +384,19 @@ namespace BrowseLib
                 char[] delimiterChars = { '<', '=', '>' };
                 string[] words = condition.Split(delimiterChars);
                 bool tableFound = false;
-                string columnName;
-                string postCon;
-                int postNum;
-                bool esNumero;
+                string columnName = "";
+                string postCon = "";
+                int postNum = 0;
+                bool esNumero = false;
                 char symbol;
                 List<int> numCon = new List<int>();
+
+                if (condition != "")
+                {
+                    columnName = words[0];
+                    postCon = words[1];
+                    esNumero = int.TryParse(postCon, out postNum);
+                }
 
                 if (condition.Contains('<'))
                 {
@@ -408,19 +415,24 @@ namespace BrowseLib
                 {
                     if (table == tb.getName())
                     {
-                         tableFound = true;
+                        tableFound = true;
+                        if (columns.Contains("*"))
+                        {
+                            columns.Clear();
+                            foreach (Column c in tb.columns)
+                            {
+                                columns.Add(c.name);
+                            }
+                        }
                         select = "{";
                         foreach (string cName in columns)
                         {
                             foreach (Column cl in tb.columns)
                             {
-                                if (cName == cl.name)
+                                if (cName == cl.name || (!columns.Contains(columnName) && columnName == cl.name))
                                 {
                                     if (condition != "")
                                     {
-                                        columnName = words[0];
-                                        postCon = words[1];
-                                        esNumero = int.TryParse(postCon, out postNum);
                                         for (int i = 0; i < cl.getColumnSize(); i++)
                                         {
                                             string name = cl.name;
@@ -460,12 +472,12 @@ namespace BrowseLib
                                             }
 
                                         }
-                                        if (numCl.Count() == 0)
+                                        if (numCl.Count() == 0 && cName == cl.name)
                                         {
                                             numCl.Add(tb.columns.IndexOf(cl));
                                             select += "'" + cName + "'";
                                         }
-                                        else
+                                        else if (cName == cl.name)
                                         {
                                             numCl.Add(tb.columns.IndexOf(cl));
                                             select += ",'" + cName + "'";
@@ -490,7 +502,7 @@ namespace BrowseLib
                         }
                         if (condition == "")
                         {
-                            for (int i = 0; i < tb.columnSize() - 1; i++)
+                            for (int i = 0; i < tb.columns[0].column.Count(); i++)
                             {
                                 numCon.Add(i);
                             }
@@ -502,7 +514,7 @@ namespace BrowseLib
                             select += "{";
                             foreach (int k in numCl)
                             {
-                                if (k == 0)
+                                if (numCl.IndexOf(k) == 0)
                                 {
                                     select += tb.selectColumn(k).column[j];
                                 }
