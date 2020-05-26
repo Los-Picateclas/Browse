@@ -9,10 +9,6 @@ namespace BrowseLib
         private string user, password;
         private Profile profile;
 
-
-
-
-
         public User(string name, string pass, Profile prof)
         {
             user = name;

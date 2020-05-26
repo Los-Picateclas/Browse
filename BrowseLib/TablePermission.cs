@@ -9,8 +9,6 @@ namespace BrowseLib
         private string table;
         private List<Privileges> privileges;
 
-
-
         public TablePermission(string tbname)
         {
             table = tbname;
@@ -29,9 +27,6 @@ namespace BrowseLib
             privileges.Remove(p);
         }
         public List<Privileges> getPrivileges() { return privileges; }
-
-
-
 
 
         public Boolean hasPrivilege(string P)
@@ -63,11 +58,6 @@ namespace BrowseLib
             else { return false; }
             
         }
-
-
-
-
-
 
         public Boolean samePrivileges(TablePermission tp) {
             Boolean samePrivileges = true;

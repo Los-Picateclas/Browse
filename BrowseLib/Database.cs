@@ -90,9 +90,6 @@ namespace BrowseLib
 
         }
 
-
-
-
         public Boolean hasInsertPrivilege(string table)
         {
             Boolean has = false;
@@ -194,16 +191,12 @@ namespace BrowseLib
 
 
         }
-
-
-
-
-
-
-
-
-
-
+        /*
+        public Database getDatabase()
+        {
+            //return Database;
+        }
+        */
 
         //It saves each table from the list
         public void saveAllTables(Database d)
