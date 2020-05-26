@@ -1,7 +1,7 @@
 Database1,admin,admin
 CREATE TABLE EmployeesPersonal (Name TEXT,Age INT,Address TEXT);
 SELECT Name,Age FROM EmplodfsdsfyeesPersonal WHERE Age<23;
-INSERT INTO gfdgf VALUES ('Eva',18,'Calle Los Herran 16 2 Derecha. 01005
+INSERT INTO gfdgf VALUES ('Eva',18,'Calle Los Herran 16 2 Derecha. 01005');
 INSERT INTO EmployeesPersonal VALUES ('Eva',18,'Calle Los Herran 16 2 Derecha. 01005 Vitoria-Gasteiz');
 INSERT INTO EmployeesPersonal VALUES ('Ramon',26,'Larratxo kalea 23 2. Ezk. 20012 Donostia');
 INSERT INTO EmployeesPersonal VALUES ('Miren',22,'Larratxo kalea 23 2. Ezk. 20012 Donostia');
@@ -84,7 +84,7 @@ DELETE USER Eva;
 Database1,Eva,1234
 
 Database1,Ramon,abcd
-SELECT * FROM Employees_Public
+SELECT * FROM Employees_Public;
 INSERT INTO Employees_Public VALUES ('Patxi','Programmer');
 UPDATE Employees_Public SET Role='Programmer' WHERE Name='Ramon';
 
@@ -92,6 +92,6 @@ Database1,admin,admin
 DELETE DROP SECURITY PROFILE Employee;
 
 Database1,Ramon,abcd
-SELECT * FROM Employees_Public
+SELECT * FROM Employees_Public;
 INSERT INTO Employees_Public VALUES ('Patxi','Programmer');
 UPDATE Employees_Public SET Role='Programmer' WHERE Name='Ramon';

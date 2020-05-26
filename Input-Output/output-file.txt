@@ -1,37 +1,37 @@
 # TEST 1
 Database created 2 ms
-Table created (16,2817 ms)
-Table not found (5,4443 ms)
-Error (0,2324 ms)
-Tuple added (5,1857 ms)
-Tuple added (1,6262 ms)
-Tuple added (1,6846 ms)
-Tuple(s) deleted (3,6639 ms)
-Table not found (1,3337 ms)
-{'Name','Age'} => {Ramon,26}{Miren,22} (1,101 ms)
-TOTAL TIME: 36,5535ms
+Table created (17,2978 ms)
+Table not found (4,1138 ms)
+Table not found (4,5326 ms)
+Tuple added (2,4306 ms)
+Tuple added (1,4319 ms)
+Tuple added (1,6892 ms)
+Tuple(s) deleted (3,4525 ms)
+Table not found (1,9049 ms)
+{'Name','Age'} => {Ramon,26}{Miren,22} (1,0356 ms)
+TOTAL TIME: 37,8889ms
 
 # TEST 2
 Database opened 0 ms
-{'Name','Age'} => {Ramon,26}{Miren,22} (0,0587 ms)
-{'Name','Age'} => {Miren,22} (0,0244 ms)
-Table not found (0,0223 ms)
-Table created (2,8803 ms)
-Table created (3,6371 ms)
-Tuple added (4,6329 ms)
-{'Name','Age'} => {Ramon,26}{Miren,22} (0,0398 ms)
-{'Name','Role'} => {Borja,Programming manager} (0,0201 ms)
-{} => {} (0,0171 ms)
-Table not found (0,0164 ms)
-Table not found (4,4798 ms)
-Tuple added (3,579 ms)
-Tuple added (5,3339 ms)
-Tuple added (5,666 ms)
-Profile created (0,7836 ms)
-Privileges granted (4,0869 ms)
-User added (0,9402 ms)
-User added (0,0297 ms)
-TOTAL TIME: 36,2482ms
+{'Name','Age'} => {Ramon,26}{Miren,22} (0,0624 ms)
+{'Name','Age'} => {Miren,22} (0,0477 ms)
+Table not found (0,0382 ms)
+Table created (3,2159 ms)
+Table created (4,2395 ms)
+Tuple added (3,8574 ms)
+{'Name','Age'} => {Ramon,26}{Miren,22} (0,036 ms)
+{'Name','Role'} => {Borja,Programming manager} (0,0203 ms)
+{} => {} (0,0289 ms)
+Table not found (0,0373 ms)
+Table not found (6,4738 ms)
+Tuple added (3,914 ms)
+Tuple added (3,9882 ms)
+Tuple added (4,8141 ms)
+Profile created (0,6023 ms)
+Privileges granted (3,5425 ms)
+User added (1,121 ms)
+User added (0,0314 ms)
+TOTAL TIME: 36,0709ms
 
 # TEST 3
 Database opened 0 ms
@@ -43,71 +43,71 @@ TOTAL TIME: 0ms
 
 # TEST 5
 Database opened 0 ms
-This user does not have select privilege (0,4434 ms)
-{'Name','Role'} => {Eva,Programming manager}{Ramon,Programmer}{Miren,Sales} (2,4246 ms)
-{'Role'} => {Programming manager} (0,0555 ms)
-It does not have delete privilege (0,0186 ms)
-{'Role'} => {Programming manager} (0,0429 ms)
-TOTAL TIME: 2,985ms
+This user does not have select privilege (0,4721 ms)
+{'Name','Role'} => {Eva,Programming manager}{Ramon,Programmer}{Miren,Sales} (2,3975 ms)
+{'Role'} => {Programming manager} (0,0395 ms)
+It does not have delete privilege (0,0141 ms)
+{'Role'} => {Programming manager} (0,0508 ms)
+TOTAL TIME: 2,974ms
 
 # TEST 6
 Database opened 0 ms
-Privileges granted (0,0401 ms)
-TOTAL TIME: 0,0401ms
+Privileges granted (0,0484 ms)
+TOTAL TIME: 0,0484ms
 
 # TEST 7
 Database opened 0 ms
-This user does not have select privilege (0,025 ms)
-{'Name','Role'} => {Eva,Programming manager}{Ramon,Programmer}{Miren,Sales} (0,0615 ms)
-{'Role'} => {Programming manager} (0,0396 ms)
-Tuple(s) deleted (5,1064 ms)
-{'Role'} =>  (0,0523 ms)
-This user does not have insert privilege (0,0625 ms)
-TOTAL TIME: 5,3473ms
+This user does not have select privilege (0,0446 ms)
+{'Name','Role'} => {Eva,Programming manager}{Ramon,Programmer}{Miren,Sales} (0,0356 ms)
+{'Role'} => {Programming manager} (0,0356 ms)
+Tuple(s) deleted (4,4618 ms)
+{'Role'} =>  (0,0716 ms)
+This user does not have insert privilege (0,0176 ms)
+TOTAL TIME: 4,6668ms
 
 # TEST 8
 Database opened 0 ms
-Privileges granted (0,0327 ms)
-TOTAL TIME: 0,0327ms
+Privileges granted (0,0432 ms)
+TOTAL TIME: 0,0432ms
 
 # TEST 9
 Database opened 0 ms
-This user does not have select privilege (0,0298 ms)
-{'Name','Role'} => {Ramon,Programmer}{Miren,Sales} (0,0603 ms)
-{'Role'} =>  (0,0376 ms)
-Tuple added (4,8759 ms)
-{'Name','Role'} => {Ramon,Programmer}{Miren,Sales}{Maite,Human Resources} (0,0571 ms)
-Error (0,0553 ms)
-TOTAL TIME: 5,116ms
+This user does not have select privilege (0,0332 ms)
+{'Name','Role'} => {Ramon,Programmer}{Miren,Sales} (0,0465 ms)
+{'Role'} =>  (0,0319 ms)
+Tuple added (4,8229 ms)
+{'Name','Role'} => {Ramon,Programmer}{Miren,Sales}{Maite,Human Resources} (0,0586 ms)
+It does not have Update privilege (2,2337 ms)
+TOTAL TIME: 7,2268ms
 
 # TEST 10
 Database opened 0 ms
-Privileges granted (0,0715 ms)
-TOTAL TIME: 0,0715ms
+Privileges granted (0,0236 ms)
+TOTAL TIME: 0,0236ms
 
 # TEST 11
 Database opened 0 ms
-{'Name','Role'} => {Ramon,Programmer}{Miren,Sales}{Maite,Human Resources} (0,0384 ms)
-Error (0,029 ms)
-{'Name','Role'} => {Ramon,Programmer}{Miren,Sales}{Maite,Human Resources} (0,03 ms)
-TOTAL TIME: 0,0974ms
+{'Name','Role'} => {Ramon,Programmer}{Miren,Sales}{Maite,Human Resources} (0,0441 ms)
+Table updated (0,2291 ms)
+{'Name','Role'} => {Ramon,Human Resources}{Miren,Sales}{Maite,Human Resources} (0,0288 ms)
+TOTAL TIME: 0,302ms
 
 # TEST 12
 Database opened 0 ms
-Privileges revoked (3,5759 ms)
-Privileges revoked (0,0471 ms)
-TOTAL TIME: 3,623ms
+Privileges revoked (3,54 ms)
+Privileges revoked (0,0268 ms)
+TOTAL TIME: 3,5668ms
 
 # TEST 13
 Database opened 0 ms
-Tuple added (4,4509 ms)
-Error (0,0232 ms)
-TOTAL TIME: 4,4741ms
+Tuple added (3,8691 ms)
+Table updated (0,0343 ms)
+TOTAL TIME: 3,9034ms
 
 # TEST 14
 Database opened 0 ms
-User deleted (0,7985 ms)
-TOTAL TIME: 0,7985ms
+User deleted (0,8156 ms)
+TOTAL TIME: 0,8156ms
 
 # TEST 15
 Database opened 0 ms
@@ -115,18 +115,18 @@ TOTAL TIME: 0ms
 
 # TEST 16
 Database opened 0 ms
-Error (0,0647 ms)
-Tuple added (5,2432 ms)
-Error (0,0223 ms)
-TOTAL TIME: 5,3302ms
+This user does not have select privilege (0,0197 ms)
+Tuple added (4,8534 ms)
+Table updated (0,0362 ms)
+TOTAL TIME: 4,9093ms
 
 # TEST 17
 Database opened 0 ms
-Profile droped (0,7478 ms)
-TOTAL TIME: 0,7478ms
+Profile droped (0,7634 ms)
+TOTAL TIME: 0,7634ms
 
 # TEST 18
 Database opened 0 ms
-Error (0,0529 ms)
-Tuple added (4,0298 ms)
-Error (0,0296 ms)
+This user does not have select privilege (0,0273 ms)
+Tuple added (4,4872 ms)
+Table updated (0,0791 ms)

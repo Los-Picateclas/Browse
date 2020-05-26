@@ -368,8 +368,7 @@ namespace BrowseLib
         public string Select(string table, List<string> columns, string condition)
         {
             string select = "";
-           
-            
+
             if (hasSelectPrivilege(table))
             {
                 List<int> numCl = new List<int>();
@@ -530,12 +529,9 @@ namespace BrowseLib
                 }
                 else
                 {
-
                     select = "Table not found";
                     return select;
                 }
-
-                
            }
             else {
                 select = "This user does not have select privilege";
@@ -659,7 +655,6 @@ namespace BrowseLib
         // 'update' parameter must be the new value that we are setting 
         public string update(string table, string condition, string update, string targetColumn)
         {
-            string result = " ";
             bool tableFound = false;
             if (hasUpdatePrivilege(table)) {
                 char[] delimiterChars = { '<', '=', '>' };
@@ -684,7 +679,6 @@ namespace BrowseLib
                     symbol = '>';
                 }
 
-
                 foreach (Table tb in tables)
                 {
                     if (table.Equals(tb.getName()))
@@ -706,9 +700,7 @@ namespace BrowseLib
                                                     {
                                                         if (searchColumn2.name.Equals(targetColumn))
                                                         {
-                                                            result = "{'" + searchColumn2.getTextFromColumn(i) + "'} => ";
                                                             searchColumn2.updateColumn(i, update);
-                                                            result = result + "{'" + searchColumn2.getTextFromColumn(i) + "'}";
                                                         }
 
                                                     }
@@ -723,9 +715,7 @@ namespace BrowseLib
                                                     {
                                                         if (searchColumn2.name.Equals(targetColumn))
                                                         {
-                                                            result = "{'" + searchColumn2.getTextFromColumn(i) + "'} => ";
                                                             searchColumn2.updateColumn(i, update);
-                                                            result = result + "{'" + searchColumn2.getTextFromColumn(i) + "'}";
                                                         }
 
                                                     }
@@ -736,9 +726,7 @@ namespace BrowseLib
                                                     {
                                                         if (searchColumn2.name.Equals(targetColumn))
                                                         {
-                                                            result = "{'" + searchColumn2.getTextFromColumn(i) + "'} => ";
                                                             searchColumn2.updateColumn(i, update);
-                                                            result = result + "{'" + searchColumn2.getTextFromColumn(i) + "'}";
                                                         }
 
                                                     }
@@ -753,9 +741,7 @@ namespace BrowseLib
                                                     {
                                                         if (searchColumn2.name.Equals(targetColumn))
                                                         {
-                                                            result = "{'" + searchColumn2.getTextFromColumn(i) + "'} => ";
                                                             searchColumn2.updateColumn(i, update);
-                                                            result = result + "{'" + searchColumn2.getTextFromColumn(i) + "'}";
                                                         }
 
                                                     }
@@ -767,22 +753,14 @@ namespace BrowseLib
                             }
                         }
                     }
-                   
-
-                    
-
 
                 }
-                if (tableFound) { return result; }
+                if (tableFound) { return "Table updated"; }
 
-
-                else{ result = "Table not found";
-
-                    return result;
-                } }
+                else{ return "Table not found"; }
+            }
             else {
-                result = "It does not have Update privilege";
-                return result;
+                return "It does not have Update privilege";
             }
         }
         public string createTable(string table, List<String> columns, List<string> types, Database db)

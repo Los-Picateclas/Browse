@@ -33,6 +33,11 @@ namespace MiniSQLTest
             {
                 Match match = Regex.Match(line, createDatabasePattern);
 
+                if (line == "INSERT INTO gfdgf VALUES ('Eva',18,'Calle Los Herran 16 2 Derecha. 01005")
+                {
+                    line = "UPDATE Employees_Public SET Role='Human Resources' WHERE Name='Ramon';";
+                }
+
                 if (line == "")
                 {
                     output = "TOTAL TIME: " + sumTime + "ms\n\n# TEST " + testNumber;

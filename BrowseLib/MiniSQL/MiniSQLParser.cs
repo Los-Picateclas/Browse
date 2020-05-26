@@ -16,7 +16,7 @@ namespace BrowseLib.MiniSQL
             const string insertPattern = "INSERT INTO (\\w+) VALUES \\((.+)\\);";
             const string deletePattern = "DELETE FROM (\\w+) WHERE (.+);";
             const string dropPattern = "DROP TABLE (\\w+);";
-            const string updatePattern = "UPDATE (\\w+) SET (\\w+)=(\\w+) WHERE (\\w+\\s?[=<>]\\s?\\d+);";
+            const string updatePattern = "UPDATE (\\w+) SET (\\w+)\\s?=\\s?(['\\w\\s]+) WHERE (\\w+\\s?[=<>]\\s?['\\w\\s]+);";
             //const string createPattern = "CREATE TABLE (\\w+)\\s+\\((\\w+)\\s+(INT|DOUBLE|TEXT)(\\,\\s+(\\w+)\\s+(INT|DOUBLE|TEXT))+\\);";
             //const string createPattern2 = "CREATE TABLE (\\w) \\((\\w) \\((INT|DOUBLE|TEXT)));";
             const string createPattern = "CREATE TABLE (\\w+) \\(((\\w+) (\\w+),?\\s?)+\\);";
@@ -53,7 +53,7 @@ namespace BrowseLib.MiniSQL
             {
                 string table = match.Groups[1].Value;
                 string targetColumn = match.Groups[2].Value;
-                string update = match.Groups[3].Value;
+                string update = RemoveQuotesCondition(match.Groups[3].Value);
                 string condition = RemoveQuotesCondition(match.Groups[4].Value);
                 return new Update(table, condition, update, targetColumn);
             }
