@@ -18,9 +18,12 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Input-Output", "Input-Output", "{784DDAAA-2F95-4FC0-9167-789114A05FC8}"
 	ProjectSection(SolutionItems) = preProject
 		Input-Output\input-file.txt = Input-Output\input-file.txt
+		..\..\..\Desktop\output-file.txt = ..\..\..\Desktop\output-file.txt
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniSQLTester", "MiniSQLTester\MiniSQLTester.csproj", "{102BAFA5-D751-48C6-BD0F-F4910DB1F823}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Server", "Server\Server.csproj", "{3FBEE75E-8008-42C5-B47A-633C91969242}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -52,6 +55,10 @@ Global
 		{102BAFA5-D751-48C6-BD0F-F4910DB1F823}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{102BAFA5-D751-48C6-BD0F-F4910DB1F823}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{102BAFA5-D751-48C6-BD0F-F4910DB1F823}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3FBEE75E-8008-42C5-B47A-633C91969242}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3FBEE75E-8008-42C5-B47A-633C91969242}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3FBEE75E-8008-42C5-B47A-633C91969242}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3FBEE75E-8008-42C5-B47A-633C91969242}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
