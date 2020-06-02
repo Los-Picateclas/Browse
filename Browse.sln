@@ -5,8 +5,6 @@ VisualStudioVersion = 16.0.29613.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BrowseLib", "BrowseLib\BrowseLib.csproj", "{D17C09FD-72F2-4A83-B17C-8196D0E1BB33}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleClient", "ConsoleClient\ConsoleClient.csproj", "{4A479819-63BD-445A-8BB6-95E9F881EEB4}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{DCB2D842-9712-4E59-8286-267E44845392}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demo", "Demo\Demo.csproj", "{2A004285-63A4-46D4-8C78-5F277FD119AC}"
@@ -25,7 +23,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniSQLTester", "MiniSQLTes
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Server", "Server\Server.csproj", "{3FBEE75E-8008-42C5-B47A-633C91969242}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client", "Client\Client.csproj", "{7F95E317-691E-4D48-8E37-3273A9668D6E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Client", "Client\Client.csproj", "{7F95E317-691E-4D48-8E37-3273A9668D6E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,10 +35,6 @@ Global
 		{D17C09FD-72F2-4A83-B17C-8196D0E1BB33}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D17C09FD-72F2-4A83-B17C-8196D0E1BB33}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D17C09FD-72F2-4A83-B17C-8196D0E1BB33}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4A479819-63BD-445A-8BB6-95E9F881EEB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4A479819-63BD-445A-8BB6-95E9F881EEB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4A479819-63BD-445A-8BB6-95E9F881EEB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4A479819-63BD-445A-8BB6-95E9F881EEB4}.Release|Any CPU.Build.0 = Release|Any CPU
 		{DCB2D842-9712-4E59-8286-267E44845392}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{DCB2D842-9712-4E59-8286-267E44845392}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DCB2D842-9712-4E59-8286-267E44845392}.Release|Any CPU.ActiveCfg = Release|Any CPU

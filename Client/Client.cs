@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Client
 {
-    class Program
+    class Client
     {
         static void Main(string[] args)
         {
