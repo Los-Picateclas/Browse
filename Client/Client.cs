@@ -17,6 +17,7 @@ namespace Client
             socket.Connect(direction);
             Console.WriteLine("Connected to the server");
             Console.WriteLine(" Introduce the name of a txt file:");
+            //Task.Delay(1000).Wait();
 
             //Name of the txt archive 
             string txt = Console.ReadLine();
