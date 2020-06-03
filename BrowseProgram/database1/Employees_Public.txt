@@ -1,9 +1,0 @@
-TEXT, TEXT
-Name, Role
-
-Ramon, Programmer, 
-Miren, Sales, 
-Maite, Human Resources, 
-Patxi, Programmer, 
-Patxi, Programmer, 
-Patxi, Programmer, 

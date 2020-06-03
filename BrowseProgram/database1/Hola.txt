@@ -1,4 +1,0 @@
-TEXT, TEXT
-Name, Role
-
-Borja, Programming manager, 
