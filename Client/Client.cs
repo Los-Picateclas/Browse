@@ -8,6 +8,9 @@ namespace Client
 {
     class Client
     {
+        private static string username;
+        private static string text;
+
         static void Main(string[] args)
         {
 
@@ -16,22 +19,28 @@ namespace Client
             IPEndPoint direction = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 1234);
             socket.Connect(direction);
             Console.WriteLine("Connected to the server");
-            Console.WriteLine(" Introduce the name of a txt file:");
-            //Task.Delay(1000).Wait();
+            //Console.WriteLine(" Introduce the name of a txt file:");
+            Console.WriteLine("Write your username");
+            username = Console.ReadLine();
+            Console.WriteLine("Welcome to the Picateclas Client/Server project " + username);
+            Console.WriteLine("You can send something to Server");
+            text = Console.ReadLine();
 
+            /*
             //Name of the txt archive 
             string txt = Console.ReadLine();
             System.IO.StreamReader file = new System.IO.StreamReader("../../../../" + txt + ".txt");
             string info = System.IO.File.ReadAllText("../../../../" + txt + ".txt");
             file.Close();
             Console.WriteLine("Sending information to the server...");
+            */
 
             //We need to transform the info to bytes so we can send it to the server
-            byte[] infoToSocket = Encoding.Default.GetBytes(info);
+            byte[] infoToSocket = Encoding.Default.GetBytes(text);
             socket.Send(infoToSocket, 0, infoToSocket.Length, 0);
             Console.WriteLine("Done");
             Console.WriteLine("Press any key to finish");
-            Console.ReadKey();
+            Console.ReadLine();
 
 
         }

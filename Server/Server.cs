@@ -27,7 +27,8 @@ namespace Server
             Console.WriteLine("Client says: " + Encoding.Default.GetString(info)); //we tranform the info to a string
             socket.Close();
             Console.WriteLine("Press any key to finish");
-            Console.ReadKey();
+            Console.ReadLine();
+           
 
         }
 
