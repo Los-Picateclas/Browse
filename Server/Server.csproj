@@ -7,7 +7,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BrowseLib\BrowseLib.csproj" />
-    <ProjectReference Include="..\MiniSQLTester\MiniSQLTester.csproj" />
   </ItemGroup>
 
 </Project>
