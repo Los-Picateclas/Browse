@@ -14,7 +14,8 @@ namespace Client
         {
             //Initilize the database
             db = new Database("mydatabase", "user", "password");
-
+            //Initialize the table
+            Table table = new Table("mytable");
         }
 
         static void Main(string[] args)
@@ -40,7 +41,24 @@ namespace Client
                 Console.WriteLine();
                 text = Console.ReadLine();
             }
+            /*
+            //Insert
+                String query = "INSERT INTO db.mytable(id,username,password) VALUES (@id,@username,@password)";
 
+                    
+                    //socket.Send(byteText, 0, byteText.Length, 0);
+                    command.Parameters.AddWithValue("@username", "abc");
+                    command.Parameters.AddWithValue("@password", "abc");
+                    command.Parameters.AddWithValue("@email", "abc");
+
+                    connection.Open();
+                    int result = command.ExecuteNonQuery();
+
+                    // Check Error
+                    if (result < 0)
+                        Console.WriteLine("Error inserting data into Database!");
+                        */
+                    
         }
     }
 }

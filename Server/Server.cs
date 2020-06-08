@@ -30,10 +30,11 @@ namespace Server
                 Console.WriteLine("Client says: " + infoString);
                 socket.Close();
             }
+
            
         }
 
-        }
+    }
     
 }
 
