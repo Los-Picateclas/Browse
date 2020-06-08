@@ -20,7 +20,7 @@ namespace Client
 
         static void Main(string[] args)
         {
-            //We need a socket and a IP adrees to connect to the server so we create it.
+            //We need a socket and a IP adrees to connect to the server so we create it
             Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             IPEndPoint direction = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 1234);
             socket.Connect(direction);
@@ -40,25 +40,14 @@ namespace Client
                 Console.WriteLine("Done");
                 Console.WriteLine();
                 text = Console.ReadLine();
+
             }
-            /*
+
             //Insert
-                String query = "INSERT INTO db.mytable(id,username,password) VALUES (@id,@username,@password)";
+            String query = "INSERT INTO db.mytable(id,username,password) VALUES (@1,@javier,@password)";
+            byte[] byteQuery = Encoding.Default.GetBytes(query);
+            socket.Send(byteQuery, 0, byteQuery.Length, 0);
 
-                    
-                    //socket.Send(byteText, 0, byteText.Length, 0);
-                    command.Parameters.AddWithValue("@username", "abc");
-                    command.Parameters.AddWithValue("@password", "abc");
-                    command.Parameters.AddWithValue("@email", "abc");
-
-                    connection.Open();
-                    int result = command.ExecuteNonQuery();
-
-                    // Check Error
-                    if (result < 0)
-                        Console.WriteLine("Error inserting data into Database!");
-                        */
-                    
         }
     }
 }
