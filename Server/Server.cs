@@ -2,11 +2,30 @@
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using BrowseLib;
+using BrowseLib.MiniSQL;
 
 namespace Server
 {
     class Server
     {
+        public void initialize()
+        {
+            //Initilize the database
+            Database db = new Database("mydatabase", "user", "password");
+            //Initialize the table
+            Table tb = new Table("mytable");
+
+            //Insert
+            //MiniSQLQuery query = MiniSQLParser.Parse("INSERT INTO Person VALUES (Javier, Ortiz, 45);");
+            //Insert insertQuery = query as Insert;
+            //byte[] byteQuery = Encoding.Default.GetBytes(query);
+            //socket.Send(insertQuery, 0, insertQuery.Length, 0);
+
+            //Select
+            //MiniSQLQuery query = MiniSQLParser.Parse("SELECT Name, Age, Height FROM People;");
+            //Select selectQuery = query as Select;
+        }
         public static void Main(string[] args)
         {
             //We will use sockets to make the server. 
