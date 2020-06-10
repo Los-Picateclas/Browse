@@ -12,20 +12,14 @@ namespace Server
         public void initialize()
         {
             //Initilize the database
-            Database db = new Database("mydatabase", "user", "password");
+            //Database db = new Database("mydatabase", "user", "password");
+            BrowseLib.Database database = new Database("mydatabase", "user", "password");
             //Initialize the table
             Table tb = new Table("mytable");
 
-            //Insert
-            //MiniSQLQuery query = MiniSQLParser.Parse("INSERT INTO Person VALUES (Javier, Ortiz, 45);");
-            //Insert insertQuery = query as Insert;
-            //byte[] byteQuery = Encoding.Default.GetBytes(query);
-            //socket.Send(insertQuery, 0, insertQuery.Length, 0);
-
-            //Select
-            //MiniSQLQuery query = MiniSQLParser.Parse("SELECT Name, Age, Height FROM People;");
-            //Select selectQuery = query as Select;
+            database.ExecuteMiniSQLQuery("query");
         }
+
         public static void Main(string[] args)
         {
             //We will use sockets to make the server. 
@@ -48,13 +42,10 @@ namespace Server
                 string infoString = Encoding.Default.GetString(info); //We tranform the info to string
                 Console.WriteLine("Client says: " + infoString);
                 socket.Close();
-            }
 
-           
+            }           
         }
-
-    }
-    
+    } 
 }
 
 

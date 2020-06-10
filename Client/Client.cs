@@ -10,7 +10,6 @@ namespace Client
 {
     class Client
     {    
-
         static void Main(string[] args)
         {
             //We need a socket and a IP adrees to connect to the server so we create it
@@ -33,12 +32,13 @@ namespace Client
                 Console.WriteLine("Done");
                 Console.WriteLine();
                 text = Console.ReadLine();
-
             }
 
-
+            //Insert
+            MiniSQLQuery query = MiniSQLParser.Parse("INSERT INTO Person VALUES (@" + text + ")");
+            Insert insertQuery = query as Insert;
+            //byte[] byteQuery = Encoding.Default.GetBytes(query);
+            //socket.Send(insertQuery, 0, insertQuery.Length, 0);
         }
-
-    
     }
 }
