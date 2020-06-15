@@ -59,11 +59,12 @@ namespace Server
 
             //We only accept one connection for our socket
             listener.Listen(1);
-            Console.WriteLine("Waiting for a client...");
+            Console.WriteLine("Connected");
 
             //This new socket will return the client response
             Socket listen = listener.Accept();
-            Console.WriteLine("Connected");
+            Console.WriteLine("");
+            Console.WriteLine("Waiting for a client...");
 
             //We can only use bytes to transfer the information
             byte[] info = new byte[255];
