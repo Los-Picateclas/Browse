@@ -3,6 +3,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
+using System.Threading;
 using BrowseLib;
 using BrowseLib.MiniSQL;
 
@@ -45,24 +46,23 @@ namespace Server
         }
         public static void Main(string[] args)
         {
-
             //Create the server and initialize
             Server server = new Server();
             server.initialize();
 
             //We will use sockets to make the server. 
-            Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            Socket listener = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 
             //Now we specify the IP and the port. 127.0.0.1 is our local pc direction
-            IPEndPoint direction = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 1234);
-            socket.Bind(direction);
+            IPEndPoint localEndPoint = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 1234);
+            listener.Bind(localEndPoint);
 
             //We only accept one connection for our socket
-            socket.Listen(1); 
+            listener.Listen(1);
             Console.WriteLine("Waiting for a client...");
 
             //This new socket will return the client response
-            Socket listen = socket.Accept(); 
+            Socket listen = listener.Accept();
             Console.WriteLine("Connected");
 
             //We can only use bytes to transfer the information
@@ -75,7 +75,7 @@ namespace Server
                 int receive = listen.Receive(info, 0, info.Length, 0);
 
                 //We tranform the info to string
-                string infoString = Encoding.Default.GetString(info); 
+                string infoString = Encoding.Default.GetString(info);
                 Console.WriteLine("Client says: " + infoString);
 
                 //The server doesn´t receive all the 0s frome the query
@@ -84,10 +84,9 @@ namespace Server
 
                 //Execute MiniSQLQuery and do the Parser
                 String valor = db.ExecuteMiniSQLQuery(s);
-                Console.WriteLine("Server says: " + valor);
-                socket.Close();
-
-            }           
+                Console.WriteLine(valor);
+                Console.WriteLine();
+            }          
         }
     } 
 }
