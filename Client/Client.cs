@@ -27,7 +27,7 @@ namespace Client
             //Create the client
             Client cliente = new Client();
 
-            //We will use sockets to make the server. 
+            //Create socket and conexion with server 
             Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 
             //Now we specify the IP and the port. 127.0.0.1 is our local pc direction
