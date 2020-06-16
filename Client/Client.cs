@@ -26,14 +26,15 @@ namespace Client
         static void Main(string[] args)
         {
             //Create the client
-            Client cliente = new Client();
-
-            //Create socket and conexion with server 
-            Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-
+            TcpClient client = new TcpClient();
+            
             //Now we specify the IP and the port. 127.0.0.1 is our local pc direction
-            IPEndPoint localEndPoint = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 1234);
-            socket.Connect(localEndPoint);
+            IPAddress IP = IPAddress.Parse("127.0.0.1");
+            int Port = 5000;
+
+            //We make the conexion with server 
+            client.Connect(IP, Port);
+            NetworkStream ns = client.GetStream();
 
             Console.WriteLine("Connected to the local server");
             Console.WriteLine("Introduce a SQL sentence:");
@@ -47,12 +48,25 @@ namespace Client
             Console.WriteLine("             (Write exit in case you want to end)");
             Console.WriteLine("");
             string query = Console.ReadLine();
-
             while (query != "exit")
             {
-                cliente.sendQuery(query, socket);
+              
+                byte[] buffer = Encoding.ASCII.GetBytes(query);
+                ns.Write(buffer, 0, buffer.Length);
+                byte[] receivedBytes = new byte[1024];
+                int byte_count = ns.Read(receivedBytes, 0, receivedBytes.Length);
+                byte[] formated = new byte[byte_count];
+                //handle  the null characteres in the byte array
+                Array.Copy(receivedBytes, formated, byte_count);
+                //We tranform the info to string
+                string data = Encoding.ASCII.GetString(formated);
+                Console.WriteLine(data);
                 query = Console.ReadLine();
             }
+            ns.Close();
+            client.Close();
+            Console.WriteLine("Disconnected");
+            Console.ReadKey();
         }
     }
 }
