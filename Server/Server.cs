@@ -78,7 +78,7 @@ namespace Server
                 Array.Copy(buffer, formated, byte_count);
                 //We tranform the info to string
                 string data = Encoding.ASCII.GetString(formated);
-                Console.WriteLine(data);
+                Console.WriteLine("Client says: " + data);
                 //Execute MiniSQLQuery and do the Parser
                 String valor = db.ExecuteMiniSQLQuery(data);
                 Server.broadcast(valor, client);

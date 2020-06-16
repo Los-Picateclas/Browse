@@ -37,7 +37,7 @@ namespace Client
             NetworkStream ns = client.GetStream();
 
             Console.WriteLine("Connected to the local server");
-            Console.WriteLine("Introduce a SQL sentence:");
+            Console.WriteLine("Introduce a SQL query:");
             Console.WriteLine("");
             Console.WriteLine("For example: INSERT INTO mytable VALUES (name);");
             Console.WriteLine("             SELECT * FROM mytable;");
@@ -60,7 +60,7 @@ namespace Client
                 Array.Copy(receivedBytes, formated, byte_count);
                 //We tranform the info to string
                 string data = Encoding.ASCII.GetString(formated);
-                Console.WriteLine(data);
+                Console.WriteLine("Server says: " + data);
                 query = Console.ReadLine();
             }
             ns.Close();
